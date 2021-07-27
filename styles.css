@@ -152,7 +152,7 @@ body{
     padding: 20px;
     background-color: var(--main-color7);
     border: 4px dashed var( --primaryColor2) ;
-    display: none;
+    /*display: none;*/
 }
 .problemeServeur{
     font-family: 'Roboto', sans-serif;

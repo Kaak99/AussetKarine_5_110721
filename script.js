@@ -1,9 +1,32 @@
+//  .......  fonctions  ........ //
+
+//afficher warning
+function warning(){
+  noLoading.style.display = 'block' ;
+}
+
+//afficher warning
+function noWarning(){
+  noLoading.style.display = 'none' ;
+}
+
+//  .......  tests à retirer  ........ //
+
 console.log(" test ");
 console.log(" test2 ");
 console.log(` test `);
 
+
+//  .......  const  ........ //
+
 const tedImg1 = document.getElementById('ted-img1');
-console.log(tedImg1.src);
+const noLoading = document.querySelector('.noLoading');
+
+
+//  .......  code  ........ //
+noWarning();
+
+//console.log(tedImg1.src);
 
 fetch("http://localhost:3000/api/teddies")
   .then (res => res.json())
@@ -37,6 +60,11 @@ fetch("http://localhost:3000/api/teddies")
 //   .then(data => console.log(data))
 //   .catch(error => console.log('error'));
 
+//ok pour afficher l'image
+// fetch("http://localhost:3000/api/teddies")
+//   .then (res => res.json())
+//   .then (data => tedImg1.src = data[0].imageUrl)
+// ;
 
 
 
