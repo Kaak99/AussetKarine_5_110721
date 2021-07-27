@@ -7,7 +7,7 @@ console.log(tedImg1.src);
 
 fetch("http://localhost:3000/api/teddies")
   .then (res => res.json())
-  .then ( data => tedImg1.src = data[0].imageUrl )
+  .then (data => tedImg1.src = data[0].imageUrl)
 ;
 
 
