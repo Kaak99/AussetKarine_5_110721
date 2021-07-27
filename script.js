@@ -1,12 +1,12 @@
-console.log("  ");
 console.log(" test ");
-console.log(`  `);
+console.log(" test2 ");
+console.log(` test `);
 
 
 fetch("http://localhost:3000/api/teddies")
-  .then(res => res.json())
-  .then(data => console.log(data))
+  .then(res => console.log(res))
 ;
+
 
 // 1/ le console.log du retour de la requête (montre une promesse: body, response etc...)
 // console.log(fetch("http://localhost:3000/api/teddies"));
@@ -22,6 +22,17 @@ fetch("http://localhost:3000/api/teddies")
 //   .then(data => console.log(data))
 // ;
 
+// 4/ mettre test erreur
+// fetch("http://localhost:3000/api/teddies")
+//   .then(res => {
+//     if (res.ok) {
+//       console.log("success!")
+//     } else {
+//       console.log("failed!")
+//     }
+//   })
+//   .then(data => console.log(data))
+//   .catch(error => console.log('error'));
 
 
 
