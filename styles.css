@@ -21,7 +21,9 @@
     --main-color2: #F6A2A8; /* */
     --main-color3: #ACB0F7;
     --main-color4: #D11485;
-    --main-color5: #F3E9F1;/*logo bg*/
+    --main-color5: #F3E9F1;/*logo&header bg*/
+    --main-color6: #E3E0FC;/*footer bg*/
+    --main-color7: #C5C6FE;/*main bg*/
 
     --mainWhite: #fff;
     --mainBlack: #000;
@@ -77,9 +79,13 @@ p{
 	
 a{
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 700;
     padding: 20px;
+}
+
+.fas{
+    padding: 0 10px;
 }
 
 li{list-style: none;}
@@ -113,8 +119,30 @@ body{
 
 }
 /*<!--  headernav (...)-->*/
+.headernav{
+    background-color: var(--main-color5); 
+}
+
+.headernav ul{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /*<!------------------------------MAIN----------------> */
+
+.noLoading{
+    padding: 20px;
+    background-color: var(--main-color7);
+    border: 4px dashed var( --primaryColor2) ;
+}
+.problemeServeur{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+    padding: 10px;
+
+}
+
 
 /*<!--  banner (...)-->*/
 
@@ -127,6 +155,10 @@ body{
 
 /*<!------------------------------ FOOTER -------------------------------->*/
 
+footer{
+    background-color: var(--main-color6);
+}
+
 footer ul{
     flex-direction: column;
     justify-content: center;
@@ -134,7 +166,10 @@ footer ul{
 
 }
 
-
+.fab{
+    font-size: 2.5rem;
+    padding: 20px 12px;
+}
 
 /*________________________________responsive _______ @media___________________________________________*/
 
