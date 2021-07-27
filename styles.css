@@ -50,6 +50,7 @@ h1{
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 0.8em;
+    text-transform: uppercase;
 }
 
 h2{
@@ -131,15 +132,33 @@ body{
 
 /*<!------------------------------MAIN----------------> */
 
+.main, section{
+    background-color: var(--main-color7);
+    padding: 20px;
+}
+
+
+.teddiesCardContainer{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
 .noLoading{
     padding: 20px;
     background-color: var(--main-color7);
     border: 4px dashed var( --primaryColor2) ;
+    display: none;
 }
 .problemeServeur{
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     padding: 10px;
+
 
 }
 

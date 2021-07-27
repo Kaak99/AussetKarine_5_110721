@@ -2,9 +2,12 @@ console.log(" test ");
 console.log(" test2 ");
 console.log(` test `);
 
+const tedImg1 = document.getElementById('ted-img1');
+console.log(tedImg1.src);
 
 fetch("http://localhost:3000/api/teddies")
-  .then(res => console.log(res))
+  .then (res => res.json())
+  .then ( data => tedImg1.src = data[0].imageUrl )
 ;
 
 
