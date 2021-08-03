@@ -44,58 +44,112 @@
 <!-- ....................  MAIN .....................  -->
   <main>
 
-    <!-- ... Section  :    ... -->
-    <section>
+    <!-- ... Section  :  Titre  ... -->
+    <section id="title">
       <h1 class="centerTxt">Adoptez votre nounours !</h1>
     </section>
 
-    <!-- ... Section  :    ... -->
-    <section>
+    <!-- ... Section  :  les nounours  ... -->
+    <section id="ourTeddies">
       <h2 class="centerTxt">Présentation de nos nounours</h2>
+
       <div class="teddiesCardContainer d-flex">
-        <img class="ted-img" id="ted-img1" src="" alt="nounours1">
-        <img class="ted-img" id="ted-img2" src="" alt="nounours2">
-        <img class="ted-img" id="ted-img3" src="" alt="nounours3">
-        <img class="ted-img" id="ted-img4" src="" alt="nounours4">
-        <img class="ted-img" id="ted-img5" src="" alt="nounours5">
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex">
+            <img class="ted-img" src="images/test.webp" alt="teddybear image" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex">
+            <img class="ted-img" src="images/test.webp" alt="teddybear image" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex">
+            <img class="ted-img" src="images/test.webp" alt="teddybear image" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex">
+            <img class="ted-img" src="images/test.webp" alt="teddybear image" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex">
+            <img class="ted-img" src="images/test.webp" alt="teddybear image" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
       </div>
-      <div id="items"></div>
+
+      <div class="noLoading">
+        <p class="problemeServeur centerTxt">Un problème est survenu.</p>
+        <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
+        <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
+    </div>
+
     </section>
 
-    <!-- ... Section  :    ... -->
-    <section>
+    <!-- ... Section  :   best sales ... -->
+    <section id="ourBestSales">
       <h2 class="centerTxt">Nos Meilleurs ventes</h2>
+      <div class="teddiesCardContainer d-flex">
+        <div class="teddyCard">
+          <figure class="ted-fig d-flex bestSale">
+            <img class="ted-img" src="images/test.webp" alt="teddybear" />
+            <figcaption class="ted-figcap">
+              <p class="ted-name">Name</p>
+              <p class="ted-description">Description</p>
+              <p class="ted-price">Price</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
     </section>     
-    <!-- ... Section  :    ... -->
-    <section>
-      <h2 class="centerTxt">Nos conditions de vente</h2>
+
+    <!-- ... Section  : livraison gratuite etc   ... -->
+    <section id="ourSellAbility">
+      <h2 class="centerTxt">Nos services</h2>
+      <p class="centerTxt">Envoi maximum dans les 48h !</p>
+      <div class="d-flex deliveryImgBox" >
+        <img class="delivery" src="images/delivery/chronopost.jpg" alt="chronopost" />
+        <img class="delivery" src="images/delivery/colissimo.jpg" alt="chronopost" />
+        <img class="delivery" src="images/delivery/mondial.jpg" alt="chronopost" />
+        <img class="delivery" src="images/delivery/poste.jpg" alt="chronopost" />
+      </div>
+      <p class="centerTxt">livraison gratuite au delà de 60€ d'achat!</p>
+      <div class="d-flex deliveryFaBox" >
+        <i class="fab fa-cc-visa logoPay"></i>
+        <i class="fab fa-cc-paypal"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+      </div>
     </section>  
 
-
-</section3>
-<h2></h2>
-
-
-    <div class="noLoading">
-      <p class="problemeServeur centerTxt">Un problème est survenu.</p>
-      <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
-      <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
-  </div>
-
-    <!-- ... Section  :    ... -->
-    <section>
-
-    </section>
-
-    <!-- ... Article  :     ... -->        
-    <article>
-
-    </article>
-
-    <!-- ... Aside  :       ... -->
-    <aside>
-
-    </aside>
 
 
   </main>
@@ -105,7 +159,6 @@
   <footer>
 
     <ul class="d-flex">
-      <li><i class="fab fa-cc-visa logoPay"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-amex"></i></li>
       <li><a class="centerTxt" href="#whoarewe.htm">Qui sommes nous?</a></li>
       <li class="centerTxt"><a href="#CGV.htm">CGV</a></li>
       <li><a href="#legal.htm">Mentions légales</a></li>

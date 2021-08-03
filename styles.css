@@ -28,6 +28,7 @@
     --mainWhite: #fff;
     --mainBlack: #000;
     --mainGrey: #808080;
+    --mainPink : pink;
     
     
     --main-padding: 25px 10px;
@@ -49,33 +50,33 @@
 h1{
     font-size: 1.6rem;
     font-weight: 700;
-    line-height: 0.8em;
+    line-height: 1.8rem;
     text-transform: uppercase;
 }
 
 h2{
     font-size: 1.4rem;
     font-weight: 700;
-    line-height: 0.8em;
+    line-height: 1.6rem;
 }
 
 h3{
     font-size: 1.3rem;
     font-weight: 700;
-    line-height: 0.8em;
+    line-height: 1.5rem;
 }
 
 h4{
     font-size: 1.2rem;
     font-weight: 400;
-    line-height: 0.8em;
+    line-height: 1.4rem;
 }
 
 
 p{
     font-size: 1.1rem;
     font-weight: 400;
-    line-height: 0.8em;
+    line-height: 1.3rem;
 }
 	
 a{
@@ -134,7 +135,14 @@ body{
 
 .main, section{
     background-color: var(--main-color7);
+    padding: 10px;
+}
+
+h1{
     padding: 20px;
+}
+h2{
+    padding: 25px 0 15px 0;
 }
 
 
@@ -142,12 +150,41 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height:auto;
+
 }
 
+.teddyCard{
+    width:300px;
+    height:auto;
+    align-items: center;
+/*    padding: 10px 0 10px 0;*/
+    border: 1px solid var(--mainPink) ;
+    border-radius: 25px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 20%);
+    margin-bottom: 10px;
+}
 
+.ted-fig{
+    width:100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0 10px 0;
+}
 
+.ted-img{
+    width: 280px;
+    height: 170px;
+    object-fit:cover;
+    border: 1px solid pink;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    margin-bottom: 8px;
+}
 
-
+/*<!-- en cas d'erreur internet/api -->*/
 .noLoading{
     padding: 20px;
     background-color: var(--main-color7);
@@ -158,24 +195,48 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     padding: 10px;
-
-
 }
 
 
-/*<!--  banner (...)-->*/
+/*<!--  section bestSale(...)-->*/
+.bestSale.ted-fig{
+    background-color: var(--main-color6);
+    border-radius: 25px;
+}
+
+
+/*<!--  section delivery(...)-->*/
+.deliveryImgBox{
+    width:100%;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    padding: 8px 0 10px 0;
+    background:#FFF;
+
+}
+.delivery{
+    width: 70px;
+    height: 60px;
+}
+
+#ourSellAbility p{
+    padding: 10px 0 10px 0;
+}
+
+
+
 
 /*<!--  section (...)-->*/
 
-/*<!--  article (...)-->*/
 
-/*<!--  aside  (...)-->*/
 
 
 /*<!------------------------------ FOOTER -------------------------------->*/
 
 footer{
     background-color: var(--main-color6);
+    padding: 30px 0 30px 0;
 }
 
 footer ul{
@@ -187,7 +248,7 @@ footer ul{
 
 .fab{
     font-size: 2.5rem;
-    padding: 20px 12px;
+    padding: 10px 12px;
 }
 
 /*________________________________responsive _______ @media___________________________________________*/
