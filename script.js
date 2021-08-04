@@ -65,41 +65,35 @@ fetch(url)
     }
   })
   .then(data => {
-    console.log(data); //affiche les data de l'api (json=tableau d'objet)
+    console.log(123 +data); //affiche les data de l'api (json=tableau d'objet)
     // Création de la variable qui s'ajoutera aux éléments //
-    let getAllTeddies = "";
+    let teddiesString = "";
 
     // Boucle pour récupérer les données des produits //
     for(let i = 0; i < data.length; i++) {
       console.log(data[i].name+data[i].price); // Visualisation si la boucle est opérationnel //
       
       // Création de l'élément en HTML //
-      getAllTeddies += 
-      `<li class="item">
-        <div class="card mb-3">
-          <div id="cardProduct" class="row g-0">
-            <div class="col-md-4">
-              <img src="${data[i].imageUrl}" class="img-thumbnail shadow" alt="Ours en peluche" />
-            </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h2 class="card-title fs-4">${data[i].name}</h2>
-                  <p class="card-text">${data[i].description}</p>
-                  <p class="card-text text-muted fs-5">${(data[i].price/100).toFixed(2).replace(".",",")}€</p>
-                  <br />
-                  <a
-                    class="btn btn-outline-primary w-25"
-                    href="./product.html?${data[i]._id}"
-                    >Détail</a>
-                </div>
-              </div>
-          </div>
-        </div>
-      </li>`
-    }
+      teddiesString += 
+      `<div class="teddyCard">
+      <a href="html/product.html">
+        <figure class="ted-fig d-flex">
+          <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
+          <figcaption class="ted-figcap d-flex">
+            <p class="ted-name">${data[i].name}</p>
+            <p class="ted-description">${data[i].description}</p>
+            <p class="ted-price">${data[i].price}</p>
+          </figcaption>
+        </figure>
+      </a>
+    </div>`
+    };
     
      // Insertion des éléments recuperés dans la page index.html //
-    document.getElementById("items").innerHTML = getAllTeddies
+    // const containerHtml = document.getElementsByClassName("teddiesCardContainer");
+    const containerHtml = document.querySelector(".teddiesCardContainer");
+    containerHtml.innerHTML = teddiesString;
+    console.log(456+containerHtml);
 })
 
 // Message d'erreur //
