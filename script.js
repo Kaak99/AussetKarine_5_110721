@@ -80,9 +80,12 @@ fetch(url)
         <figure class="ted-fig d-flex">
           <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
           <figcaption class="ted-figcap d-flex">
-            <p class="ted-name">${data[i].name}</p>
+            <div class="ted-nameprice d-flex">
+              <p class="ted-name">${data[i].name}</p>
+              <p class="ted-price">${data[i].price/100}€</p>
+            </div>
             <p class="ted-description">${data[i].description}</p>
-            <p class="ted-price">${data[i].price}</p>
+
           </figcaption>
         </figure>
       </a>

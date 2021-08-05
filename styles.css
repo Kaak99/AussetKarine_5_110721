@@ -1,16 +1,12 @@
 /*-----------------*/
-/*---           ---*/
-/*-----------------*/
-
-
-
-/*commentaire*/
-
+/*---  orinoco  ---*/
+/*-------css-------*/
 
 
 /* GENERAL */
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@100;400;700&display=swap');
-
+/*font-family: 'Indie Flower', cursive;
+font-family: 'Roboto', sans-serif;*/
 
 :root {
     --primaryColor1: #919BA7;
@@ -32,12 +28,10 @@
     
     
     --main-padding: 25px 10px;
-    
     --main-spacing: 0.5rem;
-    
     --main-transition: all 0.3sec linear;
-    
-    }
+}
+
 *{
 	margin: 0;
 	padding: 0;
@@ -52,12 +46,16 @@ h1{
     font-weight: 700;
     line-height: 1.8rem;
     text-transform: uppercase;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    text-shadow : 0 0 20px var(--main-color4) ; 
 }
 
 h2{
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 1.6rem;
+    padding: 25px 0 15px 0;
 }
 
 h3{
@@ -92,9 +90,7 @@ a{
 
 li{list-style: none;}
 
-/*font-family: 'Indie Flower', cursive;
 
-font-family: 'Roboto', sans-serif;*/
 	
 /* <!---------------------------- BODY ----------------------------> */
 
@@ -104,7 +100,6 @@ body{
     font-family: 'Indie Flower', cursive;
     max-width: 1400px;
     margin: 0 auto;
-	border: solid 1px red;
 }
 
 /*<!------------------------------HEADER----------------> */
@@ -129,6 +124,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 20px;
 }
 
 /*<!------------------------------MAIN----------------> */
@@ -138,21 +134,13 @@ body{
     padding: 10px;
 }
 
-h1{
-    padding: 20px;
-}
-h2{
-    padding: 25px 0 15px 0;
-}
-
-
 .teddiesCardContainer{
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
     height:auto;
-
 }
 
 .teddyCard{
@@ -163,7 +151,7 @@ h2{
     border: 1px solid var(--mainPink) ;
     border-radius: 25px;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 20%);
-    margin-bottom: 10px;
+    margin: 10px 20px;
 }
 
 .ted-fig{
@@ -184,13 +172,28 @@ h2{
     margin-bottom: 8px;
 }
 
+
 .ted-figcap{
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
+    padding: 5px;
 }
 
+.ted-nameprice{
+    flex-direction:row;
+    justify-content:space-between;
+    /* align-items: center; */
+}
 
+.ted-name{
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+.ted-price{
+    font-family: 'Roboto', sans-serif;
+}
 
 
 
@@ -222,6 +225,7 @@ h2{
 .bestSaleImg{
     width: 300px;
     height: 320px;
+    margin: 20px 0;
     background-image: url(images/best-sale/fred.jpg);
     background-size: cover;
     background-position: 50% 0%;
@@ -243,30 +247,35 @@ h2{
 
 
 /*<!--  section delivery(...)-->*/
-.deliveryImgBox{
-    width:100%;
-    flex-direction: row;
-    justify-content:space-evenly;
-    align-items: center;
-    padding: 8px 0 10px 0;
-    background:#FFF;
 
-}
-.delivery{
-    width: 50px;
-    height: 35px;
+#ourSellAbility{
+    flex-direction: column;
+    align-items: center;
 }
 
 #ourSellAbility p{
     padding: 10px 0 10px 0;
 }
 
+.deliveryImgBox{
+    width:74%;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    padding: 8px 0 10px 0;
+    background:#FFF;
+}
 
+.deliveryImg{
+    width: 50px;
+    height: 35px;
+}
 
-
-/*<!--  section (...)-->*/
-
-
+.deliveryFaBox{
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+}
 
 
 /*<!------------------------------ FOOTER -------------------------------->*/
@@ -280,7 +289,6 @@ footer ul{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .fab{
@@ -291,14 +299,71 @@ footer ul{
 /*________________________________responsive _______ @media___________________________________________*/
 
 
-
-@media all and (max-width: 1200px) and (min-width:600px)
-{
-    /*general*/
-	/*header*/
-	/*main*/
-	/*footer*/
+@media all and (max-width: 320px){/* <320w*/
+        /*main*/
+    .teddyCard{
+        width:280px;
+        height:auto;
+        margin: 10px 0;
+    }
+    .ted-img{
+        width: 250px;
+        height: 140px;
+    }
+    .bestSaleImg{
+        width: 280px;
+        height: 300px;
+    }
 }
+
+
+@media all and (min-width: 900px){
+    .headernav ul{
+        flex-direction: row;
+        justify-content:space-evenly;
+    }
+	/*main*/
+    .teddyCard{
+        width:420px;
+        height:auto;
+        margin: 15px;
+    }
+    .ted-img{
+        width: 400px;
+        height: 300px;
+    }
+    .bestSaleImg{
+        width: 500px;
+        height: 700px;
+    }
+    #ourSellAbility p{
+        padding: 10px 0 10px 0;
+    }
+    
+    .deliveryImgBox{
+        justify-content:center;
+        padding: 15px 0;
+    }
+    .deliveryImg{
+        width: 80px;
+        height: 65px;
+        margin: 0 40px;
+    }
+    
+    .deliveryFaBox{
+        justify-content:center;
+    }
+    .deliveryFaBox .fab{
+        font-size: 3.5rem;
+        margin: 0 20px;
+    }
+	/*footer*/
+    footer ul{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
 
 @media all and (max-width: 600px)
 {	/*general*/
@@ -307,3 +372,4 @@ footer ul{
 	/*footer*/
 
 }
+
