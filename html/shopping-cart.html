@@ -9,17 +9,17 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orinoco shopping-cart</title>
+  <title>Orinoco Shopping-cart page</title>
+  <meta name="description" content="Orinoco est une boutique en ligne parisienne qui vend de beaux nounours #teddybear">
+  <link rel="shortcut icon" href="../favicon.ico" >
   <link rel="stylesheet" href="../styles.css">
   <script src="https://kit.fontawesome.com/e8a7d66f52.js" crossorigin="anonymous"></script>
-  <!--<script src="script.js" defer></script>-->
+  <script src="../js/shopping-cart.js0" defer></script>
 </head>
 
 <!-- ............................  BODY ............................  -->
 
 <body>
-
-
 
 
   <!-- ..................  HEADER ..................  -->
@@ -33,9 +33,6 @@
       <ul class="d-flex">
 	      <li><a href="html/shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
 	      <li><a href="html/my-orders.html"><i class="fas fa-list-alt"></i>Mes commandes</a></li>
-	      <li></li>
-	      <li></li>
-	      <li></li>
       </ul>
     </div>
 
@@ -44,26 +41,84 @@
 
 <!-- ....................  MAIN .....................  -->
   <main>
-	<div class="noLoading">
-    <p class="problemeServeur centerTxt">Un problème est survenu.</p>
-    <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
-    <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
- </div>
 
-    <!-- ... Section  :    ... -->
-    <section>
+    <!-- ... Section  :  Titre  ... -->
+    <section id="title">
+      <h1 class="centerTxt cart">Votre panier</h1>
+    </section>
+
+    <!-- ... Section  :  les nounours  ... -->
+    <section id="yourCart" class="cart">
+
+      <h2 class="centerTxt cart">Vos nounours vous attendent !</h2> 
+      <p class="centerTxt cart">Toutes nos transactions sont sécurisées</p>   
+      <div class="form2Container cart">
+        <form class="form2 centerTxt cart d-flex" method="post" action="order.php>"><!--form2=  cart / panier  -->
+          <fieldset class="cartField cart d-flex">
+            <div class="oneCartItem d-flex">
+              <p>x</p>
+              <a href=""><img src="images/test.webp" alt="teddybear image"></a>
+              <p class="cart-teddyName cart">nounours1</p>
+              <p class="cart-teddyColor cart">brun</p>
+              <label for="cart-teddyNumber cart"></label>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber"></input>
+              <p class="cart-teddyPrice cart">55€</p>
+            </div>
+            <div class="oneCartItem d-flex">
+              <p>x</p>
+              <a href=""><img src="images/test.webp" alt="teddybear image"></a>
+              <p class="cart-teddyName cart">nounours2</p>
+              <p class="cart-teddyColor cart">brun</p>
+              <label for="cart-teddyNumber cart"></label>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber"></input>
+              <p class="cart-teddyPrice cart">45€</p>
+            </div>
+            <div class="billContainer d-flex">
+              <div class="billText d-flex">
+                <p>TOTAL</p>
+                <p>FRAIS DE PORT</p>
+                <p>SOMME A PAYER</p>
+              </div>
+              <div class="billCalc d-flex">
+                <p>100€</p>
+                <p>0€</p>
+                <p>1000€</p>
+              </div>
+            </div>
+
+            </br></br>
+          </fieldset>
+          <fieldset class="shopperField d-flex cart">
+
+              <label for="shopperName">Nom :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName"></input>
+              <label for="shopperForename">Prénom :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename"></input>
+              <label for="shopperAdresse">Adresse :</label>
+              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse"></textarea>
+              <label for="shopperTel">Téléphone :</label>
+              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel"></input>
+              <label for="shopperMail">E-mail :</label>
+              <input type="mail" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail"></input>
+
+
+          </fieldset>
+
+
+
+            <button class="cart" type="submit">Valider la commande</button></br></br>
+        </form>
+      </div>
+
+      <div class="noLoading">
+        <p class="problemeServeur centerTxt">Un problème est survenu.</p>
+        <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
+        <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
+    </div>
 
     </section>
 
-    <!-- ... Article  :     ... -->        
-    <article>
 
-    </article>
-
-    <!-- ... Aside  :       ... -->
-    <aside>
-
-    </aside>
 
 
   </main>
@@ -73,7 +128,6 @@
   <footer>
 
     <ul class="d-flex">
-      <li><i class="fab fa-cc-visa logoPay"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-amex"></i></li>
       <li><a class="centerTxt" href="#whoarewe.htm">Qui sommes nous?</a></li>
       <li class="centerTxt"><a href="#CGV.htm">CGV</a></li>
       <li><a href="#legal.htm">Mentions légales</a></li>

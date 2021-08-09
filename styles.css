@@ -154,6 +154,11 @@ body{
     margin: 10px 20px;
 }
 
+.teddyCard:hover{
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+
 .ted-fig{
     width:100%;
     flex-direction: column;
@@ -296,7 +301,130 @@ footer ul{
     padding: 10px 12px;
 }
 
+
+/* .......................................page product.html.........................................*/
+.form1Container{
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+    width: 100%;
+    height:auto;
+}
+
+/* .form1{
+    background-color:var(--main-color3);
+} */
+
+button{
+    padding: 15px;
+    margin: 30px 10px;
+    background-color: var(--main-color1);
+    color: var(--mainWhite);
+    border-radius: 5px;
+    width: 200px;
+}
+button:hover{
+    transition: all 20sec ease-in;
+    transform: scale(1.02);
+    background-color:var(--primaryColor3);
+    cursor:  pointer;
+
+}
+
+
+/* .......................................page shopping-cart.html.........................................*/
+
+h2+p{
+    padding-bottom: 50px;
+}
+
+form.cart{
+    width: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+}
+
+fieldset.cartField{
+    width: 98%;
+    height:auto;
+    flex-direction: column;
+    justify-content:space-evenly;
+    padding: 10px;
+    background-color:var(--main-color6);
+    font-family: 'Roboto', sans-serif;
+}
+fieldset .oneCartItem{
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+    padding: 10px;
+    background-color:var(--main-color6);
+    font-family: 'Roboto', sans-serif;
+}
+
+.oneCartItem p{
+padding: 0 6px;
+}
+
+
+fieldset .billContainer{
+    justify-content: center;
+
+
+
+}
+
+
+
+fieldset a{
+    display: none;
+}
+
+.cart label{
+    padding: 14px 10px;
+}
+
+
+
+.billText{
+    /* width: 98%;
+    height:auto; */
+    flex-direction: column;
+    /* justify-content:flex-start; */
+    align-items: flex-start;
+    margin-top: 20px ;  
+    padding-left: 5%; 
+}
+
+.billCalc{
+    /* width: 98%;
+    height:auto; */
+    flex-direction: column;
+    /* justify-content:flex-end; */
+    align-items: flex-end;
+    margin-top: 20px ;  
+    padding-left: 10%; 
+
+}
+
+textarea.cart{
+    resize: none;
+}
+
+
+fieldset.shopperField{
+    width: 98%;
+    height:auto;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    background-color:var(--main-color6);
+}
+/*_____________________________________________________________________________________________________*/
 /*________________________________responsive _______ @media___________________________________________*/
+/*___________________________________________________________________________________________________*/
 
 
 @media all and (max-width: 320px){/* <320w*/
@@ -316,8 +444,15 @@ footer ul{
     }
 }
 
+@media all and (max-width: 600px)/* <600w*/
+{	/*general*/
+	/*header*/
+	/*main*/
+	/*footer*/
 
-@media all and (min-width: 900px){
+}
+
+@media all and (min-width: 900px){/* >900w*/
     .headernav ul{
         flex-direction: row;
         justify-content:space-evenly;
@@ -362,14 +497,28 @@ footer ul{
         flex-direction: row;
         justify-content: space-evenly;
     }
+
+/*...........................*/
+	/*shopping-cart.html*/
+/*...........................*/
+    fieldset.cartField{
+        width: 60%;
+        justify-content:space-evenly;/*??*/
+    }
+    fieldset a{
+        display: box;
+    }
+
+    fieldset.shopperField{
+        width: 60%;
+        justify-content: center;
+        padding: 100px;
+    }
+    
+
+
 }
 
 
-@media all and (max-width: 600px)
-{	/*general*/
-	/*header*/
-	/*main*/
-	/*footer*/
 
-}
 

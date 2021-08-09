@@ -9,17 +9,17 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orinoco Product</title>
+  <title>Orinoco teddybear product page</title>
+  <meta name="description" content="Orinoco est une boutique en ligne parisienne qui vend de beaux nounours #teddybear">
+  <link rel="shortcut icon" href="../favicon.ico" >
   <link rel="stylesheet" href="../styles.css">
   <script src="https://kit.fontawesome.com/e8a7d66f52.js" crossorigin="anonymous"></script>
-  <!--<script src="script.js" defer></script>-->
+  <script src="../js/product.js0" defer></script>
 </head>
 
 <!-- ............................  BODY ............................  -->
 
 <body>
-
-
 
 
   <!-- ..................  HEADER ..................  -->
@@ -33,9 +33,6 @@
       <ul class="d-flex">
 	      <li><a href="html/shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
 	      <li><a href="html/my-orders.html"><i class="fas fa-list-alt"></i>Mes commandes</a></li>
-	      <li></li>
-	      <li></li>
-	      <li></li>
       </ul>
     </div>
 
@@ -44,26 +41,60 @@
 
 <!-- ....................  MAIN .....................  -->
   <main>
-	<div class="noLoading">
-    <p class="problemeServeur centerTxt">Un problème est survenu.</p>
-    <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
-    <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
- </div>
 
-    <!-- ... Section  :    ... -->
-    <section>
+    <!-- ... Section  :  Titre  ... -->
+    <section id="title">
+      <h1 class="centerTxt product">Voulez vous l'adopter ?</h1>
+    </section>
+
+    <!-- ... Section  :  les nounours  ... -->
+    <section id="ourTeddies">
+
+      <h2 class="centerTxt">Votre nounours</h2>    
+      <div class="teddiesCardContainer product d-flex">
+        <div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
+            <figure class="ted-fig product d-flex">
+              <img class="ted-img product" src="images/test.webp" alt="teddybear image" />
+              <figcaption class="ted-figcap product">
+                <div class="ted-nameprice d-flex">
+                  <p class="ted-name product">Name</p>
+                  <p class="ted-price product">Price</p>
+                </div>
+              <p class="ted-description product">Description</p>
+              </figcaption>
+            </figure>
+          </a>
+        </div>  
+      </div>
+
+      <h2 class="centerTxt">Personnalisez votre nounours :</h2>
+      <div class="form1Container product d-flex"><!--form1=  choix nombre et couleur -->
+        <form class="form1 centerTxt" method="get" action="shopping-cart.html">
+            <label for "couleurMenu">Quelle couleur choisissez-vous : </label>
+            <select name="couleurMenu" id="couleurMenu">
+              <option value="tan">Tan</option>
+              <option value="chocolate">Chocolate</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
+            </select></br></br>
+
+            <label for "nombreMenu">Combien en voulez vous : </label>
+            <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
+            </select></br></br>
+
+            <button class="product"type="submit"> Envoyer au panier</button></br></br>
+        </form>
+      </div>
+
+      <div class="noLoading">
+        <p class="problemeServeur centerTxt">Un problème est survenu.</p>
+        <p class="problemeServeur centerTxt">Il semble que le serveur soit indisponible.</p>
+        <p class="problemeServeur centerTxt">Ou bien qu'il y ait un problème sur votre connexion internet</p>
+    </div>
 
     </section>
 
-    <!-- ... Article  :     ... -->        
-    <article>
 
-    </article>
-
-    <!-- ... Aside  :       ... -->
-    <aside>
-
-    </aside>
 
 
   </main>
@@ -73,7 +104,6 @@
   <footer>
 
     <ul class="d-flex">
-      <li><i class="fab fa-cc-visa logoPay"></i><i class="fab fa-cc-paypal"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-amex"></i></li>
       <li><a class="centerTxt" href="#whoarewe.htm">Qui sommes nous?</a></li>
       <li class="centerTxt"><a href="#CGV.htm">CGV</a></li>
       <li><a href="#legal.htm">Mentions légales</a></li>
