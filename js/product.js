@@ -118,30 +118,40 @@ fetch(urlTeddy)
       </figure>
     </div>`
      // Insertion des éléments recuperés //
-     const container1Html = document.querySelector(".teddiesCardContainer");
-     container1Html.innerHTML = teddyProduct;
+    const container1Html = document.querySelector(".teddiesCardContainer");
+    container1Html.innerHTML = teddyProduct;
 
 
+    let colorsString="";
+    for (let index = 0; index < data.colors.length; index++) {
+      colorsString+=
+      `<option value="data.colors[index]">${data.colors[index]}</option>`
+    }
+ 
+   
+    const container2Html = document.querySelector("#couleurMenu");
+    console.log(container2Html);
+    container2Html.innerHTML = colorsString;
     
-     let teddyProductColors="";
-     teddyProductColors=
-      `<form class="form1 centerTxt" method="get" action="shopping-cart.html">
-      <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
-      <select name="couleurMenu" id="couleurMenu">
-        <option value="data.colors[0]">${data.colors[0]}</option>
-        <option value="data.colors[1]">${data.colors[1]}</option>
-        <option value="data.colors[2]">${data.colors[2]}</option>
-        <option value="data.colors[3]">${data.colors[3]}</option>
-      </select></br></br>
+    //  let teddyProductColors="";
+    //  teddyProductColors=
+    //   `<form class="form1 centerTxt" method="get" action="shopping-cart.html">
+    //   <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
+    //   <select name="couleurMenu" id="couleurMenu">
+    //     <option value="data.colors[0]">${data.colors[0]}</option>
+    //     <option value="data.colors[1]">${data.colors[1]}</option>
+    //     <option value="data.colors[2]">${data.colors[2]}</option>
+    //     <option value="data.colors[3]">${data.colors[3]}</option>
+    //   </select></br></br>
 
-      <label for="nombreMenu">Combien en voulez vous : </label>
-      <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
-      </select></br></br>
+    //   <label for="nombreMenu">Combien en voulez vous : </label>
+    //   <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
+    //   </select></br></br>
 
-      <button class="product"type="submit"> Envoyer au panier</button></br></br>
-      </form>`
-     const container2Html = document.querySelector(".form1Container");
-     container2Html.innerHTML = teddyProductColors;
+    //   <button class="product"type="submit"> Envoyer au panier</button></br></br>
+    //   </form>`
+    //  const container2Html = document.querySelector(".form1Container");
+    //  container2Html.innerHTML = teddyProductColors;
 
   });
 
