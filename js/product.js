@@ -23,109 +23,190 @@ const noLoading = document.querySelector('.noLoading');
 const url="http://localhost:3000/api/teddies" ;
 const productId = window.location.search.substring(1);
 console.log(productId);
+const urlTeddy=`${url}/${productId}`;
+/*const urlTeddy= url+"/"+productId;*/
+console.log(urlTeddy);
 
 
 //  .......  code  ........ //
 noWarning();
 
+//1.verifie appel api: promesse avec response code 200
+// console.log(fetch(urlTeddy));
+
+//2.verifie réponse api: status 200
+// fetch(urlTeddy)
+//   .then(res=> console.log(res))
+
+//3.verifie transfo json
+// fetch(urlTeddy)
+//   .then(res=>console.log(res.json()))
+
+//4.verifie transfo objet; donne 1 1objet avec _id, colors:array[4], description, imageUrl, name, price
+// fetch(urlTeddy)
+//   .then(res=>res.json())
+//   .then(data=>console.log(data))
 
 
+//5. exploitation (objet, tableau )... 
+//   fetch(urlTeddy)
+//  .then(res => {
+//       if (res.ok) {
+//         console.log("success(fetch url)!");
+//         return res.json();
+//       } else {
+//         console.log("failed (fetch url)!")
+//         warning();
+//       }
+//     })
+//     .then(data => {
+//       console.log(data); //affiche les data de l'api (json=tableau d'objet)
+//       // Création de la variable qui s'ajoutera aux éléments //
+//       let tedId=data._id;
+//       console.log(tedId); //
+//       let tedName=data.name;
+//       console.log(tedName); //
+//       let tedPrice=data.price;
+//       console.log(tedPrice); //
+//       let tedDescription=data.description;
+//       console.log(tedDescription); //
+//       let tedUrl=data.imageUrl;
+//       console.log(tedUrl); //
+//       let tedColors=data.colors;
+//       // console.log(tedColors); //
+//       // console.log(tedcolors[0]);
+//       for (let index = 0; index < tedColors.length; index++) {
+//         console.log(tedColors[index]);}
 
-// new URL= location.href;
+//       console.log("for of colors[] : ");//
+//       for (const element of data.colors) {
+//         console.log(element);
+//       }
+
+//       console.log("for in objet data : ");//
+//       for (const property in data) {
+//         console.log(`${property}: ${data[property]}`);
+//       } 
+//     });
 
 
-fetch(url)
+fetch(urlTeddy)
   .then(res => {
-    if (res.ok) {
-      console.log("success(fetch url)!");
-      return res.json();
-    } else {
-      console.log("failed (fetch url)!")
-      warning();
-    }
+      if (res.ok) {
+        console.log("success(fetch url)!");
+        return res.json();
+      } else {
+        console.log("failed (fetch url)!")
+        warning();
+      }
   })
   .then(data => {
-    console.log(123 +data); //affiche les data de l'api (json=tableau d'objet)
-    // Création de la variable qui s'ajoutera aux éléments //
-    let teddiesString = "";
-
-    // Boucle pour récupérer les données des produits //
-    for(let i = 0; i < data.length; i++) {
-      console.log(data[i].name+data[i].price); // Visualisation si la boucle est opérationnel //
-      
-      // Création de l'élément en HTML //
-      teddiesString += 
-      `<div class="teddyCard">
-      <a href="../html/product.html?${data[i]._id}">
-        <figure class="ted-fig d-flex">
-          <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
-          <figcaption class="ted-figcap d-flex">
-            <div class="ted-nameprice d-flex">
-              <p class="ted-name">${data[i].name}</p>
-              <p class="ted-price">${data[i].price/100}€</p>
-            </div>
-            <p class="ted-description">${data[i].description}</p>
-
-          </figcaption>
-        </figure>
-      </a>
+    let tedUrl=data.imageUrl;
+    console.log(tedUrl); //
+    let teddyProduct="";
+    teddyProduct=
+    `<div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
+      <figure class="ted-fig product d-flex">
+        <img class="ted-img product" src="${data.imageUrl}" alt="teddybear image" />
+        <figcaption class="ted-figcap product">
+          <div class="ted-nameprice d-flex">
+            <p class="ted-name product">${data.name}</p>
+            <p class="ted-price product">${data.price/100}€</p>
+          </div>
+          <p class="ted-description product">${data.description}</p>
+        </figcaption>
+      </figure>
     </div>`
-    };
+     // Insertion des éléments recuperés //
+     const container1Html = document.querySelector(".teddiesCardContainer");
+     container1Html.innerHTML = teddyProduct;
+
+
     
-     // Insertion des éléments recuperés dans la page index.html //
-    // const containerHtml = document.getElementsByClassName("teddiesCardContainer");
-    const containerHtml = document.querySelector(".teddiesCardContainer");
-    containerHtml.innerHTML = teddiesString;
-    console.log(456+containerHtml);
-})
+     let teddyProductColors="";
+     teddyProductColors=
+      `<form class="form1 centerTxt" method="get" action="shopping-cart.html">
+      <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
+      <select name="couleurMenu" id="couleurMenu">
+        <option value="data.colors[0]">${data.colors[0]}</option>
+        <option value="data.colors[1]">${data.colors[1]}</option>
+        <option value="data.colors[2]">${data.colors[2]}</option>
+        <option value="data.colors[3]">${data.colors[3]}</option>
+      </select></br></br>
 
-// Message d'erreur //
-  .catch(error => {
-    console.log('error(du catch de fetch url)');
-    warning()
-  })
-  ;
+      <label for="nombreMenu">Combien en voulez vous : </label>
+      <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
+      </select></br></br>
 
-  
+      <button class="product"type="submit"> Envoyer au panier</button></br></br>
+      </form>`
+     const container2Html = document.querySelector(".form1Container");
+     container2Html.innerHTML = teddyProductColors;
+
+  });
+
+  // <option value="data.colors[0]">${data.colors[0]}</option>
+  // <option value="data.colors[1]">${data.colors[1]}</option>
+  // <option value="data.colors[2]">${data.colors[2]}</option>
+  // <option value="data.colors[3]">${data.colors[3]}</option>
 
 
-//works-redo
+
+
+
+
+
+
+
+
+
+
+
+
+    //àvirer
+// fetch(url)
+//   .then(res => {
+//     if (res.ok) {
+//       console.log("success(fetch url)!");
+//       return res.json();
+//     } else {
+//       console.log("failed (fetch url)!")
+//       warning();
+//     }
+//   })
 //   .then(data => {
-//     console.log(data); //affiche les data de l'api (json=tableau d'objet)
+//     console.log(123 +data); //affiche les data de l'api (json=tableau d'objet)
 //     // Création de la variable qui s'ajoutera aux éléments //
-//     let getAllTeddies = "";
+//     let teddiesString = "";
 
 //     // Boucle pour récupérer les données des produits //
 //     for(let i = 0; i < data.length; i++) {
 //       console.log(data[i].name+data[i].price); // Visualisation si la boucle est opérationnel //
       
 //       // Création de l'élément en HTML //
-//       getAllTeddies += 
-//       `<li class="item">
-//         <div class="card mb-3">
-//           <div id="cardProduct" class="row g-0">
-//             <div class="col-md-4">
-//               <img src="${data[i].imageUrl}" class="img-thumbnail shadow" alt="Ours en peluche" />
+//       teddiesString += 
+//       `<div class="teddyCard">
+//       <a href="../html/product.html?${data[i]._id}">
+//         <figure class="ted-fig d-flex">
+//           <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
+//           <figcaption class="ted-figcap d-flex">
+//             <div class="ted-nameprice d-flex">
+//               <p class="ted-name">${data[i].name}</p>
+//               <p class="ted-price">${data[i].price/100}€</p>
 //             </div>
-//               <div class="col-md-8">
-//                 <div class="card-body">
-//                   <h2 class="card-title fs-4">${data[i].name}</h2>
-//                   <p class="card-text">${data[i].description}</p>
-//                   <p class="card-text text-muted fs-5">${(data[i].price/100).toFixed(2).replace(".",",")}€</p>
-//                   <br />
-//                   <a
-//                     class="btn btn-outline-primary w-25"
-//                     href="./product.html?${data[i]._id}"
-//                     >Détail</a>
-//                 </div>
-//               </div>
-//           </div>
-//         </div>
-//       </li>`
-//     }
+//             <p class="ted-description">${data[i].description}</p>
+
+//           </figcaption>
+//         </figure>
+//       </a>
+//     </div>`
+//     };
     
 //      // Insertion des éléments recuperés dans la page index.html //
-//     document.getElementById("items").innerHTML = getAllTeddies
+//     // const containerHtml = document.getElementsByClassName("teddiesCardContainer");
+//     const containerHtml = document.querySelector(".teddiesCardContainer");
+//     containerHtml.innerHTML = teddiesString;
+//     console.log(456+containerHtml);
 // })
 
 // // Message d'erreur //
@@ -135,139 +216,4 @@ fetch(url)
 //   })
 //   ;
 
-  
-
-
-
-// console.log('123456');
-// const teddyTab=data;
-// console.log(teddyTab);
-
-
-// 0/
-// fetch("http://localhost:3000/api/teddies", {
-// });
-
-// 1/ le console.log du retour de la requête (montre une promesse: body, response etc...)
-// console.log(fetch("http://localhost:3000/api/teddies"));
-
-// 2/ le console.log de la reéponse (montre la réponse)
-// fetch("http://localhost:3000/api/teddies")
-//   .then(res => console.log(res))
-// ;
-
-// 3/ accéder au body=contenu  : utiliser json
-// fetch("http://localhost:3000/api/teddies")
-//   .then(res => res.json())
-//   .then(data => console.log(data))
-// ;
-
-// 4/ mettre test erreur
-// fetch("http://localhost:3000/api/teddies")
-//   .then(res => {
-//     if (res.ok) {
-//       console.log("success!")
-//     } else {
-//       console.log("failed!")
-//     }
-//   })
-//   .then(data => console.log(data))
-//   .catch(error => console.log('error'));
-
-//ok pour afficher l'image
-// fetch("http://localhost:3000/api/teddies")
-//   .then (res => res.json())
-//   .then (data => tedImg1.src = data[0].imageUrl)
-// ;
-
-//essai boucle for (ok) mais un seul div en dur...et tout l'objet à faire, pas juste img!
-// --> créer chaque objet card en js ; boucler sur tout objet
-// const tedImg1 = document.getElementById('ted-img1');
-// const noLoading = document.querySelector('.noLoading');
-// fetch("http://localhost:3000/api/teddies")
-//   .then (res => res.json())
-//   .then (data => {
-//     for (var i = 0 ; i < data.length ; i++) {  
-//       tedImg1.src = data[i].imageUrl;
-//       }
-//   })    
-// ;
-//console.log(tedImg1.src);
-
-// marche grace au return , sinon data undefined
-// fetch("http://localhost:3000/api/teddies")
-//   .then(res => {
-//     console.log('rtyu');
-//     return res.json()})
-
-//   .then(data => console.log(data))
-
-
-//echec lamentable
-// var teddyTab;
-
-// fetch("http://localhost:3000/api/teddies")
-//   .then(res => {
-//     console.log('rtyu');
-//     return res.json()})
-
-//   .then(data => {
-//     console.log(data+'b');
-//     console.log(data+'c');
-//     fruits = data;
-//     console.log(fruits+'e')
-//   })
-//   console.log(fruits+'azerty');
-
-// ;
-
-//marche mais sort pas
-// fetch(url)
-//   .then(res => {
-//     if (res.ok) {
-//       console.log("success(fetch url)!");
-//       return res.json();
-//     } else {
-//       console.log("failed (fetch url)!")
-//       warning();
-//     }
-//   })
-//   .then(data => {
-//     console.log(data);
-//     const teddyTab=data;
-//     console.log(teddyTab);
-//     // transfert(data);
-    
-//   })
-//   // .catch(error => console.log('error(du catch de fetch url)')); 
-//   .catch(error => {
-//     console.log('error(du catch de fetch url)');
-//     warning()
-//   })
-//   ;
-
-//fonctionne met teddybear ne sort pas non plus (// undefined)
-// var teddyTab;
-// fetch(url)
-//   .then(res => {
-//     if (res.ok) {
-//       console.log("success(fetch url)!");
-//       return res.json();
-//     } else {
-//       console.log("failed (fetch url)!")
-//       warning();
-//     }
-//   })
-//   .then(data => {
-//     console.log(data); //affiche les data de l'api (json=tableau d'objet)
-//     // teddyTab=data; //const -donc locale! - recup les data (json=tableau d'objet)
-//     const teddyTab=data; //const -donc locale! - recup les data (json=tableau d'objet)
-//     console.log(teddyTab); //affiche const teddyTab, qui contient bien les data (json)
-//     transfert(data); //affiche chaque élément (objet nounours) du tableau data=json
-//   })
-//   .catch(error => {
-//     console.log('error(du catch de fetch url)');
-//     warning()
-//   })
-//   ;
   

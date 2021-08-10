@@ -371,9 +371,7 @@ padding: 0 6px;
 
 fieldset .billContainer{
     justify-content: center;
-
-
-
+    padding-bottom: 20px;
 }
 
 
@@ -419,8 +417,9 @@ fieldset.shopperField{
     height:auto;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
+    padding:10px;
     background-color:var(--main-color6);
+    font-family: 'Roboto', sans-serif;
 }
 /*_____________________________________________________________________________________________________*/
 /*________________________________responsive _______ @media___________________________________________*/
@@ -512,7 +511,7 @@ fieldset.shopperField{
     fieldset.shopperField{
         width: 60%;
         justify-content: center;
-        padding: 100px;
+        padding: 30px 100px;
     }
     
 
