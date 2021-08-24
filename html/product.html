@@ -68,7 +68,7 @@
 
       <h2 class="centerTxt">Personnalisez votre nounours :</h2>
       <div class="form1Container product d-flex"><!--form1=  choix nombre et couleur -->
-        <form class="form1 centerTxt" method="get" action="shopping-cart.html">
+        <form class="form1 centerTxt" method="GET" action="shopping-cart.html">
             <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
             <select name="couleurMenu" id="couleurMenu">
               <option value="tan">Tan</option>
@@ -81,7 +81,7 @@
             <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
             </select></br></br>
 
-            <button class="product"type="submit"> Envoyer au panier</button></br></br>
+            <button id="sendProductButton"class="product" type="submit"> Envoyer au panier</button></br></br>
         </form>
       </div>
 

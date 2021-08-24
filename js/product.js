@@ -22,13 +22,19 @@ console.log(` test `);
 const noLoading = document.querySelector('.noLoading');
 const url="http://localhost:3000/api/teddies" ;
 const productId = window.location.search.substring(1);
+
+localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours
+
 console.log(productId);
 const urlTeddy=`${url}/${productId}`;
-/*const urlTeddy= url+"/"+productId;*/
 console.log(urlTeddy);
+
+// localStorage.setItem('productjsKey1', 'productjsValeur1');
+// localStorage.setItem("productjsKey2","productjsValeur2");
 
 
 //  .......  code  ........ //
+
 noWarning();
 
 //1.verifie appel api: promesse avec response code 200
@@ -117,6 +123,7 @@ fetch(urlTeddy)
         </figcaption>
       </figure>
     </div>`
+
      // Insertion des éléments recuperés //
     const container1Html = document.querySelector(".teddiesCardContainer");
     container1Html.innerHTML = teddyProduct;
@@ -126,104 +133,65 @@ fetch(urlTeddy)
     for (let index = 0; index < data.colors.length; index++) {
       colorsString+=
       `<option value="data.colors[index]">${data.colors[index]}</option>`
+      localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
+      localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
+
+
     }
  
    
     const container2Html = document.querySelector("#couleurMenu");
     console.log(container2Html);
     container2Html.innerHTML = colorsString;
-    
-    //  let teddyProductColors="";
-    //  teddyProductColors=
-    //   `<form class="form1 centerTxt" method="get" action="shopping-cart.html">
-    //   <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
-    //   <select name="couleurMenu" id="couleurMenu">
-    //     <option value="data.colors[0]">${data.colors[0]}</option>
-    //     <option value="data.colors[1]">${data.colors[1]}</option>
-    //     <option value="data.colors[2]">${data.colors[2]}</option>
-    //     <option value="data.colors[3]">${data.colors[3]}</option>
-    //   </select></br></br>
+  }
+);
 
-    //   <label for="nombreMenu">Combien en voulez vous : </label>
-    //   <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
-    //   </select></br></br>
+//si change couleur
+//localStorage.setItem('numberNow', `${ }`);//stocke le nombre en cours
 
-    //   <button class="product"type="submit"> Envoyer au panier</button></br></br>
-    //   </form>`
-    //  const container2Html = document.querySelector(".form1Container");
-    //  container2Html.innerHTML = teddyProductColors;
+//si change quantité
 
-  });
-
-  // <option value="data.colors[0]">${data.colors[0]}</option>
-  // <option value="data.colors[1]">${data.colors[1]}</option>
-  // <option value="data.colors[2]">${data.colors[2]}</option>
-  // <option value="data.colors[3]">${data.colors[3]}</option>
+//localStorage.setItem('colorNow', `${ }`);//stocke le nombre en cours
 
 
 
 
+//si validation du bouton "ajouter au panier"
+// var sendProductButton = document.querySelector('#sendProductButton');
 
+// sendProductButton.addEventListener("click", () =>{
+//   // sendProductButton.preventDefault();
 
-
-
-
-
-
-
-
-
-    //àvirer
-// fetch(url)
-//   .then(res => {
-//     if (res.ok) {
-//       console.log("success(fetch url)!");
-//       return res.json();
-//     } else {
-//       console.log("failed (fetch url)!")
-//       warning();
-//     }
-//   })
-//   .then(data => {
-//     console.log(123 +data); //affiche les data de l'api (json=tableau d'objet)
-//     // Création de la variable qui s'ajoutera aux éléments //
-//     let teddiesString = "";
-
-//     // Boucle pour récupérer les données des produits //
-//     for(let i = 0; i < data.length; i++) {
-//       console.log(data[i].name+data[i].price); // Visualisation si la boucle est opérationnel //
-      
-//       // Création de l'élément en HTML //
-//       teddiesString += 
-//       `<div class="teddyCard">
-//       <a href="../html/product.html?${data[i]._id}">
-//         <figure class="ted-fig d-flex">
-//           <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
-//           <figcaption class="ted-figcap d-flex">
-//             <div class="ted-nameprice d-flex">
-//               <p class="ted-name">${data[i].name}</p>
-//               <p class="ted-price">${data[i].price/100}€</p>
-//             </div>
-//             <p class="ted-description">${data[i].description}</p>
-
-//           </figcaption>
-//         </figure>
-//       </a>
-//     </div>`
-//     };
-    
-//      // Insertion des éléments recuperés dans la page index.html //
-//     // const containerHtml = document.getElementsByClassName("teddiesCardContainer");
-//     const containerHtml = document.querySelector(".teddiesCardContainer");
-//     containerHtml.innerHTML = teddiesString;
-//     console.log(456+containerHtml);
 // })
 
-// // Message d'erreur //
-//   .catch(error => {
-//     console.log('error(du catch de fetch url)');
-//     warning()
-//   })
-//   ;
 
-  
+//on pourrait envoye touets les infos par le bouton en method="get" aussi ? (mais manque le id)
+//si clique sur envoyer, mettre dans local storage id1, nombre1, couleur1
+//si revient sur page avec un autre nounours, doit incrementer id2 nombre2 couleur2 etc
+//dans page du panier on recup et affiche valeurs (et mettre dans local storage+mise à jour somme totale?)
+//quand validera panier, envoyer au serveur toutes ces infos + la somme finale
+//renverra id de validation
+//on affiche alors la page de commande affichant le numero de commande (et date livraison...)
+//devrait aficher aussi toutes les infos de la commande mais vider le local storage pour vider les achats
+//donc clear local storage à retour de id et recréer des var de commandes dans local storage?
+
+
+//ou :
+//on stocke données à garder des qu'on est sur cette page dans "xxxNow" (nameNow, priceNow, numberNow, colorNow, idNow...=)
+//quand validation du bouton, un fois dans panier, on range ailleurs (*) et on initialise
+//serait bien dans un objet mais ne peut que etre ds local storage sinon on perd tout à chaque fois...
+//comment incrementer? 
+//transmettre un compteur à chaque appui sur envoyer au panier et creer une nouvelle variable
+//type id2 , id3... (qu'on réinitialise à 999?)
+
+//ou alors on stocke dans key contenant id
+//par exemple dans name5beaaa8f1c9d440000a57d95, price5beaaa8f1c9d440000a57d95 ...
+
+
+
+
+
+
+
+
+
