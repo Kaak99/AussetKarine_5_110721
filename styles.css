@@ -154,7 +154,7 @@ body{
     margin: 10px 20px;
 }
 
-.teddyCard:hover{
+.teddyCard:not(.product):hover{
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -303,13 +303,18 @@ footer ul{
 
 
 /* .......................................page product.html.........................................*/
-.form1Container{
+.formContainer{
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     /* align-items: center; */
     width: 100%;
     height:auto;
+}
+
+.formContainer label{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 
 /* .form1{
@@ -323,15 +328,30 @@ button{
     color: var(--mainWhite);
     border-radius: 5px;
     width: 200px;
+    font-weight: 700;
 }
-button:hover{
+button:hover, .returnIndexButton:hover{
     transition: all 20sec ease-in;
     transform: scale(1.02);
     background-color:var(--primaryColor3);
     cursor:  pointer;
 
 }
+.returnIndexButton{
+    padding: 15px;
+    margin: 30px 10px;
+    background-color: var(--main-color1);
+    color: var(--mainWhite);
+    border-radius: 5px;
+    width: 100px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+}
 
+.buttonContainer{
+    justify-content: center;
+}
 
 /* .......................................page shopping-cart.html.........................................*/
 
@@ -365,7 +385,7 @@ fieldset .oneCartItem{
 }
 
 .oneCartItem p{
-padding: 0 6px;
+    padding: 0 6px;
 }
 
 

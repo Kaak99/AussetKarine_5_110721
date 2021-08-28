@@ -26,7 +26,7 @@
   <header>
 
     <div class="logo">
-      <a href="index.html"><img src="../images/logo/orinoco.png" alt="logo de la société orinoco"></a>
+      <a href="../index.html"><img src="../images/logo/orinoco.png" alt="logo de la société orinoco"></a>
     </div>
 
     <div class="headernav">
@@ -67,21 +67,22 @@
       </div>
 
       <h2 class="centerTxt">Personnalisez votre nounours :</h2>
-      <div class="form1Container product d-flex"><!--form1=  choix nombre et couleur -->
-        <form class="form1 centerTxt" method="GET" action="shopping-cart.html">
-            <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
-            <select name="couleurMenu" id="couleurMenu">
-              <option value="tan">Tan</option>
-              <option value="chocolate">Chocolate</option>
-              <option value="black">Black</option>
-              <option value="white">White</option>
-            </select></br></br>
+      <div class="formContainer product d-flex"><!--form1=  choix nombre et couleur -->
+        <form class="form1 centerTxt">
+          <label for="couleurMenu">Quelle couleur choisissez-vous : </label>
+          <select name="couleurMenu" id="couleurMenu">
+            <option value="tan">Tan</option>
+            <option value="chocolate">Chocolate</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+          </select></br></br>
 
-            <label for="nombreMenu">Combien en voulez vous : </label>
-            <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
-            </select></br></br>
-
-            <button id="sendProductButton"class="product" type="submit"> Envoyer au panier</button></br></br>
+          <label for="nombreMenu">Combien en voulez vous : </label>
+          <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
+          <div class="buttonContainer d-flex centerTxt">
+            <a href="../index.html" class="returnIndexButton product centerTxt"> Retour</a>
+            <button id="sendProductButton" class="product" type="button"> Envoyer au panier</button>
+          </div>
         </form>
       </div>
 

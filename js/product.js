@@ -132,7 +132,7 @@ fetch(urlTeddy)
     let colorsString="";
     for (let index = 0; index < data.colors.length; index++) {
       colorsString+=
-      `<option value="data.colors[index]">${data.colors[index]}</option>`
+      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
       localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
       localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
 
@@ -140,11 +140,28 @@ fetch(urlTeddy)
     }
  
    
-    const container2Html = document.querySelector("#couleurMenu");
-    console.log(container2Html);
-    container2Html.innerHTML = colorsString;
+    const container2colorHtml = document.querySelector("#couleurMenu");
+    const container2numberHtml = document.querySelector("#nombreMenu");
+    var couleurMenu=document.querySelector("#couleurMenu").value;
+    var nombreMenu=document.querySelector("#nombreMenu").value;
+    console.log(couleurMenu);
+    console.log(nombreMenu);
+    //localStorage.setItem('colorNow', `${container2colorHtml.value}`);
+    localStorage.setItem('colorNow', `${couleurMenu}`);
+    localStorage.setItem('numberNow',`${nombreMenu}`);
+
+    // ou console.log(document.querySelector("#couleurMenu").value);
+    //et console.log(document.querySelector("#nombreMenu").value);
   }
 );
+
+const sendProductButton = document.querySelector("#sendProductButton");
+sendProductButton.addEventListener('click', function(){
+  console.log('coucou');
+  document.location.href="shopping-cart.html";
+
+});
+
 
 //si change couleur
 //localStorage.setItem('numberNow', `${ }`);//stocke le nombre en cours
