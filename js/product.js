@@ -109,7 +109,7 @@ fetch(urlTeddy)
   .then(data => {
     let tedUrl=data.imageUrl;
     console.log(tedUrl); //
-    let teddyProduct="";
+    let teddyProduct="";//let's put in the html code for this teddy product
     teddyProduct=
     `<div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
       <figure class="ted-fig product d-flex">
@@ -126,60 +126,33 @@ fetch(urlTeddy)
 
      // Insertion des éléments recuperés //
     const container1Html = document.querySelector(".teddiesCardContainer");
-    container1Html.innerHTML = teddyProduct;
+    container1Html.innerHTML = teddyProduct;//write html for the teddy product
 
-
-    let colorsString="";
-    for (let index = 0; index < data.colors.length; index++) {
-      colorsString+=
-      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
       localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
       localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
 
+    let colorsString="";//let's put the right colors in html-menu
+    for (let index = 0; index < data.colors.length; index++) {
+      colorsString+=
+      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
+    }   
+});
 
-    }
- 
-   
+
+//if click on button "send product to shopping-cart " :
+const sendProductButton = document.querySelector("#sendProductButton");
+sendProductButton.addEventListener('click', function(){
     const container2colorHtml = document.querySelector("#couleurMenu");
     const container2numberHtml = document.querySelector("#nombreMenu");
     var couleurMenu=document.querySelector("#couleurMenu").value;
     var nombreMenu=document.querySelector("#nombreMenu").value;
-    console.log(couleurMenu);
-    console.log(nombreMenu);
-    //localStorage.setItem('colorNow', `${container2colorHtml.value}`);
+    //save color&number in local storage
     localStorage.setItem('colorNow', `${couleurMenu}`);
     localStorage.setItem('numberNow',`${nombreMenu}`);
-
-    // ou console.log(document.querySelector("#couleurMenu").value);
-    //et console.log(document.querySelector("#nombreMenu").value);
-  }
+    document.location.href="shopping-cart.html";//go to shopping-cart.html
+ }
 );
 
-const sendProductButton = document.querySelector("#sendProductButton");
-sendProductButton.addEventListener('click', function(){
-  console.log('coucou');
-  document.location.href="shopping-cart.html";
-
-});
-
-
-//si change couleur
-//localStorage.setItem('numberNow', `${ }`);//stocke le nombre en cours
-
-//si change quantité
-
-//localStorage.setItem('colorNow', `${ }`);//stocke le nombre en cours
-
-
-
-
-//si validation du bouton "ajouter au panier"
-// var sendProductButton = document.querySelector('#sendProductButton');
-
-// sendProductButton.addEventListener("click", () =>{
-//   // sendProductButton.preventDefault();
-
-// })
 
 
 //on pourrait envoye touets les infos par le bouton en method="get" aussi ? (mais manque le id)
