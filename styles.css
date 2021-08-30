@@ -441,6 +441,25 @@ fieldset.shopperField{
     background-color:var(--main-color6);
     font-family: 'Roboto', sans-serif;
 }
+
+.shopperInputAlert{
+    font-size: 0.8rem;
+    color: var(--main-color4);
+}
+
+.shopperInputValid{
+    font-size: 0.8rem;
+    color:var(--primaryColor3);
+    display: none;
+}
+
+/* fieldset:hover .shopperInputAlert{
+    display: none;
+}
+fieldset:hover .shopperInputValid{
+    display: block;
+} */
+
 /*_____________________________________________________________________________________________________*/
 /*________________________________responsive _______ @media___________________________________________*/
 /*___________________________________________________________________________________________________*/
