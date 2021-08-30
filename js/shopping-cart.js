@@ -10,7 +10,8 @@ function noWarning(){
   noLoading.style.display = 'none' ;
 }
 
-//créer objet envoyé
+
+
 function productObjetCreate(){
   let productObjet=
   {
@@ -30,6 +31,7 @@ console.log(`shopping-cart`);
 
 //  .......  const  ........ //
 const noLoading = document.querySelector('.noLoading');
+const form2Container=document.querySelector('.form2Container');
 //const url="http://localhost:3000/api/teddies" ;
 
 // let idLast = localStorage.getItem('idNow');
@@ -46,11 +48,69 @@ const noLoading = document.querySelector('.noLoading');
 //   var productObjet=productObjetCreate();
 //   console.log(productObjet);
 // }
-if (nam) {
+
+
+
+//si pas de panier dans LS et qu'on ne vient pas d'ajouter dans panier (sendToCart!==true) 
+if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')!==true))
+ {//alors afficher html="panier vide"
+   console.log("panier vide");
+  form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespéremment vide !</p></br></br>`;
+  } else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
+ {//panier vide mais on vient d'ajouter
+  var productObjet=productObjetCreate();//on crée un objet avec les données du teddy envoyé au panier
+  var productTab=[];
+  productTab.push(productObjet);//on l'ajoute au tableau productTab
+  localStorage.setItem('productTabLS', `${productTab}`);//on crée productTabLS dans localstorage et on sauve le panier productTab dedans
+  console.log("on affiche panier");
+ } else if ((localStorage.getItem('productTabLS')!==null) && (localStorage.getItem('sendToCart')!==true))
+  {//cas ou on a pas rajouté(clic lien panier) et que panier non vide--> afficher panier
+    console.log("on affiche panier");
+ } else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
+  {//cas ou on ajoute ET il ya deja un panier
+    console.log("on affiche panier");
+  }
+  else{//cas non répertorié
+    console.log("cas non répertorié");
   
-}
-var productObjet=productObjetCreate();
-console.log(productObjet);
+  
+  
+  }
+
+
+
+
+
+// if (condition) {
+  
+// }
+// else if (condition) {
+  
+// }
+
+// else if (condition) {
+  
+// }
+
+// else {
+  
+// } 
+
+
+
+  // var productObjet=productObjetCreate();
+  // console.log(productObjet);
+  // var productTab=[];
+  // productTab== localStorage.getItem('productTabLS')
+
+
+
+
+
+//  let bidule=localStorage.getItem('sendToCart');
+//  console.log(bidule);
+
+
 
 noWarning();
 // var essai1 = localStorage.getItem('essai1');

@@ -30,6 +30,9 @@ console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);
 
 //  .......  code  ........ //
 
+localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours dans local storage
+localStorage.setItem('sendToCart',false);//initialise à false dans local storage
+
 noWarning();//affichage sans alerte avant fetch, alerte selon résultats 
 
 
@@ -67,15 +70,24 @@ fetch(urlTeddy)
     const container1Html = document.querySelector(".teddiesCardContainer");
     container1Html.innerHTML = teddyProduct;//write html for the teddy product
 
-      localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
-      localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
+    //on sauve nom et prix dans local storage
+    localStorage.setItem('nameNow', `${data.name}`);//stocke le nom en cours
+    localStorage.setItem('priceNow', `${data.price}`);//stocke le prix en cours
 
     // colorsString récupère l'html des différents choix de couleur de ce teddy
     let colorsString="";//let's put the right colors in html-menu
     for (let index = 0; index < data.colors.length; index++) {
+      console.log(` ${data.colors[index]} `);
       colorsString+=
-      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
-    }   
+      `<option value="${data.colors[index]}">${data.colors[index]}</option>`
+    } 
+    //on écrit les differentes couleurs du menu (colorsString) dans l'html ( #couleurMenu )
+    const container2Html = document.querySelector("#couleurMenu");
+    container2Html.innerHTML = colorsString; 
+    console.log( colorsString );  
+    console.log(container2Html);
+
+
   })
   
   // Message d'erreur //
@@ -87,18 +99,22 @@ fetch(urlTeddy)
   ;
 
 
+//quand on clique sur "envoyer au panier "(#sendProductButton)
+//on récupère les dernieres données de couleur/nombre--> localstorage
+//on met à true la key sendToCart
+
 //if click on button "send product to shopping-cart " :
 const sendProductButton = document.querySelector("#sendProductButton");
 sendProductButton.addEventListener('click', function(){
-    const container2colorHtml = document.querySelector("#couleurMenu");
-    const container2numberHtml = document.querySelector("#nombreMenu");
-    var couleurMenu=document.querySelector("#couleurMenu").value;
-    var nombreMenu=document.querySelector("#nombreMenu").value;
-    //save color&number in local storage
-    localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours
-    localStorage.setItem('colorNow', `${couleurMenu}`);
-    localStorage.setItem('numberNow',`${nombreMenu}`);
-    document.location.href="shopping-cart.html";//go to shopping-cart.html
+  const container2colorHtml = document.querySelector("#couleurMenu");
+  const container2numberHtml = document.querySelector("#nombreMenu");
+  var couleurMenu=document.querySelector("#couleurMenu").value;
+  var nombreMenu=document.querySelector("#nombreMenu").value;
+  localStorage.setItem('colorNow', `${couleurMenu}`);
+  localStorage.setItem('numberNow',`${nombreMenu}`);
+  localStorage.setItem('sendToCart',true);
+
+  document.location.href="shopping-cart.html";//go to shopping-cart.html
  }
 );
 
