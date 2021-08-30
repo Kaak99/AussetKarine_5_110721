@@ -13,29 +13,107 @@ function noWarning(){
 
 //  .......  tests à retirer  ........ //
 
-console.log(" test ");
-console.log(" test2 ");
-console.log(` test `);
+console.log(` testproduct `);
 
 
 //  .......  const  ........ //
+
 const noLoading = document.querySelector('.noLoading');
 const url="http://localhost:3000/api/teddies" ;
-const productId = window.location.search.substring(1);
+const productId = window.location.search.substring(1);//l'id de ce teddy est récup dans l'adresse url
+const urlTeddy=`${url}/${productId}`; //= url/id de ce teddy (url?id = ${window.location} )
+console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);
 
-localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours
 
-console.log(productId);
-const urlTeddy=`${url}/${productId}`;
-console.log(urlTeddy);
 
-// localStorage.setItem('productjsKey1', 'productjsValeur1');
-// localStorage.setItem("productjsKey2","productjsValeur2");
 
 
 //  .......  code  ........ //
 
-noWarning();
+noWarning();//affichage sans alerte avant fetch, alerte selon résultats 
+
+
+//fetch sur xxx.html/id du teddy pour récup infos(nom prix descr)
+fetch(urlTeddy)
+  .then(res => {
+      if (res.ok) {
+        console.log("success(fetch url)!");
+        return res.json();//retourne données format json
+      } else {
+        console.log("failed (fetch url)!")//si bad url ou ...
+        console.error("erreur : ", status.code)//affiche message d'erreur 
+        warning();
+      }
+  })
+  .then(data => {
+    //let tedImgUrl=data.imageUrl;//tcke url de img du teddy dans tedImgUrl
+    //console.log(tedImgUrl); //
+    let teddyProduct="";//let's put in teddyProduct the html code for this teddy product
+    teddyProduct=
+    `<div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
+      <figure class="ted-fig product d-flex">
+        <img class="ted-img product" src="${data.imageUrl}" alt="teddybear image" />
+        <figcaption class="ted-figcap product">
+          <div class="ted-nameprice d-flex">
+            <p class="ted-name product">${data.name}</p>
+            <p class="ted-price product">${(data.price/100).toFixed(2)}€</p>
+          </div>
+          <p class="ted-description product">${data.description}</p>
+        </figcaption>
+      </figure>
+    </div>`
+
+     // Insertion du html formé(teddyProduct) dans .teddiesCardContainer //
+    const container1Html = document.querySelector(".teddiesCardContainer");
+    container1Html.innerHTML = teddyProduct;//write html for the teddy product
+
+      localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
+      localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
+
+    // colorsString récupère l'html des différents choix de couleur de ce teddy
+    let colorsString="";//let's put the right colors in html-menu
+    for (let index = 0; index < data.colors.length; index++) {
+      colorsString+=
+      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
+    }   
+  })
+  
+  // Message d'erreur //
+  .catch(error => {
+    console.log('error(du catch de fetch url)');//+quand pas connexion server,bad url,erreur dans then
+    console.error("erreur : ", status.code)//affiche message d'erreur 
+    warning()
+  })
+  ;
+
+
+//if click on button "send product to shopping-cart " :
+const sendProductButton = document.querySelector("#sendProductButton");
+sendProductButton.addEventListener('click', function(){
+    const container2colorHtml = document.querySelector("#couleurMenu");
+    const container2numberHtml = document.querySelector("#nombreMenu");
+    var couleurMenu=document.querySelector("#couleurMenu").value;
+    var nombreMenu=document.querySelector("#nombreMenu").value;
+    //save color&number in local storage
+    localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours
+    localStorage.setItem('colorNow', `${couleurMenu}`);
+    localStorage.setItem('numberNow',`${nombreMenu}`);
+    document.location.href="shopping-cart.html";//go to shopping-cart.html
+ }
+);
+
+
+
+
+
+
+
+
+
+/////////////////////
+//   fetch         //
+////////////////////
+
 
 //1.verifie appel api: promesse avec response code 200
 // console.log(fetch(urlTeddy));
@@ -76,8 +154,8 @@ noWarning();
 //       console.log(tedPrice); //
 //       let tedDescription=data.description;
 //       console.log(tedDescription); //
-//       let tedUrl=data.imageUrl;
-//       console.log(tedUrl); //
+//       let tedImgUrl=data.imageUrl;
+//       console.log(tedImgUrl); //
 //       let tedColors=data.colors;
 //       // console.log(tedColors); //
 //       // console.log(tedcolors[0]);
@@ -94,94 +172,5 @@ noWarning();
 //         console.log(`${property}: ${data[property]}`);
 //       } 
 //     });
-
-
-fetch(urlTeddy)
-  .then(res => {
-      if (res.ok) {
-        console.log("success(fetch url)!");
-        return res.json();
-      } else {
-        console.log("failed (fetch url)!")
-        warning();
-      }
-  })
-  .then(data => {
-    let tedUrl=data.imageUrl;
-    console.log(tedUrl); //
-    let teddyProduct="";//let's put in the html code for this teddy product
-    teddyProduct=
-    `<div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
-      <figure class="ted-fig product d-flex">
-        <img class="ted-img product" src="${data.imageUrl}" alt="teddybear image" />
-        <figcaption class="ted-figcap product">
-          <div class="ted-nameprice d-flex">
-            <p class="ted-name product">${data.name}</p>
-            <p class="ted-price product">${data.price/100}€</p>
-          </div>
-          <p class="ted-description product">${data.description}</p>
-        </figcaption>
-      </figure>
-    </div>`
-
-     // Insertion des éléments recuperés //
-    const container1Html = document.querySelector(".teddiesCardContainer");
-    container1Html.innerHTML = teddyProduct;//write html for the teddy product
-
-      localStorage.setItem('nameNow', `${data.name}`);//stocke l'id en cours
-      localStorage.setItem('priceNow', `${data.price/100}`);//stocke le prix en cours
-
-    let colorsString="";//let's put the right colors in html-menu
-    for (let index = 0; index < data.colors.length; index++) {
-      colorsString+=
-      `<option value=${data.colors[index]}>${data.colors[index]}</option>`
-    }   
-});
-
-
-//if click on button "send product to shopping-cart " :
-const sendProductButton = document.querySelector("#sendProductButton");
-sendProductButton.addEventListener('click', function(){
-    const container2colorHtml = document.querySelector("#couleurMenu");
-    const container2numberHtml = document.querySelector("#nombreMenu");
-    var couleurMenu=document.querySelector("#couleurMenu").value;
-    var nombreMenu=document.querySelector("#nombreMenu").value;
-    //save color&number in local storage
-    localStorage.setItem('colorNow', `${couleurMenu}`);
-    localStorage.setItem('numberNow',`${nombreMenu}`);
-    document.location.href="shopping-cart.html";//go to shopping-cart.html
- }
-);
-
-
-
-//on pourrait envoye touets les infos par le bouton en method="get" aussi ? (mais manque le id)
-//si clique sur envoyer, mettre dans local storage id1, nombre1, couleur1
-//si revient sur page avec un autre nounours, doit incrementer id2 nombre2 couleur2 etc
-//dans page du panier on recup et affiche valeurs (et mettre dans local storage+mise à jour somme totale?)
-//quand validera panier, envoyer au serveur toutes ces infos + la somme finale
-//renverra id de validation
-//on affiche alors la page de commande affichant le numero de commande (et date livraison...)
-//devrait aficher aussi toutes les infos de la commande mais vider le local storage pour vider les achats
-//donc clear local storage à retour de id et recréer des var de commandes dans local storage?
-
-
-//ou :
-//on stocke données à garder des qu'on est sur cette page dans "xxxNow" (nameNow, priceNow, numberNow, colorNow, idNow...=)
-//quand validation du bouton, un fois dans panier, on range ailleurs (*) et on initialise
-//serait bien dans un objet mais ne peut que etre ds local storage sinon on perd tout à chaque fois...
-//comment incrementer? 
-//transmettre un compteur à chaque appui sur envoyer au panier et creer une nouvelle variable
-//type id2 , id3... (qu'on réinitialise à 999?)
-
-//ou alors on stocke dans key contenant id
-//par exemple dans name5beaaa8f1c9d440000a57d95, price5beaaa8f1c9d440000a57d95 ...
-
-
-
-
-
-
-
 
 

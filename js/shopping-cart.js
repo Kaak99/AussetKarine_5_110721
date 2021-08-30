@@ -10,6 +10,18 @@ function noWarning(){
   noLoading.style.display = 'none' ;
 }
 
+//créer objet envoyé
+function productObjetCreate(){
+  let productObjet=
+  {
+    id: localStorage.getItem('idNow'),
+    name: localStorage.getItem('nameNow'),
+    price: localStorage.getItem('priceNow'),
+    color: localStorage.getItem('colorNow'),
+    number: localStorage.getItem('numberNow')
+  } ;
+  return productObjet;
+}
 
 //  .......  tests à retirer  ........ //
 
@@ -28,6 +40,18 @@ const noLoading = document.querySelector('.noLoading');
 
 
 //  .......  code  ........ //
+
+//si localstorage pas vide, on crée un objet productObjet avec les données
+// if (localStorage.getItem('anyItem') !== null) {
+//   var productObjet=productObjetCreate();
+//   console.log(productObjet);
+// }
+if (nam) {
+  
+}
+var productObjet=productObjetCreate();
+console.log(productObjet);
+
 noWarning();
 // var essai1 = localStorage.getItem('essai1');
 // console.log(essai1);
@@ -40,33 +64,37 @@ noWarning();
 
 //tabCart=[];
 
-//objet de contact 
-var objContact={
-  firstName: "ka",
-  lastName: "ak",
-  address: "123 azerty",
-  city: "laville",
-  email: "cours@gg.com"
-};
-console.log(objContact);
 
-//tableau de produits  
+//--------------------com------
+// //objet de contact 
+// var objContact={
+//   firstName: "ka",
+//   lastName: "ak",
+//   address: "123 azerty",
+//   city: "laville",
+//   email: "cours@gg.com"
+// };
+// console.log(objContact);
 
-var productTab=[
-  {
-  name: "Arnold",
-  price: 39,
-  color: "chocolate",
-  number: 3
-  },
-  {
-    name: "Gustav",
-    price: 45,
-    color: "white",
-    number: 2
-  }
-];
-console.log(productTab);
+// //tableau de produits  
+
+// var productTab=[
+//   {
+//   name: "Arnold",
+//   price: 39,
+//   color: "chocolate",
+//   number: 3
+//   },
+//   {
+//     name: "Gustav",
+//     price: 45,
+//     color: "white",
+//     number: 2
+//   }
+// ];
+// console.log(productTab);
+
+
 
 // let productTab2=["Arnold, 39, chocolate,3","Gustav, 45, white,"];
 
@@ -76,9 +104,10 @@ console.log(productTab);
 // let jsonToSend= JSON.stringify(dataToSend);
 // console.log(jsonToSend);
 
+//--------------------com------
+// var jsonOrder=JSON.stringify({ objContact, productTab });
+// console.log(jsonOrder);
 
-var jsonOrder=JSON.stringify({ objContact, productTab });
-console.log(jsonOrder);
 
 
 // var promise1=fetch("http://localhost:3000/api/teddies/order",{
@@ -90,18 +119,18 @@ console.log(jsonOrder);
 // console.log(promise1);
 
 
+//--------------------com------
+// fetch("http://localhost:3000/api/teddies/order", {
+//   method: 'POST',
+//   headers: {
+//       'Content-Type': 'application/json'
+//   },
+// //  mode:'cors',
+//   body: jsonOrder
+// }).then(response => {
+//   return response.json();
 
-fetch("http://localhost:3000/api/teddies/order", {
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json'
-  },
-//  mode:'cors',
-  body: jsonOrder
-}).then(response => {
-  return response.json();
-
-})
+// })
 
 
 //1.verifie appel api: promesse avec response code 200
@@ -196,6 +225,7 @@ fetch("http://localhost:3000/api/teddies/order", {
 //   .then(data => {
 //     localStorage.setItem("order", JSON.stringify(data));
 //     // document.location.href = "my-orders.html";
+//  //effacer locastorage
 // });
 
 
