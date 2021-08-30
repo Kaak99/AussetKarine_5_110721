@@ -31,7 +31,7 @@ console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);
 //  .......  code  ........ //
 
 localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours dans local storage
-localStorage.setItem('sendToCart',false);//initialise à false dans local storage
+localStorage.setItem('sendToCart',"false");//initialise à false dans local storage(pour test surtout )
 
 noWarning();//affichage sans alerte avant fetch, alerte selon résultats 
 
@@ -112,7 +112,9 @@ sendProductButton.addEventListener('click', function(){
   var nombreMenu=document.querySelector("#nombreMenu").value;
   localStorage.setItem('colorNow', `${couleurMenu}`);
   localStorage.setItem('numberNow',`${nombreMenu}`);
-  localStorage.setItem('sendToCart',true);
+  //localStorage.setItem('sendToCart',true);//boleen deviennent des string de toute façon dans localStorage
+  localStorage.setItem('sendToCart',"true");
+
 
   document.location.href="shopping-cart.html";//go to shopping-cart.html
  }

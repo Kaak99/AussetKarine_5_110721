@@ -31,8 +31,8 @@
 
     <div class="headernav">
       <ul class="d-flex">
-	      <li><a href="html/shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
-	      <li><a href="html/my-orders.html"><i class="fas fa-list-alt"></i>Mes commandes</a></li>
+	      <li><a href="shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
+	      <li><a href="my-orders.html"><i class="fas fa-list-alt"></i>Mes commandes</a></li>
       </ul>
     </div>
 
@@ -78,7 +78,7 @@
           </select></br></br>
 
           <label for="nombreMenu">Combien en voulez vous : </label>
-          <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu"></input>
+          <input type="number" size="3" maxlength="3" value="1" name="nombreMenu" id="nombreMenu" min="1" max="99"></input>
           <div class="buttonContainer d-flex centerTxt">
             <a href="../index.html" class="returnIndexButton product centerTxt"> Retour</a>
             <button id="sendProductButton" class="product" type="button"> Envoyer au panier</button>

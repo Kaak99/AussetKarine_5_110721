@@ -31,7 +31,7 @@
 
     <div class="headernav">
       <ul class="d-flex">
-	      <li><a href="#shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
+	      <li><a href="shopping-cart.html"><i class="fas fa-shopping-cart" title="Mon panier"></i>Mon panier</a></li>
 	      <li><a href="my-orders.html"><i class="fas fa-list-alt"></i>Mes commandes</a></li>
       </ul>
     </div>
@@ -61,7 +61,7 @@
               <p class="cart-teddyName cart">nounours1</p>
               <p class="cart-teddyColor cart">brun</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber"></input>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
               <p class="cart-teddyPrice cart">55€</p>
             </div>
             <div class="oneCartItem d-flex">
@@ -70,23 +70,22 @@
               <p class="cart-teddyName cart">nounours2</p>
               <p class="cart-teddyColor cart">brun</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber"></input>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
               <p class="cart-teddyPrice cart">45€</p>
             </div>
-            <div class="billContainer d-flex">
-              <div class="billText d-flex">
-                <p>TOTAL</p>
-                <p>FRAIS DE PORT</p>
-                <p>SOMME A PAYER</p>
-              </div>
-              <div class="billCalc d-flex">
-                <p>100€</p>
-                <p>0€</p>
-                <p>1000€</p>
-              </div>
+          </fieldset>
+          <fieldset class="billContainer cart d-flex">
+            <div class="billText d-flex">
+              <p>TOTAL</p>
+              <p>FRAIS DE PORT</p>
+              <p>SOMME A PAYER</p>
             </div>
-
-            </br></br>
+            <div class="billCalc d-flex">
+              <p>100€</p>
+              <p>0€</p>
+              <p>1000€</p>
+            </div>
+          </br></br>
           </fieldset>
           <fieldset class="shopperField d-flex cart">
 

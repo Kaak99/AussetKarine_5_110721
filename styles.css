@@ -307,7 +307,7 @@ footer ul{
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     width: 100%;
     height:auto;
 }
@@ -317,9 +317,9 @@ footer ul{
     font-weight: 300;
 }
 
-/* .form1{
-    background-color:var(--main-color3);
-} */
+.form1{
+    width: 90%;
+}
 
 button{
     padding: 15px;
@@ -386,15 +386,23 @@ fieldset .oneCartItem{
 
 .oneCartItem p{
     padding: 0 6px;
+    font-size: 1rem;
 }
 
 
-fieldset .billContainer{
-    justify-content: center;
-    padding-bottom: 20px;
+fieldset.billContainer{
+    width: 98%;
+    height:auto;
+    flex-direction: row;
+    justify-content:space-evenly;
+    padding: 10px;
+    background-color:var(--main-color6);
+    font-family: 'Roboto', sans-serif;
 }
-
-
+.billContainer p{
+    margin-bottom: 30px;
+    font-size: 0.8rem;
+}
 
 fieldset a{
     display: none;
@@ -404,33 +412,31 @@ fieldset a{
     padding: 14px 10px;
 }
 
-
-
 .billText{
-    /* width: 98%;
-    height:auto; */
+    width: 48%;
+    height:auto; 
     flex-direction: column;
     /* justify-content:flex-start; */
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     margin-top: 20px ;  
-    padding-left: 5%; 
+    /*padding-left: 5%; */
 }
 
 .billCalc{
-    /* width: 98%;
-    height:auto; */
+    width: 48%;
+    height:auto;
     flex-direction: column;
     /* justify-content:flex-end; */
     align-items: flex-end;
     margin-top: 20px ;  
     padding-left: 10%; 
-
 }
+
+
 
 textarea.cart{
     resize: none;
 }
-
 
 fieldset.shopperField{
     width: 98%;
@@ -465,7 +471,7 @@ fieldset:hover .shopperInputValid{
 /*___________________________________________________________________________________________________*/
 
 
-@media all and (max-width: 320px){/* <320w*/
+@media all and (max-width: 330px){/* <330w*/
         /*main*/
     .teddyCard{
         width:280px;
@@ -479,6 +485,19 @@ fieldset:hover .shopperInputValid{
     .bestSaleImg{
         width: 280px;
         height: 300px;
+    }
+    .billContainer p{
+        margin-bottom: 50px;
+        font-size: 0.8rem;
+        padding-left: 10px;
+    }
+    fieldset .oneCartItem p{
+    font-size: 0.8rem;
+    }
+    .form1{
+        display: flex;
+        flex-direction: column;
+        width: 240px;
     }
 }
 
@@ -539,7 +558,7 @@ fieldset:hover .shopperInputValid{
 /*...........................*/
 	/*shopping-cart.html*/
 /*...........................*/
-    fieldset.cartField{
+    fieldset.cartField, fieldset.billContainer{
         width: 60%;
         justify-content:space-evenly;/*??*/
     }
