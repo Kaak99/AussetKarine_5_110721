@@ -96,25 +96,14 @@ const teddyNumbers=document.querySelectorAll('#cart-teddyNumber');
 const teddyPrices=document.querySelectorAll('.cart-teddyPrice');
 //const teddyPrices=document.getElementsByClassName('cart-teddyPrice');
 
-//const regexName= ;Forname Adress City 
 
-//const regexPhone=  (0|\+33)[1-9](*[0-9]{2}){4};//(0|\+33)[1-9](*[0-9]{2}){4} ;
-//const regexMail= /\S+@\.\S+/;
-//const regexPhone=[0][1-9][0-9]{8};
-//const regexPhone=[0][1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9];
-
-const inputName=document.querySelector('#shopperName');
-const inputForename=document.querySelector('#shopperForename');
-const inputAdresse=document.querySelector('#shopperAdresse');
-const inputCity=document.querySelector('#shopperCity');
-const inputTel=document.querySelector('#shopperTel');
-const inputMail=document.querySelector('#shopperMail');
 
 
 
 
 //  .......  code  ........ //
 
+noWarning();
 //document.querySelector('#shopperMailAlert').style.display= 'none';
 //document.querySelector('#shopperMailOk').style.display= 'block';
 
@@ -184,28 +173,122 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
 }
 
 
+//  +++++++++++++regex-start+++++++++++++++++++  //
 
 
-inputMail.addEventListener('input', (e)=>{
-  //const regexMail= /\S+@\.\S+/;
-  const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+//essai fonction------erreur----
+// function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
+//   //document.querySelector(`#${id}`).addEventListener('input', (e)=>{
+//     document.getElementById('id').addEventListener('input', (e)=>{
+//     console.log('id');
+//     if (e.target.value.search(regex)===0){//si match
+//       document.getElementById('champAlert').style.display= 'none';
+//       document.getElementById('champOk').style.display= 'block';
+//       console.log("match!")
+//     }
+//     else if (e.target.value.search(regex)===-1) {//si match pas
+//       document.getElementById('champAlert').style.display= 'block';
+//       document.getElementById('champOk').style.display= 'none';
+//       console.log("match pas!")
+//     }
+//   })
+// }
+// const regexCity= /[^0-9]/ ;
+// regexForm("shopperCity",regexCity,'shopperCityAlert', 'shopperCityOk')// REGEX CITY
+
+
+//fin essai fonction----------
+
+const regexNoNumber= /[^0-9]/ ;
+const regexAll= /./ ;
+const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
+const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+
+document.querySelector('#shopperName').addEventListener('input', (e)=>{// REGEX NOM 
+  if (e.target.value.search(regexNoNumber)===0){//si match
+    document.querySelector('#shopperNameAlert').style.display= 'none';
+    document.querySelector('#shopperNameOk').style.display= 'block';
+    console.log("match!");
+  }
+  else if (e.target.value.search(regexNoNumber)===-1) {//si match pas
+    document.querySelector('#shopperNameAlert').style.display= 'block';
+    document.querySelector('#shopperNameOk').style.display= 'none';
+    console.log("match pas!");
+  }
+})
+
+document.querySelector('#shopperForename').addEventListener('input', (e)=>{// REGEX PRENOM 
+  if (e.target.value.search(regexNoNumber)===0){//si match
+    document.querySelector('#shopperForenameAlert').style.display= 'none';
+    document.querySelector('#shopperForenameOk').style.display= 'block';
+    console.log("match!");
+  }
+  else if (e.target.value.search(regexNoNumber)===-1) {//si match pas
+    document.querySelector('#shopperForenameAlert').style.display= 'block';
+    document.querySelector('#shopperForenameOk').style.display= 'none';
+    console.log("match pas!");
+  }
+})
+
+document.querySelector('#shopperAdresse').addEventListener('input', (e)=>{// REGEX ADRESSE 
+  if (e.target.value.search(regexAll)===0){//si match
+    document.querySelector('#shopperAdresseAlert').style.display= 'none';
+    document.querySelector('#shopperAdresseOk').style.display= 'block';
+    console.log("match!");
+  }
+  else if (e.target.value.search(regexAll)===-1) {//si match pas
+    document.querySelector('#shopperCityAlert').style.display= 'block';
+    document.querySelector('#shopperCityOk').style.display= 'none';
+    console.log("match pas!");
+  }
+})
+
+document.querySelector('#shopperCity').addEventListener('input', (e)=>{// REGEX CITY
+  if (e.target.value.search(regexNoNumber)===0){//si match
+    document.querySelector('#shopperCityAlert').style.display= 'none';
+    document.querySelector('#shopperCityOk').style.display= 'block';
+    console.log("match!");
+  }
+  else if (e.target.value.search(regexNoNumber)===-1) {//si match pas
+    document.querySelector('#shopperCityAlert').style.display= 'block';
+    document.querySelector('#shopperCityOk').style.display= 'none';
+    console.log("match pas!");
+  }
+})
+
+document.querySelector('#shopperTel').addEventListener('input', (e)=>{// REGEX TEL
+  if (e.target.value.search(regexTel)===0){//si match
+    document.querySelector('#shopperTelAlert').style.display= 'none';
+    document.querySelector('#shopperTelOk').style.display= 'block';
+    console.log("match!");
+  }
+  else if (e.target.value.search(regexTel)===-1) {//si match pas
+    document.querySelector('#shopperTelAlert').style.display= 'block';
+    document.querySelector('#shopperTelOk').style.display= 'none';
+    console.log("match pas!");
+  }
+})
+
+document.querySelector('#shopperMail').addEventListener('input', (e)=>{// REGEX MAIL
   if (e.target.value.search(regexMail)===0){//si match
     document.querySelector('#shopperMailAlert').style.display= 'none';
     document.querySelector('#shopperMailOk').style.display= 'block';
-    console.log("match!")
+    console.log("match!");
   }
   else if (e.target.value.search(regexMail)===-1) {//si match pas
     document.querySelector('#shopperMailAlert').style.display= 'block';
     document.querySelector('#shopperMailOk').style.display= 'none';
-    console.log("match pas!")
+    console.log("match pas!");
     //shopperMailAlert ou shopperMailOk  (id)
   }
-
 })
 
 
 
+//  +++++++++++++regex-end+++++++++++++++++++  //
 
+
+// validation finale commande
 document.querySelector('#validOrderButton').addEventListener('click', function() {
   //verifier tous champs formulaire 
 
@@ -296,7 +379,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
 
-noWarning();
+
 // var essai1 = localStorage.getItem('essai1');
 // console.log(essai1);
 // localStorage.removeItem('essai1');
