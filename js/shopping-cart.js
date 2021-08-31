@@ -199,8 +199,8 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
 
 //fin essai fonction----------
 
-const regexNoNumber= /[^0-9]/ ;
-const regexAll= /./ ;
+const regexNoNumber= /[^0-9]{2}/ ;//et au moins 2carac
+const regexAll= /.{8}/ ;//et au moins 8carac
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
@@ -216,7 +216,6 @@ document.querySelector('#shopperName').addEventListener('input', (e)=>{// REGEX 
     console.log("match pas!");
   }
 })
-
 document.querySelector('#shopperForename').addEventListener('input', (e)=>{// REGEX PRENOM 
   if (e.target.value.search(regexNoNumber)===0){//si match
     document.querySelector('#shopperForenameAlert').style.display= 'none';
@@ -229,7 +228,6 @@ document.querySelector('#shopperForename').addEventListener('input', (e)=>{// RE
     console.log("match pas!");
   }
 })
-
 document.querySelector('#shopperAdresse').addEventListener('input', (e)=>{// REGEX ADRESSE 
   if (e.target.value.search(regexAll)===0){//si match
     document.querySelector('#shopperAdresseAlert').style.display= 'none';
@@ -242,7 +240,6 @@ document.querySelector('#shopperAdresse').addEventListener('input', (e)=>{// REG
     console.log("match pas!");
   }
 })
-
 document.querySelector('#shopperCity').addEventListener('input', (e)=>{// REGEX CITY
   if (e.target.value.search(regexNoNumber)===0){//si match
     document.querySelector('#shopperCityAlert').style.display= 'none';
@@ -255,7 +252,6 @@ document.querySelector('#shopperCity').addEventListener('input', (e)=>{// REGEX 
     console.log("match pas!");
   }
 })
-
 document.querySelector('#shopperTel').addEventListener('input', (e)=>{// REGEX TEL
   if (e.target.value.search(regexTel)===0){//si match
     document.querySelector('#shopperTelAlert').style.display= 'none';
@@ -268,7 +264,6 @@ document.querySelector('#shopperTel').addEventListener('input', (e)=>{// REGEX T
     console.log("match pas!");
   }
 })
-
 document.querySelector('#shopperMail').addEventListener('input', (e)=>{// REGEX MAIL
   if (e.target.value.search(regexMail)===0){//si match
     document.querySelector('#shopperMailAlert').style.display= 'none';
@@ -282,31 +277,33 @@ document.querySelector('#shopperMail').addEventListener('input', (e)=>{// REGEX 
     //shopperMailAlert ou shopperMailOk  (id)
   }
 })
-
-
-
 //  +++++++++++++regex-end+++++++++++++++++++  //
 
 
 // validation finale commande
 document.querySelector('#validOrderButton').addEventListener('click', function() {
   //verifier tous champs formulaire 
+  console.log("on verifie tous champs formulaire ")
+  if (document.querySelector('#shopperName').addEventListener('input', (e)=>{target.value.search(regexNoNumber)===0})) {
+    console.log("on part à la page my-orders.html!");
 
-
-//on part à la page "mes commandes" my-orders.html"
-  console.log("on part à la page my-orders.html!")
-  document.location.href="shopping-cart.html";//go to shopping-cart.html
+      //on part à la page "mes commandes" my-orders.html"
+    console.log("on part à la page my-orders.html ");
+    //document.location.href="shopping-cart.html";//go to shopping-cart.html
+}
 })
 
+
+
+
 //modif:
-//quand refresh garder panier(ou clic lien)
+//quand refresh garder panier(ou clic lien)=ok
 //si x suppr
 //si +/- ajuster prix et total 
 ///si mmeme nom et couleur  additionner
-//si touche backspace reverif regex?
 
 
-
+//pb:le total, POST, verif finale, fonction regex
 
 
 
