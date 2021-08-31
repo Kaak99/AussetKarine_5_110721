@@ -38,20 +38,47 @@ function showCart(tab){
               <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2)}€</p>
             </div>`
   };
-  console.log('itemsString='+itemsString);
+  //console.log('itemsString='+itemsString);
   itemsContainer.innerHTML= itemsString;
 }
 
 
 function calcTotal(tab){
-  let totalPrice="";
+  let price;
+  let totalPrice;
+  console.log(typeof(totalPrice))
+  console.log("voici tab=");
+  console.log(tab);
   for (let i = 0; i < tab.length; i++) {
-    totalPrice += tab[i].price*tab[i].number;
-    totalHTML.innerHTML= totalPrice;
+    a=tab[i].price;
+    console.log(a) ;
+    //console.log(typeof(tab[i].price)) ;
+    console.log(typeof(a)) ;
+    b=tab[i].number;
+    console.log(b) ;
+    console.log(typeof(b)) ;
+    //console.log(typeof(tab[i].number))
+    price=a*b;
+    totalPrice=totalPrice+price
+    //totalPrice = (tab[i].price)*(tab[i].number) +totalPrice;
+    //totalPrice += Number(tab[i].price)*Number(tab[i].number);
+    console.log(totalPrice);
+  
   }
+  console.log(totalPrice);
+  //totalHTML.innerText= totalPrice;
 }
 
-
+function calcTotal2(teddyPrices){
+  let totalPrice="";
+  console.log("teddyPrices="+teddyPrices);
+for (const price of teddyPrices) {
+  totalPrice += price
+  console.log("totalPrice2="+totalPrice);
+  totalHTML.innerHTML= totalPrice;
+}
+  
+}
 
 
 //  .......  tests à retirer  ........ //
@@ -60,28 +87,36 @@ console.log(`shopping-cart`);
 
 
 //  .......  const  ........ //
+//const url="http://localhost:3000/api/teddies" ;
 const noLoading = document.querySelector('.noLoading');
 const form2Container=document.querySelector('.form2Container');
 const itemsContainer=document.querySelector('.cartField');
 const totalHTML=document.querySelector('.billCalc:first-child');
-//const totalHTML=document.querySelector('.billCalc p');
+const teddyNumbers=document.querySelectorAll('#cart-teddyNumber');
+const teddyPrices=document.querySelectorAll('.cart-teddyPrice');
+//const teddyPrices=document.getElementsByClassName('cart-teddyPrice');
 
-//const url="http://localhost:3000/api/teddies" ;
+//const regexName= ;Forname Adress City 
 
-// let idLast = localStorage.getItem('idNow');
-// localStorage.setItem(`id+${idLast}`,`${idLast}`);//stocke le nombre en cours
-// let nameLast = localStorage.getItem('nameNow');
-// let priceLast = localStorage.getItem('priceNow');
+//const regexPhone=  (0|\+33)[1-9](*[0-9]{2}){4};//(0|\+33)[1-9](*[0-9]{2}){4} ;
+//const regexMail= /\S+@\.\S+/;
+//const regexPhone=[0][1-9][0-9]{8};
+//const regexPhone=[0][1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9];
+
+const inputName=document.querySelector('#shopperName');
+const inputForename=document.querySelector('#shopperForename');
+const inputAdresse=document.querySelector('#shopperAdresse');
+const inputCity=document.querySelector('#shopperCity');
+const inputTel=document.querySelector('#shopperTel');
+const inputMail=document.querySelector('#shopperMail');
+
 
 
 
 //  .......  code  ........ //
 
-//si localstorage pas vide, on crée un objet productObjet avec les données
-// if (localStorage.getItem('anyItem') !== null) {
-//   var productObjet=productObjetCreate();
-//   console.log(productObjet);
-// }
+//document.querySelector('#shopperMailAlert').style.display= 'none';
+//document.querySelector('#shopperMailOk').style.display= 'block';
 
 var sentToCart=localStorage.getItem('sendToCart');
 localStorage.removeItem('sendToCart');
@@ -98,27 +133,31 @@ console.log("isBasketEmpty"+isBasketEmpty);
 
 //if (weJustSentToCart==null || weJustSentToCart==false ) {
 //if (didWeJustSentToCart==false) {
-if (didWeJustSentToCart != true) {
+if (didWeJustSentToCart != true) {// on n'a rien envoyé au panier (juste cliqué lien panier ou shopping-cart.html )
   console.log("rien fait!");
-  if (isBasketEmpty==true) {
+  if (isBasketEmpty==true) {//cas1= on a rien ajouté et  panier vide avant 
     //alors afficher html="panier vide"
     console.log("panier vide1");
     console.log(localStorage.getItem('productTabLS'));
     console.log(localStorage.getItem('sendToCart'));
     form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
   }
-  else {    //alors afficher panier
+  else {    //cas2= rien rajouté mais un panier existait -> afficher panier
     console.log(" afficher panier="+actualBasket);
+    var productTab=[];
+    productTab=JSON.parse(localStorage.getItem('productTabLS'));
     showCart(productTab);
+    calcTotal(productTab);
+    //calcTotal2(teddyPrices);
   }
 }
-else if (didWeJustSentToCart == true) {
+else if (didWeJustSentToCart == true) {// on a envoyé un item au panier  
     console.log("oui j'ai envoyé !");
     var productObjet=productObjetCreate();//on crée un objet avec les données du teddy envoyé au panier
     console.log("productObjet =");
     console.log(productObjet);
 
-    if (isBasketEmpty==true) {
+    if (isBasketEmpty==true) {// cas3= on a envoyé au panier et il était vide avant 
       console.log("isBasketEmpty"+isBasketEmpty);
       var productTab=[];
       console.log("productTab"+productTab);
@@ -131,7 +170,7 @@ else if (didWeJustSentToCart == true) {
       console.log("le productTabLS sauvé (vide+1ajout)"+localStorage.getItem('productTabLS')); 
       showCart(productTab);
     }
-    else{//si panier déja rempl
+    else{//// cas4= on a envoyé au panier et il était plein avant 
       productTab=JSON.parse(localStorage.getItem('productTabLS'));
       productTab.push(productObjet);//on push sur productTab
       console.log("productTab après push=");
@@ -145,12 +184,43 @@ else if (didWeJustSentToCart == true) {
 }
 
 
-//modif:
-//quand refresh garder panier
-//si x suppr
-//si +/- ajuster prix
-///si mmeme nom et couleur  additionner
 
+
+inputMail.addEventListener('input', (e)=>{
+  //const regexMail= /\S+@\.\S+/;
+  const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+  if (e.target.value.search(regexMail)===0){//si match
+    document.querySelector('#shopperMailAlert').style.display= 'none';
+    document.querySelector('#shopperMailOk').style.display= 'block';
+    console.log("match!")
+  }
+  else if (e.target.value.search(regexMail)===-1) {//si match pas
+    document.querySelector('#shopperMailAlert').style.display= 'block';
+    document.querySelector('#shopperMailOk').style.display= 'none';
+    console.log("match pas!")
+    //shopperMailAlert ou shopperMailOk  (id)
+  }
+
+})
+
+
+
+
+document.querySelector('#validOrderButton').addEventListener('click', function() {
+  //verifier tous champs formulaire 
+
+
+//on part à la page "mes commandes" my-orders.html"
+  console.log("on part à la page my-orders.html!")
+  document.location.href="shopping-cart.html";//go to shopping-cart.html
+})
+
+//modif:
+//quand refresh garder panier(ou clic lien)
+//si x suppr
+//si +/- ajuster prix et total 
+///si mmeme nom et couleur  additionner
+//si touche backspace reverif regex?
 
 
 
