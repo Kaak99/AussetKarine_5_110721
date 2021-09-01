@@ -66,7 +66,7 @@ fetch(url)
               <figcaption class="ted-figcap d-flex">
                 <div class="ted-nameprice d-flex">
                   <p class="ted-name">${data[i].name}</p>
-                  <p class="ted-price">${(data[i].price/100).toFixed(2)} €</p>
+                  <p class="ted-price">${(data[i].price/100).toFixed(2).replace(".",",")} €</p>
                 </div>
                 <p class="ted-description">${data[i].description}</p>
               </figcaption>

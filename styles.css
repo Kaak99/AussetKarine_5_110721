@@ -467,7 +467,9 @@ input.cart:invalid{
     box-shadow: 0 0 2px 1px var(--primaryColor2);
 }
 
-
+.fa-times:hover{
+    cursor: pointer;
+}
 
 /* fieldset:hover .shopperInputAlert{
     display: none;

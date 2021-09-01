@@ -24,60 +24,80 @@ function productObjetCreate(){
 }
 
 
+// function comparer(productTab,productObjet){
+  
+// }
+
+
+
+// function fusionner(productTab,productObjet){
+
+// }
+
+
+
 function showCart(tab){
   let itemsString = "";// Création de la variable qui concatenera tous éléments
   for (let i = 0; i < tab.length; i++) {
     itemsString +=
      `<div class="oneCartItem d-flex">
-              <p>x</p>
+              <p><i class="fas fa-times"></i></p>
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">${tab[i].name}</p>
               <p class="cart-teddyColor cart">${tab[i].color}</p>
               <label for="cart-teddyNumber cart"></label>
               <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
-              <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2)}€</p>
+              <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
             </div>`
   };
-  //console.log('itemsString='+itemsString);
+  //////console.log('itemsString='+itemsString);
   itemsContainer.innerHTML= itemsString;
 }
 
 
 function calcTotal(tab){
-  let price;
-  let totalPrice=0;
-  console.log(typeof(totalPrice))
-  console.log("voici tab=");
-  console.log(tab);
+  //let price;
+  let totalPrice=0;//sinon problème...permet init comme nombre 
+  ////console.log(typeof(totalPrice))
+  ////console.log("voici tab=");
+  ////console.log(tab);
   for (let i = 0; i < tab.length; i++) {
-    a=tab[i].price;
-    console.log(a) ;
-    //console.log(typeof(tab[i].price)) ;
-    console.log(typeof(a)) ;
-    b=tab[i].number;
-    console.log(b) ;
-    console.log(typeof(b)) ;
-    //console.log(typeof(tab[i].number))
-    price=a*b;
-    totalPrice=totalPrice+price
     totalPrice = (tab[i].price)*(tab[i].number) +totalPrice;
-    totalPrice += Number(tab[i].price)*Number(tab[i].number);
-    console.log(totalPrice);
-  
+    // a=tab[i].price;
+    // //console.log(a) ;
+    // ////console.log(typeof(tab[i].price)) ;
+    // //console.log(typeof(a)) ;
+    // b=tab[i].number;
+    // //console.log(b) ;
+    // //console.log(typeof(b)) ;
+    // ////console.log(typeof(tab[i].number))
+    // price=a*b;
+    // totalPrice=totalPrice+price
+    // totalPrice = (tab[i].price)*(tab[i].number) +totalPrice;
+    // totalPrice += Number(tab[i].price)*Number(tab[i].number);
+    // //console.log(totalPrice);
+  //${(product.price/100).toFixed(2).replace(".",",")}€
   }
-  console.log(totalPrice);
-  totalHTML.textContent= totalPrice;
+  //console.log(totalPrice);
+  totalHTML.textContent= `${(totalPrice/100).toFixed(2).replace(".",",")}€ `;
+  return totalPrice;
 }
 
-function calcTotal2(teddyPrices){
-  let totalPrice="";
-  console.log("teddyPrices="+teddyPrices);
-for (const price of teddyPrices) {
-  totalPrice += price
-  console.log("totalPrice2="+totalPrice);
-  totalHTML.innerHTML= totalPrice;
+function calcAmountToPay(totalPrice,ShippingFees){//total à payer=prixTotal+frais de port
+  let AmountToPay=0;
+  //console.log(AmountToPay);
+  AmountToPay=totalPrice+(ShippingFees*100);//car on fait tout nos calculs en centimes)
+  //console.log(AmountToPay);
+  totalAmountHTML.innerHTML= `${(AmountToPay/100).toFixed(2).replace(".",",")}€ `;
 }
   
+function deleteItems(items) {
+  //console.log('que supprimer??');
+ //trouver ce qui est clické, le suppr de proctTab
+ //    showCart(productTab);
+ //let totalPrice=calcTotal(productTab);
+ //calcAmountToPay(totalPrice,ShippingFees);
+
 }
 
 
@@ -86,17 +106,17 @@ for (const price of teddyPrices) {
 function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
   //document.querySelector(`#${id}`).addEventListener('input', (e)=>{
     document.getElementById(id).addEventListener('input', (e)=>{
-    console.log('id');
+    //console.log('id');
     if (e.target.value.search(regex)===0){//si match
       document.getElementById(champAlert).style.display= 'none';
       document.getElementById(champOk).style.display= 'block';
-      console.log("match");
+      //console.log("match");
       return(true);
     }
     else if (e.target.value.search(regex)===-1) {//si match pas
       document.getElementById(champAlert).style.display= 'block';
       document.getElementById(champOk).style.display= 'none';
-      console.log("match pas!")
+      //console.log("match pas!")
       return(false);
     }
   })
@@ -106,7 +126,7 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
 
 //  .......  tests à retirer  ........ //
 
-console.log(`shopping-cart`);
+//console.log(`shopping-cart`);
 
 
 //  .......  const  ........ //
@@ -115,10 +135,13 @@ const noLoading = document.querySelector('.noLoading');
 const form2Container=document.querySelector('.form2Container');
 const itemsContainer=document.querySelector('.cartField');
 const totalHTML=document.querySelector('.billCalc p:first-child');
+const shippingFeesHTML=document.querySelector('.billCalc p:nth-child(2)');
+const totalAmountHTML=document.querySelector('.billCalc p:nth-child(3)');
 const teddyNumbers=document.querySelectorAll('#cart-teddyNumber');
 const teddyPrices=document.querySelectorAll('.cart-teddyPrice');
 //const teddyPrices=document.getElementsByClassName('cart-teddyPrice');
 
+const ShippingFees=0.2;
 
 
 
@@ -132,68 +155,90 @@ noWarning();
 
 var sentToCart=localStorage.getItem('sendToCart');
 localStorage.removeItem('sendToCart');
-//console.log(typeof(sentToCart));
-//console.log(sentToCart);
+////console.log(typeof(sentToCart));
+////console.log(sentToCart);
 var didWeJustSentToCart= sentToCart=="true"? true : false;
-console.log("didWeJustSentToCart"+didWeJustSentToCart);
-// console.log(typeof(didWeJustSentToCart));
+//console.log("didWeJustSentToCart"+didWeJustSentToCart);
+// //console.log(typeof(didWeJustSentToCart));
 var actualBasket=localStorage.getItem('productTabLS')
 var isBasketEmpty= actualBasket==null? true : false;
-console.log("isBasketEmpty"+isBasketEmpty);
+//console.log("isBasketEmpty"+isBasketEmpty);
 
-//console.log("****************************");
+////console.log("****************************");
 
 //if (weJustSentToCart==null || weJustSentToCart==false ) {
 //if (didWeJustSentToCart==false) {
 if (didWeJustSentToCart != true) {// on n'a rien envoyé au panier (juste cliqué lien panier ou shopping-cart.html )
-  console.log("rien fait!");
+  //console.log("rien fait!");
   if (isBasketEmpty==true) {//cas1= on a rien ajouté et  panier vide avant 
     //alors afficher html="panier vide"
-    console.log("panier vide1");
-    console.log(localStorage.getItem('productTabLS'));
-    console.log(localStorage.getItem('sendToCart'));
+    //console.log("panier vide1");
+    //console.log(localStorage.getItem('productTabLS'));
+    //console.log(localStorage.getItem('sendToCart'));
     form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
   }
   else {    //cas2= rien rajouté mais un panier existait -> afficher panier
-    console.log(" afficher panier="+actualBasket);
+    //console.log(" afficher panier="+actualBasket);
     var productTab=[];
     productTab=JSON.parse(localStorage.getItem('productTabLS'));
     showCart(productTab);
-    calcTotal(productTab);
+    let totalPrice=calcTotal(productTab);
+    calcAmountToPay(totalPrice,ShippingFees);
     //calcTotal2(teddyPrices);
   }
 }
 else if (didWeJustSentToCart == true) {// on a envoyé un item au panier  
-    console.log("oui j'ai envoyé !");
+    //console.log("oui j'ai envoyé !");
     var productObjet=productObjetCreate();//on crée un objet avec les données du teddy envoyé au panier
-    console.log("productObjet =");
-    console.log(productObjet);
+    //console.log("productObjet =");
+    //console.log(productObjet);
 
     if (isBasketEmpty==true) {// cas3= on a envoyé au panier et il était vide avant 
-      console.log("isBasketEmpty"+isBasketEmpty);
+      //console.log("isBasketEmpty"+isBasketEmpty);
       var productTab=[];
-      console.log("productTab"+productTab);
+      //console.log("productTab"+productTab);
       productTab.push(productObjet);//on push sur productTab
-      console.log("productTab après push=");
-      console.log(productTab);
+      //console.log("productTab après push=");
+      //console.log(productTab);
       //localStorage.setItem('productTabLS',`${productTab}`);//on stocke sur local storage
       localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
-      console.log("affiche productTab=mon ajout( vide avant)= "+productTab);
-      console.log("le productTabLS sauvé (vide+1ajout)"+localStorage.getItem('productTabLS')); 
+      //console.log("affiche productTab=mon ajout( vide avant)= "+productTab);
+      //console.log("le productTabLS sauvé (vide+1ajout)"+localStorage.getItem('productTabLS')); 
       showCart(productTab);
+      let totalPrice=calcTotal(productTab);
+      calcAmountToPay(totalPrice,ShippingFees);
     }
     else{//// cas4= on a envoyé au panier et il était plein avant 
-      productTab=JSON.parse(localStorage.getItem('productTabLS'));
-      productTab.push(productObjet);//on push sur productTab
-      console.log("productTab après push=");
-      console.log(productTab);
+      productTab=JSON.parse(localStorage.getItem('productTabLS'));//crée productTab pour y mettre le contenu du panier
+      //mais avant, on teste si item existe déjà dans panier(productObjet.name and productObjet.color) , si oui=>fusion
+      //comparer(productTab,productObjet);
+      for (let i = 0; i < productTab.length; i++) {
+        if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color ) {
+        productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
+        }
+        else{
+          productTab.push(productObjet);//sinon on push productObjet sur productTab
+          //console.log("productTab après push=");
+          //console.log(productTab);
+        }  
+      }
+
       //localStorage.setItem('productTabLS',`${productTab}`);//on stocke sur local storage
       localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
       showCart(productTab);
-      console.log("affiche productTab=panier + mon ajout(pas vide avant)= "+productTab);
-      console.log("le productTabLS sauvé (plein+1ajout)"+localStorage.getItem('productTabLS')); 
+      let totalPrice=calcTotal(productTab);
+      calcAmountToPay(totalPrice,ShippingFees);
+      //console.log("affiche productTab=panier + mon ajout(pas vide avant)= "+productTab);
+      //console.log("le productTabLS sauvé (plein+1ajout)"+localStorage.getItem('productTabLS')); 
     }
 }
+
+
+//supprimer 1 item du panier
+// document.querySelectorAll('.fa-times').addEventListener('click',(e)=>{//donne tab
+// //console.log('que supprimer??');
+// //deleteItems(item);
+// };
 
 
 
@@ -205,7 +250,10 @@ const regexCP= /[0-9]{5}/ ;//et au moins 5carac
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
-var regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+var regexFormName=false;
+//console.log(regexFormName);
+
+regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
 var regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
 var regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
 regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
@@ -213,19 +261,19 @@ regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopper
 regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
 regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
-console.log("!!!!!");
-console.log(regexFormName);
-console.log("!!!!!");
+//console.log("!!!!!");
+//console.log(regexFormName);
+//console.log("!!!!!");
 
 // validation finale commande
 document.querySelector('#validOrderButton').addEventListener('click', function() {
   //verifier tous champs formulaire 
-  console.log("on verifie tous champs formulaire ")
+  //console.log("on verifie tous champs formulaire ")
   if (true) {
-    console.log("on part à la page my-orders.html!");
+    //console.log("on part à la page my-orders.html!");
 
       //on part à la page "mes commandes" my-orders.html"
-    console.log("on part à la page my-orders.html ");
+    //console.log("on part à la page my-orders.html ");
     //document.location.href="shopping-cart.html";//go to shopping-cart.html
 }
 })
@@ -250,32 +298,32 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 // //si pas de panier dans LS et qu'on ne vient pas d'ajouter dans panier (sendToCart!==true) 
 // if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')!=true))
 //  {//alors afficher html="panier vide"
-//    console.log("panier vide1");
-//    console.log(localStorage.getItem('productTabLS'));
-//    console.log(localStorage.getItem('sendToCart'));
+//    //console.log("panier vide1");
+//    //console.log(localStorage.getItem('productTabLS'));
+//    //console.log(localStorage.getItem('sendToCart'));
 //   form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
 //   }
 //   else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
 //   {//panier vide mais on vient d'ajouter
 //     var productObjet=productObjetCreate();//on crée un objet avec les données du teddy envoyé au panier
-//     console.log(productObjet);
+//     //console.log(productObjet);
 //     var productTab=[];
 //     productTab.push(productObjet);//on l'ajoute au tableau productTab
-//     console.log(productTab);
+//     //console.log(productTab);
 //     localStorage.setItem('productTabLS', `${productTab}`);//on crée productTabLS dans localstorage et on sauve le panier productTab dedans
-//     console.log("on affiche panier2");
+//     //console.log("on affiche panier2");
 //   }
 //   else if ((localStorage.getItem('productTabLS')!=null) && (localStorage.getItem('sendToCart')!=true))
 //   {//cas ou on a pas rajouté(clic lien panier) et que panier non vide--> afficher panier
-//       console.log("on affiche panier3");
+//       //console.log("on affiche panier3");
 //   }
 //   else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
 //   {//cas ou on ajoute ET il ya deja un panier
-//       console.log("on affiche panier4");
+//       //console.log("on affiche panier4");
 //   }
 //   else
 //   {//cas non répertorié
-//       console.log("cas non répertorié");
+//       //console.log("cas non répertorié");
 //   }
 
 
@@ -300,7 +348,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
   // var productObjet=productObjetCreate();
-  // console.log(productObjet);
+  // //console.log(productObjet);
   // var productTab=[];
   // productTab== localStorage.getItem('productTabLS')
 
@@ -309,13 +357,13 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
 //  let bidule=localStorage.getItem('sendToCart');
-//  console.log(bidule);
+//  //console.log(bidule);
 
 
 
 
 // var essai1 = localStorage.getItem('essai1');
-// console.log(essai1);
+// //console.log(essai1);
 // localStorage.removeItem('essai1');
 
 
@@ -335,7 +383,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 //   city: "laville",
 //   email: "cours@gg.com"
 // };
-// console.log(objContact);
+// //console.log(objContact);
 
 // //tableau de produits  
 
@@ -353,7 +401,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 //     number: 2
 //   }
 // ];
-// console.log(productTab9);
+// //console.log(productTab9);
 
 
 
@@ -361,14 +409,14 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
 // let dataToSend= objContact,productTab9;
-// console.log(dataToSend);
+// //console.log(dataToSend);
 // let jsonToSend= JSON.stringify(dataToSend);
-// console.log("123");
-// console.log(jsonToSend);
+// //console.log("123");
+// //console.log(jsonToSend);
 
 // //--------------------com------
 // var jsonOrder=JSON.stringify({ objContact, productTab });
-// console.log(jsonOrder);
+// //console.log(jsonOrder);
 
 
 
@@ -378,7 +426,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 //   body: jsonOrder
 // });
 
-// console.log(promise1);
+// //console.log(promise1);
 
 
 //--------------------com------
@@ -396,27 +444,27 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
 //1.verifie appel api: promesse avec response code 200
-// console.log(fetch(urlTeddy));
+// //console.log(fetch(urlTeddy));
 
 //2.verifie réponse api: status 200
 // fetch(urlTeddy)
-//   .then(res=> console.log(res))
+//   .then(res=> //console.log(res))
 
 //3.verifie transfo json
 // fetch(urlTeddy)
-//   .then(res=>console.log(res.json()))
+//   .then(res=>//console.log(res.json()))
 
 //4.verifie transfo objet; donne 1 1objet avec _id, colors:array[4], description, imageUrl, name, price
 // fetch(urlTeddy)
 //   .then(res=>res.json())
-//   .then(data=>console.log(data))
+//   .then(data=>//console.log(data))
 
 
 //5. exploitation (objet, tableau )... 
 //   fetch(urlTeddy)
 //  .then(res => {
 //       if (res.ok) {
-//         console.log("success(fetch url)!");
+//         //console.log("success(fetch url)!");
 //         return res.json();
 //       } else {
 //         console.error("erreur : ", status.code)
@@ -424,32 +472,32 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 //       }
 //     })
 //     .then(data => {
-//       console.log(data); //affiche les data de l'api (json=tableau d'objet)
+//       //console.log(data); //affiche les data de l'api (json=tableau d'objet)
 //       // Création de la variable qui s'ajoutera aux éléments //
 //       let tedId=data._id;
-//       console.log(tedId); //
+//       //console.log(tedId); //
 //       let tedName=data.name;
-//       console.log(tedName); //
+//       //console.log(tedName); //
 //       let tedPrice=data.price;
-//       console.log(tedPrice); //
+//       //console.log(tedPrice); //
 //       let tedDescription=data.description;
-//       console.log(tedDescription); //
+//       //console.log(tedDescription); //
 //       let tedUrl=data.imageUrl;
-//       console.log(tedUrl); //
+//       //console.log(tedUrl); //
 //       let tedColors=data.colors;
-//       // console.log(tedColors); //
-//       // console.log(tedcolors[0]);
+//       // //console.log(tedColors); //
+//       // //console.log(tedcolors[0]);
 //       for (let index = 0; index < tedColors.length; index++) {
-//         console.log(tedColors[index]);}
+//         //console.log(tedColors[index]);}
 
-//       console.log("for of colors[] : ");//
+//       //console.log("for of colors[] : ");//
 //       for (const element of data.colors) {
-//         console.log(element);
+//         //console.log(element);
 //       }
 
-//       console.log("for in objet data : ");//
+//       //console.log("for in objet data : ");//
 //       for (const property in data) {
-//         console.log(`${property}: ${data[property]}`);
+//         //console.log(`${property}: ${data[property]}`);
 //       } 
 //     });
 
@@ -471,16 +519,16 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 //essai2
 // let jsonOrder=JSON.stringify({ objContact, productTab });
-// console.log(jsonOrder);
+// //console.log(jsonOrder);
 
 // fetch("http://localhost:3000/api/teddies/order",
 //  {method: "POST", headers:{"Content-Type": "application/json"}, body: jsonOrder})
 //   .then(res => {
 //     if (res.ok) {
-//       console.log("success(fetch url)!");
+//       //console.log("success(fetch url)!");
 //       return res.json();
 //     } else {
-//       console.log("failed (fetch url)!")
+//       //console.log("failed (fetch url)!")
 //       warning();
 //     }
 //   })
