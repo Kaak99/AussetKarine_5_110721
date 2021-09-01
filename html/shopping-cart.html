@@ -53,7 +53,7 @@
       <h2 class="centerTxt cart">Vos nounours vous attendent !</h2> 
       <p class="centerTxt cart">Toutes nos transactions sont sécurisées</p>   
       <div class="form2Container cart">
-        <form class="form2 centerTxt cart d-flex" method="post" action="order.php>"><!--form2=  cart / panier  -->
+        <form class="form2 centerTxt cart d-flex"><!--form2=  cart / panier  -->
           <fieldset class="cartField cart d-flex">
             <div class="oneCartItem d-flex">
               <p>x</p>
@@ -100,9 +100,14 @@
               <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
 
               <label for="shopperAdresse">Adresse :</label>
-              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie lieu-dit code postal"></textarea>
+              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit"></textarea>
               <p id="shopperAdresseAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Adresse incorrecte</p>
               <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
+
+              <label for="shopperCP">Code postal :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" maxlength="5" size="5" min="5" max="5"></input>
+              <p id="shopperCPAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Code postal incorrect</p>
+              <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
               <label for="shopperCity">Ville :</label>
               <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville"></input>
