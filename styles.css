@@ -471,6 +471,10 @@ input.cart:invalid{
     cursor: pointer;
 }
 
+.shopperField label:hover{
+    cursor: help;
+}
+
 /* fieldset:hover .shopperInputAlert{
     display: none;
 }

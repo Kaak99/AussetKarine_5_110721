@@ -83,15 +83,17 @@ function calcTotal(tab){
   return totalPrice;
 }
 
-function calcAmountToPay(totalPrice,ShippingFees){//total à payer=prixTotal+frais de port
+function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+frais de port
   let AmountToPay=0;
   //console.log(AmountToPay);
-  AmountToPay=totalPrice+(ShippingFees*100);//car on fait tout nos calculs en centimes)
+  AmountToPay=totalPrice+(shippingFees*100);//car on fait tout nos calculs en centimes)
   //console.log(AmountToPay);
+  shippingFeesHTML.innerHTML=`${(shippingFees).toFixed(2).replace(".",",")}€ `;
   totalAmountHTML.innerHTML= `${(AmountToPay/100).toFixed(2).replace(".",",")}€ `;
 }
   
-function deleteItems(items) {
+function deleteItems() {
+  //this.facross
   //console.log('que supprimer??');
  //trouver ce qui est clické, le suppr de proctTab
  //    showCart(productTab);
@@ -212,18 +214,23 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
       productTab=JSON.parse(localStorage.getItem('productTabLS'));//crée productTab pour y mettre le contenu du panier
       //mais avant, on teste si item existe déjà dans panier(productObjet.name and productObjet.color) , si oui=>fusion
       //comparer(productTab,productObjet);
+      console.log("avant else if");
       for (let i = 0; i < productTab.length; i++) {
         if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color ) {
         productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
+        console.log("passage if");
+        console.log(i);
         }
         else{
           productTab.push(productObjet);//sinon on push productObjet sur productTab
+          console.log("passage else");
           //console.log("productTab après push=");
           //console.log(productTab);
         }  
       }
 
       //localStorage.setItem('productTabLS',`${productTab}`);//on stocke sur local storage
+      console.log("apres else if");
       localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
       showCart(productTab);
       let totalPrice=calcTotal(productTab);
@@ -235,12 +242,29 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
 
 
 //supprimer 1 item du panier
-// document.querySelectorAll('.fa-times').addEventListener('click',(e)=>{//donne tab
-// //console.log('que supprimer??');
-// //deleteItems(item);
-// };
+let facrossTab=document.querySelectorAll('.fa-times');
+console.log(facrossTab);
+// facrossTab.forEach(facross => {
+//   //facross.addEventListener('click',deleteItems)
+//   facross.addEventListener('click',(e)=>{
+//     console.log(e);
+//     const idx = [...this.children].indexOf(e.target);
+//     console.log(idx);
+// })
+// });
 
+//facrossTab.addEventListener('click',(e)=>{//donne tab
+//console.log('que supprimer??');
+//console.log(e);
+//deleteItems(item);
 
+for (const key in facrossTab) {
+  console.log(key);
+  //console.log(values);
+}
+for (const iterator of facrossTab) {
+  console.log(iterator);
+}
 
 //regex----------
 
@@ -269,12 +293,70 @@ regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMail
 document.querySelector('#validOrderButton').addEventListener('click', function() {
   //verifier tous champs formulaire 
   //console.log("on verifie tous champs formulaire ")
+  //et verifier que panier pas nul
   if (true) {
     //console.log("on part à la page my-orders.html!");
 
       //on part à la page "mes commandes" my-orders.html"
     //console.log("on part à la page my-orders.html ");
     //document.location.href="shopping-cart.html";//go to shopping-cart.html
+
+    let contact = {
+      firstName: document.getElementById("shopperForename").value,
+      lastName: document.getElementById("shopperName").value,
+      address: document.getElementById("shopperAdresse").value,
+      city: document.getElementById("shopperCity").value,
+      email: document.getElementById("shopperMail").value
+  };
+    //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
+    let jsonToSend = JSON.stringify({
+      contact, productTab
+  })
+
+//---fetch---
+
+fetch("http://localhost:3000/api/teddies/order", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode:'cors',
+        body: jsonToSend
+    }).then(response => {
+        return response.json();
+
+    })
+    // Enregistre les infos du formulaire + id + total de la commande
+//pour affichage dans la page confirmation.html //
+    .then( r => {
+        localStorage.setItem('contact', JSON.stringify(r.contact));
+        localStorage.setItem('orderId', JSON.stringify(r.orderId));
+        localStorage.setItem('total', JSON.stringify(total));
+        localStorage.removeItem('anyItem');
+        window.location.replace("./confirmation.html");
+    })
+    .catch((e) => {
+        displayError();
+        console.log(e);
+    })
+
+
+
+
+//---fetch---
+
+
+
+
+  console.log("on vide localStorage?");
+  //localStorage.clear();
+
+  console.log("on part à la page my-orders.html ");
+  //document.location.href="my-orders.html";//go to my-orders.html
+
+}else{
+
+  console.log("pas glop");
 }
 })
 
@@ -292,39 +374,6 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
 
 
-
-
-
-// //si pas de panier dans LS et qu'on ne vient pas d'ajouter dans panier (sendToCart!==true) 
-// if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')!=true))
-//  {//alors afficher html="panier vide"
-//    //console.log("panier vide1");
-//    //console.log(localStorage.getItem('productTabLS'));
-//    //console.log(localStorage.getItem('sendToCart'));
-//   form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
-//   }
-//   else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
-//   {//panier vide mais on vient d'ajouter
-//     var productObjet=productObjetCreate();//on crée un objet avec les données du teddy envoyé au panier
-//     //console.log(productObjet);
-//     var productTab=[];
-//     productTab.push(productObjet);//on l'ajoute au tableau productTab
-//     //console.log(productTab);
-//     localStorage.setItem('productTabLS', `${productTab}`);//on crée productTabLS dans localstorage et on sauve le panier productTab dedans
-//     //console.log("on affiche panier2");
-//   }
-//   else if ((localStorage.getItem('productTabLS')!=null) && (localStorage.getItem('sendToCart')!=true))
-//   {//cas ou on a pas rajouté(clic lien panier) et que panier non vide--> afficher panier
-//       //console.log("on affiche panier3");
-//   }
-//   else if ((localStorage.getItem('productTabLS')==null) && (localStorage.getItem('sendToCart')==true))
-//   {//cas ou on ajoute ET il ya deja un panier
-//       //console.log("on affiche panier4");
-//   }
-//   else
-//   {//cas non répertorié
-//       //console.log("cas non répertorié");
-//   }
 
 
 
