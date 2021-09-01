@@ -89,38 +89,38 @@
           </fieldset>
           <fieldset class="shopperField d-flex cart">
 
-              <label for="shopperName">Nom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom"></input>
+              <label for="shopperName" title="au moins 2 lettres">Nom :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required  pattern=[^0-9]{2}></input>
               <p id="shopperNameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Nom incorrect</p>
               <p id="shopperNameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Nom accepté</p>
 
-              <label for="shopperForename">Prénom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom"></input>
+              <label for="shopperForename" title="au moins 2 lettres">Prénom :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required pattern=[^0-9]{2}></input>
               <p id="shopperForenameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Prénom incorrect</p>
               <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
 
-              <label for="shopperAdresse">Adresse :</label>
-              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit"></textarea>
+              <label for="shopperAdresse" title="au moins 6 caractères">Adresse :</label>
+              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit" required pattern=.{6}></textarea>
               <p id="shopperAdresseAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Adresse incorrecte</p>
               <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
 
-              <label for="shopperCP">Code postal :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" maxlength="5" size="5" min="5" max="5"></input>
+              <label for="shopperCP" title="5 chiffres">Code postal :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" minlength="5" maxlength="5" size="5" required></input>
               <p id="shopperCPAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Code postal incorrect</p>
               <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
-              <label for="shopperCity">Ville :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville"></input>
+              <label for="shopperCity" title="au moins 2 lettres">Ville :</label>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required pattern=[^0-9]{2}></input>
               <p id="shopperCityAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Ville incorrecte</p>
               <p id="shopperCityOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
-              <label for="shopperTel">Téléphone :</label>
-              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces"></input>
+              <label for="shopperTel" title="10 chiffres, sans espace">Téléphone :</label>
+              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required pattern=[0]{1}[1-9]{1}[0-9]{8}></input>
               <p id="shopperTelAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Numéro incorrect</p>
               <p id="shopperTelOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Numéro accepté</p>
 
-              <label for="shopperMail">E-mail :</label>
-              <input type="mail" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail"></input>
+              <label for="shopperMail" title="de type a@b.cd">E-mail :</label>
+              <input type="email" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail" required></input>
               <p id="shopperMailAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Mail incorrect</p>
               <p id="shopperMailOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Mail accepté</p>
 
@@ -129,7 +129,7 @@
 
           <div class="buttonContainer shoppingCart d-flex centerTxt">
             <a href="../index.html" class="returnIndexButton cart centerTxt"> Annuler</a>
-            <button id="validOrderButton" class="cart" type="button"> Valider la commande</button></br></br>
+            <button id="validOrderButton" class="cart" type="submit"> Valider la commande</button></br></br>
           </div>
 
         </form>

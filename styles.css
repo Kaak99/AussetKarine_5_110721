@@ -459,6 +459,16 @@ fieldset.shopperField{
     display: none;
 }
 
+input.cart:valid{
+    box-shadow: 0 0 2px 1px var(--primaryColor3);
+}
+
+input.cart:invalid{
+    box-shadow: 0 0 2px 1px var(--primaryColor2);
+}
+
+
+
 /* fieldset:hover .shopperInputAlert{
     display: none;
 }
