@@ -85,8 +85,13 @@ a{
 }
 
 .fas{
+    padding: 0 4px;
+}
+.fa-list-alt,.fa-shopping-cart{
     padding: 0 10px;
 }
+
+
 
 li{list-style: none;}
 

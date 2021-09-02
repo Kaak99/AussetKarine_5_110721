@@ -41,12 +41,12 @@ function showCart(tab){
   for (let i = 0; i < tab.length; i++) {
     itemsString +=
      `<div class="oneCartItem d-flex">
-              <p><i class="fas fa-times"></i></p>
+              <p class="pcross" data-attr=${i}><i class="fas fa-times"></i></p>
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">${tab[i].name}</p>
               <p class="cart-teddyColor cart">${tab[i].color}</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
+              <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"></input>
               <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
             </div>`
   };
@@ -92,15 +92,15 @@ function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+fra
   totalAmountHTML.innerHTML= `${(AmountToPay/100).toFixed(2).replace(".",",")}€ `;
 }
   
-function deleteItems() {
-  //this.facross
+//function deleteItems() {
+  //this.pcross
   //console.log('que supprimer??');
  //trouver ce qui est clické, le suppr de proctTab
  //    showCart(productTab);
  //let totalPrice=calcTotal(productTab);
  //calcAmountToPay(totalPrice,ShippingFees);
 
-}
+//}
 
 
 
@@ -139,7 +139,7 @@ const itemsContainer=document.querySelector('.cartField');
 const totalHTML=document.querySelector('.billCalc p:first-child');
 const shippingFeesHTML=document.querySelector('.billCalc p:nth-child(2)');
 const totalAmountHTML=document.querySelector('.billCalc p:nth-child(3)');
-const teddyNumbers=document.querySelectorAll('#cart-teddyNumber');
+const teddyNumbers=document.querySelectorAll('.cart-teddyNumber');
 const teddyPrices=document.querySelectorAll('.cart-teddyPrice');
 //const teddyPrices=document.getElementsByClassName('cart-teddyPrice');
 
@@ -215,19 +215,42 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
       //mais avant, on teste si item existe déjà dans panier(productObjet.name and productObjet.color) , si oui=>fusion
       //comparer(productTab,productObjet);
       console.log("avant else if");
-      for (let i = 0; i < productTab.length; i++) {
-        if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color ) {
-        productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
-        console.log("passage if");
-        console.log(i);
-        }
-        else{
-          productTab.push(productObjet);//sinon on push productObjet sur productTab
-          console.log("passage else");
-          //console.log("productTab après push=");
-          //console.log(productTab);
-        }  
+
+
+      //******** */
+      // let iteration=productTab.length;
+      // for (let i = 0; i < iteration; i++) {
+      //   if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color ) {
+      //   productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
+      //   console.log("passage if");
+      //   console.log(i);
+      //   }
+      //   else{
+      //     productTab.push(productObjet);//sinon on push productObjet sur productTab
+      //     console.log("passage else");
+      //     //console.log("productTab après push=");
+      //     //console.log(productTab);
+      //   }  
+      // }
+      //*************** */
+
+      let iteration=productTab.length;//soluce
+      let doublon=false;
+
+       for (let i = 0; i < iteration; i++) {
+              if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color )
+              {
+              productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
+              console.log("passage if");
+              doublon=true;
+              console.log(doublon);
+              }
+       }         
+      if(doublon==false){
+        productTab.push(productObjet);//push mon objet que si n'a trouvé aucun match au final!
+        console.log("fait le push");
       }
+
 
       //localStorage.setItem('productTabLS',`${productTab}`);//on stocke sur local storage
       console.log("apres else if");
@@ -241,32 +264,26 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
 }
 
 
-//supprimer 1 item du panier
-let facrossTab=document.querySelectorAll('.fa-times');
-console.log(facrossTab);
-// facrossTab.forEach(facross => {
-//   //facross.addEventListener('click',deleteItems)
-//   facross.addEventListener('click',(e)=>{
-//     console.log(e);
-//     const idx = [...this.children].indexOf(e.target);
-//     console.log(idx);
-// })
-// });
+//------supprimer 1 item du panier---------
+//let pcrossTab=document.querySelectorAll('.pcross');
+//console.log(pcrossTab);
 
-//facrossTab.addEventListener('click',(e)=>{//donne tab
-//console.log('que supprimer??');
-//console.log(e);
-//deleteItems(item);
 
-for (const key in facrossTab) {
-  console.log(key);
-  //console.log(values);
-}
-for (const iterator of facrossTab) {
-  console.log(iterator);
-}
+// for (const key in pcrossTab) {
+//   console.log(key);
+//   //console.log(values);
+// }
+// for (const iterator of pcrossTab) {
+//   console.log(iterator);
+// }
 
-//regex----------
+
+
+//------changer quantité---------
+
+
+
+//---------regex----------
 
 const regexNoNumber= /[^0-9]{2}/ ;//et au moins 2carac
 const regexAll= /.{6}/ ;//et au moins 6carac
@@ -274,32 +291,28 @@ const regexCP= /[0-9]{5}/ ;//et au moins 5carac
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
-var regexFormName=false;
-//console.log(regexFormName);
 
-regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-var regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-var regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+let regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
-//console.log("!!!!!");
-//console.log(regexFormName);
-//console.log("!!!!!");
+console.log("!!!!!");
+console.log(regexFormName);
+console.log("!!!!!");
 
-// validation finale commande
+
+//------------ validation finale commande-----------
+
 document.querySelector('#validOrderButton').addEventListener('click', function() {
-  //verifier tous champs formulaire 
+  //verifier tous champs formulaire ? marqueur?(regexFormName etc)
   //console.log("on verifie tous champs formulaire ")
   //et verifier que panier pas nul
-  if (true) {
-    //console.log("on part à la page my-orders.html!");
 
-      //on part à la page "mes commandes" my-orders.html"
-    //console.log("on part à la page my-orders.html ");
-    //document.location.href="shopping-cart.html";//go to shopping-cart.html
+  if (productTab!=null) {//si panier non vide
 
     let contact = {
       firstName: document.getElementById("shopperForename").value,
@@ -309,10 +322,9 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
       email: document.getElementById("shopperMail").value
   };
     //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
-    let jsonToSend = JSON.stringify({
-      contact, productTab
-  })
-
+    let jsonToSend = JSON.stringify({contact, productTab});
+    console.log("jsonToSend (le body)");
+    console.log(jsonToSend);
 //---fetch---
 
 fetch("http://localhost:3000/api/teddies/order", {
@@ -323,7 +335,9 @@ fetch("http://localhost:3000/api/teddies/order", {
         mode:'cors',
         body: jsonToSend
     }).then(response => {
+        console.log("return response.json" );
         return response.json();
+
 
     })
     // Enregistre les infos du formulaire + id + total de la commande
@@ -332,12 +346,15 @@ fetch("http://localhost:3000/api/teddies/order", {
         localStorage.setItem('contact', JSON.stringify(r.contact));
         localStorage.setItem('orderId', JSON.stringify(r.orderId));
         localStorage.setItem('total', JSON.stringify(total));
-        localStorage.removeItem('anyItem');
-        window.location.replace("./confirmation.html");
+        console.log("on ecrit localStorage" );
+        //localStorage.removeItem('anyItem');
+        //window.location.replace("./confirmation.html");
     })
     .catch((e) => {
-        displayError();
-        console.log(e);
+        console.error("erreur : ", status.code)
+        warning();
+        // displayError();
+        // console.log(e);
     })
 
 
@@ -356,7 +373,7 @@ fetch("http://localhost:3000/api/teddies/order", {
 
 }else{
 
-  console.log("pas glop");
+  console.log("pas de panier à envoyer");
 }
 })
 
@@ -368,9 +385,9 @@ fetch("http://localhost:3000/api/teddies/order", {
 //si x suppr
 //si +/- ajuster prix et total 
 ///si mmeme nom et couleur  additionner
+//attention erreur quand acces panier vide la 1ere fois (??)
 
-
-//pb:le total, POST, verif finale, fonction regex
+//pb:le total, POST, verif finale, (fonction regex)
 
 
 
@@ -549,16 +566,6 @@ fetch("http://localhost:3000/api/teddies/order", {
 //         //console.log(`${property}: ${data[property]}`);
 //       } 
 //     });
-
-
-
-
-
-
-
-
-
-
 
 
 

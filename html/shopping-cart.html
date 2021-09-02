@@ -56,21 +56,21 @@
         <form class="form2 centerTxt cart d-flex"><!--form2=  cart / panier  -->
           <fieldset class="cartField cart d-flex">
             <div class="oneCartItem d-flex">
-              <p>x</p>
+              <p class="pcross">x</p>
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">nounours1</p>
               <p class="cart-teddyColor cart">brun</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"></input>
               <p class="cart-teddyPrice cart">55€</p>
             </div>
             <div class="oneCartItem d-flex">
-              <p><i class="fas fa-times"></i></p>
+              <p class="pcross"><i class="fas fa-times"></i></p>
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">nounours2</p>
               <p class="cart-teddyColor cart">brun</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" id="cart-teddyNumber" min="1" max="99"></input>
+              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"></input>
               <p class="cart-teddyPrice cart">45€</p>
             </div>
           </fieldset>
@@ -90,17 +90,17 @@
           <fieldset class="shopperField d-flex cart">
 
               <label for="shopperName" title="au moins 2 lettres">Nom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required  pattern=[^0-9]{2}></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required></input>
               <p id="shopperNameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Nom incorrect</p>
               <p id="shopperNameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Nom accepté</p>
 
               <label for="shopperForename" title="au moins 2 lettres">Prénom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required pattern=[^0-9]{2}></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required></input>
               <p id="shopperForenameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Prénom incorrect</p>
               <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
 
               <label for="shopperAdresse" title="au moins 6 caractères">Adresse :</label>
-              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit" required pattern=.{6}></textarea>
+              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit" required></textarea>
               <p id="shopperAdresseAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Adresse incorrecte</p>
               <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
 
@@ -110,12 +110,12 @@
               <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
               <label for="shopperCity" title="au moins 2 lettres">Ville :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required pattern=[^0-9]{2}></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required></input>
               <p id="shopperCityAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Ville incorrecte</p>
               <p id="shopperCityOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
-              <label for="shopperTel" title="10 chiffres, sans espace">Téléphone :</label>
-              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required pattern=[0]{1}[1-9]{1}[0-9]{8}></input>
+              <label for="shopperTel" title="10 chiffres, sans espace(débutant par 0 )">Téléphone :</label>
+              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required></input>
               <p id="shopperTelAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Numéro incorrect</p>
               <p id="shopperTelOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Numéro accepté</p>
 
