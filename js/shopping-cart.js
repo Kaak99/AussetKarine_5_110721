@@ -314,71 +314,114 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
   if (productTab!=null) {//si panier non vide
 
+      //créons l'objet de contact (issu du formulaire) pour la commande
     let contact = {
       firstName: document.getElementById("shopperForename").value,
       lastName: document.getElementById("shopperName").value,
       address: document.getElementById("shopperAdresse").value,
       city: document.getElementById("shopperCity").value,
       email: document.getElementById("shopperMail").value
-  };
+    };
+
+    //Maintenant le tableau d'id représentant la commande
+    let arrayId=[];
+    console.log("arrayId=");
+    console.log(arrayId);
+    console.log("productTab=");
+    console.log(productTab);
+
+    for (let i = 0; i < productTab.length; i++) {
+      arrayId[i]=productTab[i].id;
+      console.log(arrayId);
+    }
+    console.log("arrayId=");
+    console.log(arrayId);
+
+
+
     //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
-    let jsonToSend = JSON.stringify({contact, productTab});
+    let jsonToSend = JSON.stringify({contact, arrayId});
     console.log("jsonToSend (le body)");
     console.log(jsonToSend);
-//---fetch---
-
-fetch("http://localhost:3000/api/teddies/order", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        mode:'cors',
-        body: jsonToSend
-    }).then(response => {
-        console.log("return response.json" );
-        return response.json();
 
 
-    })
-    // Enregistre les infos du formulaire + id + total de la commande
-//pour affichage dans la page confirmation.html //
-    .then( r => {
-        localStorage.setItem('contact', JSON.stringify(r.contact));
-        localStorage.setItem('orderId', JSON.stringify(r.orderId));
-        localStorage.setItem('total', JSON.stringify(total));
-        console.log("on ecrit localStorage" );
-        //localStorage.removeItem('anyItem');
-        //window.location.replace("./confirmation.html");
-    })
-    .catch((e) => {
-        console.error("erreur : ", status.code)
-        warning();
-        // displayError();
-        // console.log(e);
-    })
-
-
-
-
-//---fetch---
-
-
-
-
-  console.log("on vide localStorage?");
-  //localStorage.clear();
-
-  console.log("on part à la page my-orders.html ");
-  //document.location.href="my-orders.html";//go to my-orders.html
-
-}else{
-
-  console.log("pas de panier à envoyer");
-}
+    fetch("http://localhost:3000/api/teddies/order", {method: 'POST', headers: {'Content-Type': 'application/json'},mode:'cors',body: jsonToSend})
+      .then(res => {
+            if (res.ok) {
+              //console.log("success(fetch url)!");
+              return res.json();
+            } else {
+              //console.log("failed (fetch url)!")
+              warning();
+            }
+          })
+          .then(data => {
+            localStorage.setItem("order", JSON.stringify(data));
+            // document.location.href = "my-orders.html";
+         //effacer locastorage
+        });
+  }
 })
+      
+      
+  //     .then(response => {
+  //     return response.json();
+
+  // })
+
+  
+  // .then( r => {
+  //     localStorage.setItem('contact', JSON.stringify(r.contact));
+  //     localStorage.setItem('orderId', JSON.stringify(r.orderId));
+  //     localStorage.setItem('total', JSON.stringify(total));
+  //     //localStorage.removeItem('anyItem');
+  //     //window.location.replace("./confirmation.html");
+  // })
+  // .catch((e) => {
+  //     console.log(e);
+  // })
+
+//   console.log("on vide localStorage?");
+//   //localStorage.clear();
+
+//   console.log("on part à la page my-orders.html ");
+//   //document.location.href="my-orders.html";//go to my-orders.html
+
+
+// }else{
+
+//   console.log("pas de panier à envoyer");
+// }
+// })
+
+
+// let jsonOrder=JSON.stringify({ objContact, productTab });
+// //console.log(jsonOrder);
+
+// fetch("http://localhost:3000/api/teddies/order",
+//  {method: "POST", headers:{"Content-Type": "application/json"}, body: jsonOrder})
+//   .then(res => {
+//     if (res.ok) {
+//       //console.log("success(fetch url)!");
+//       return res.json();
+//     } else {
+//       //console.log("failed (fetch url)!")
+//       warning();
+//     }
+//   })
+//   .then(data => {
+//     localStorage.setItem("order", JSON.stringify(data));
+//     // document.location.href = "my-orders.html";
+//  //effacer locastorage
+// });
 
 
 
+
+
+
+
+//--------------------a faire----------------------------------
 
 //modif:
 //quand refresh garder panier(ou clic lien)=ok
@@ -387,91 +430,20 @@ fetch("http://localhost:3000/api/teddies/order", {
 ///si mmeme nom et couleur  additionner
 //attention erreur quand acces panier vide la 1ere fois (??)
 
-//pb:le total, POST, verif finale, (fonction regex)
+//pb: delete item, ajuster prix,  POST, verif finale, (fonction regex)
 
 
 
 
 
 
+//--------------------bordel à virer----------------------------------
 
 
-// if (condition) {
-  
-// }
-// else if (condition) {
-  
-// }
-
-// else if (condition) {
-  
-// }
-
-// else {
-  
-// } 
-
-
-
-  // var productObjet=productObjetCreate();
-  // //console.log(productObjet);
-  // var productTab=[];
-  // productTab== localStorage.getItem('productTabLS')
-
-
-
-
-
-//  let bidule=localStorage.getItem('sendToCart');
-//  //console.log(bidule);
-
-
-
-
-// var essai1 = localStorage.getItem('essai1');
-// //console.log(essai1);
-// localStorage.removeItem('essai1');
-
-
-
-//sauver d'emblée le nouveau choix et  APRÈS afficher tout
-//stocker avec index ?json?
-
-//tabCart=[];
 
 
 //--------------------com------
-// //objet de contact 
-// var objContact={
-//   firstName: "ka",
-//   lastName: "ak",
-//   address: "123 azerty",
-//   city: "laville",
-//   email: "cours@gg.com"
-// };
-// //console.log(objContact);
 
-// //tableau de produits  
-
-// var productTab9=[
-//   {
-//   name: "Arnold",
-//   price: 39,
-//   color: "chocolate",
-//   number: 3
-//   },
-//   {
-//     name: "Gustav",
-//     price: 45,
-//     color: "white",
-//     number: 2
-//   }
-// ];
-// //console.log(productTab9);
-
-
-
-// let productTab2=["Arnold, 39, chocolate,3","Gustav, 45, white,"];
 
 
 // let dataToSend= objContact,productTab9;
@@ -481,7 +453,7 @@ fetch("http://localhost:3000/api/teddies/order", {
 // //console.log(jsonToSend);
 
 // //--------------------com------
-// var jsonOrder=JSON.stringify({ objContact, productTab });
+// var jsonOrder=JSON.stringify({ objetContact, idTab });
 // //console.log(jsonOrder);
 
 
@@ -492,7 +464,7 @@ fetch("http://localhost:3000/api/teddies/order", {
 //   body: jsonOrder
 // });
 
-// //console.log(promise1);
+//console.log(promise1);
 
 
 //--------------------com------
@@ -607,4 +579,5 @@ fetch("http://localhost:3000/api/teddies/order", {
 //                 .then((data) => {
 //                     localStorage.setItem("order", JSON.stringify(data));
 //                     document.location.href = "my-orders.html";
-//                 });
+//                 })
+//
