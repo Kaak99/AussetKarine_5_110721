@@ -46,7 +46,7 @@ function showCart(tab){
               <p class="cart-teddyName cart">${tab[i].name}</p>
               <p class="cart-teddyColor cart">${tab[i].color}</p>
               <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"></input>
+              <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" data-attr=${i} min="1" max="99"></input>
               <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
             </div>`
   };
@@ -115,7 +115,8 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
       //console.log("match");
       return(true);
     }
-    else if (e.target.value.search(regex)===-1) {//si match pas
+    // else if (e.target.value.search(regex)===-1) {//si match pas
+    else {//si match pas
       document.getElementById(champAlert).style.display= 'block';
       document.getElementById(champOk).style.display= 'none';
       //console.log("match pas!")
@@ -234,10 +235,10 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
       // }
       //*************** */
 
-      let iteration=productTab.length;//soluce
+      //let iteration=productTab.length;//soluce
       let doublon=false;
 
-       for (let i = 0; i < iteration; i++) {
+       for (let i = 0; i < productTab.length; i++) {
               if (productTab[i].name==productObjet.name  && productTab[i].color==productObjet.color )
               {
               productTab[i].number+=productObjet.number;//si égalité, on additionne nombres seulement 
@@ -265,8 +266,46 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
 
 
 //------supprimer 1 item du panier---------
-//let pcrossTab=document.querySelectorAll('.pcross');
-//console.log(pcrossTab);
+let pcrossTab=document.querySelectorAll('.pcross');
+console.log(pcrossTab);
+
+pcrossTab.forEach(element => {
+  element.addEventListener('click',function() {
+    console.log(this);
+    console.log(this.getAttribute('data-attr'));
+    console.log(typeof(this.getAttribute('data-attr')));
+    productTab.splice((this.getAttribute('data-attr')),1);
+    console.log(productTab);
+    localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
+    // showCart(productTab);
+    // let totalPrice=calcTotal(productTab);
+    // calcAmountToPay(totalPrice,ShippingFees);
+    document.location.reload();
+  })
+});
+
+
+//------modifier quantité d'1 item du panier---------
+let inputNumberTab=document.querySelectorAll('.cart-teddyNumber');
+console.log(inputNumberTab);
+
+inputNumberTab.forEach(element => {
+  element.addEventListener('input',function() {
+    console.log(this);
+    console.log(this.value);
+    console.log(typeof(this.value));
+    console.log(typeof(this.getAttribute('data-attr')));
+    productTab[this.getAttribute('data-attr')].number=this.value;
+    // productTab.splice((this.getAttribute('data-attr')),1);
+    console.log(productTab);
+    localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
+    // showCart(productTab);
+    // let totalPrice=calcTotal(productTab);
+    // calcAmountToPay(totalPrice,ShippingFees);
+    document.location.reload();
+  })
+});
+
 
 
 // for (const key in pcrossTab) {
@@ -291,8 +330,10 @@ const regexCP= /[0-9]{5}/ ;//et au moins 5carac
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
-
-let regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+let regexFormName=false;
+console.log(regexFormName);
+console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
+regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
 let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
 let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
 let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
@@ -355,15 +396,28 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
               warning();
             }
           })
-          .then(data => {
-            localStorage.setItem("order", JSON.stringify(data));
-            // document.location.href = "my-orders.html";
-         //effacer locastorage
-        });
+          // .then(data => {
+          //   localStorage.setItem("order", JSON.stringify(data));
+        //         });
+        //   }
+        // })
+      
+      .then( r => {
+          localStorage.setItem('contact', JSON.stringify(r.contact));
+          localStorage.setItem('orderId', JSON.stringify(r.orderId));
+          localStorage.setItem('total', JSON.stringify(total));
+          //localStorage.removeItem('anyItem');
+          //window.location.replace("./confirmation.html");
+      })
+      .catch((e) => {
+          console.log(e);
+      })  
+  
+  
   }
 })
-      
-      
+
+
   //     .then(response => {
   //     return response.json();
 
