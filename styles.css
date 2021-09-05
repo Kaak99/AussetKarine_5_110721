@@ -382,7 +382,7 @@ fieldset.cartField{
 }
 fieldset .oneCartItem{
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content:space-between;
     align-items: baseline;
     padding: 10px;
     background-color:var(--main-color6);
@@ -486,6 +486,30 @@ input.cart:invalid{
 fieldset:hover .shopperInputValid{
     display: block;
 } */
+
+/* .......................................page my-orders.html.........................................*/
+
+.reportContainer p{
+    font-family: 'Roboto', sans-serif;
+}
+
+.myOrders p{
+   padding-bottom: 20px;
+}
+
+.messageCont{
+    width: 98%;
+    height:auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*padding:10px;*/
+}
+.textCont{
+    margin-left: 20px;
+}
+
+
 
 /*_____________________________________________________________________________________________________*/
 /*________________________________responsive _______ @media___________________________________________*/
@@ -593,6 +617,9 @@ fieldset:hover .shopperInputValid{
         padding: 30px 100px;
     }
     
+    /*...........................*/
+	/*my-orders.html*/
+    /*...........................*/
 
 
 }

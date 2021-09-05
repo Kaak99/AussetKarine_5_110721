@@ -92,16 +92,6 @@ function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+fra
   totalAmountHTML.innerHTML= `${(AmountToPay/100).toFixed(2).replace(".",",")}€ `;
 }
   
-//function deleteItems() {
-  //this.pcross
-  //console.log('que supprimer??');
- //trouver ce qui est clické, le suppr de proctTab
- //    showCart(productTab);
- //let totalPrice=calcTotal(productTab);
- //calcAmountToPay(totalPrice,ShippingFees);
-
-//}
-
 
 
 // fonction regex form commande (id du champ, nom const regex, id alert/ok)
@@ -144,46 +134,48 @@ const teddyNumbers=document.querySelectorAll('.cart-teddyNumber');
 const teddyPrices=document.querySelectorAll('.cart-teddyPrice');
 //const teddyPrices=document.getElementsByClassName('cart-teddyPrice');
 
-const ShippingFees=0.2;
+const ShippingFees=0.2; //noter ici les frais de port en € (type 88.88)
 
 
 
 
 
 //  .......  code  ........ //
+alert("!start!");
+console.log("hello Wld");
 
 noWarning();
 //document.querySelector('#shopperMailAlert').style.display= 'none';
 //document.querySelector('#shopperMailOk').style.display= 'block';
-
+console.log("****************************");
 var sentToCart=localStorage.getItem('sendToCart');
 localStorage.removeItem('sendToCart');
-////console.log(typeof(sentToCart));
-////console.log(sentToCart);
+console.log(typeof(sentToCart));
+console.log(sentToCart);
 var didWeJustSentToCart= sentToCart=="true"? true : false;
-//console.log("didWeJustSentToCart"+didWeJustSentToCart);
-// //console.log(typeof(didWeJustSentToCart));
+console.log("didWeJustSentToCart="+didWeJustSentToCart);
+console.log(typeof(didWeJustSentToCart));
 var actualBasket=localStorage.getItem('productTabLS')
 var isBasketEmpty= actualBasket==null? true : false;
-//console.log("isBasketEmpty"+isBasketEmpty);
+console.log("isBasketEmpty="+isBasketEmpty);
 
-////console.log("****************************");
+console.log("****************************");
 
-//if (weJustSentToCart==null || weJustSentToCart==false ) {
-//if (didWeJustSentToCart==false) {
-if (didWeJustSentToCart != true) {// on n'a rien envoyé au panier (juste cliqué lien panier ou shopping-cart.html )
+alert("!!!");
+
+if (didWeJustSentToCart != true) {// on n'a rien envoyé au panier (juste cliqué lien panier shopping-cart.html )
   //console.log("rien fait!");
-  if (isBasketEmpty==true) {//cas1= on a rien ajouté et  panier vide avant 
-    //alors afficher html="panier vide"
-    //console.log("panier vide1");
+  if (isBasketEmpty==true) {//cas1= on a rien ajouté et  panier vide avant -->html= "panier vide"
+    console.log("CAS1 = panier vide ET rien rajouté");
     //console.log(localStorage.getItem('productTabLS'));
     //console.log(localStorage.getItem('sendToCart'));
     form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
   }
   else {    //cas2= rien rajouté mais un panier existait -> afficher panier
-    //console.log(" afficher panier="+actualBasket);
+    console.log(" CAS2 = panier existait ET rien rajouté --> html=afficher panier="+actualBasket);
     var productTab=[];
-    productTab=JSON.parse(localStorage.getItem('productTabLS'));
+    productTab=JSON.parse(localStorage.getItem('productTabLS'));//on met données du panier de localStoage vers productTab
+    //actualBasket="";//reset
     showCart(productTab);
     let totalPrice=calcTotal(productTab);
     calcAmountToPay(totalPrice,ShippingFees);
@@ -197,7 +189,8 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
     //console.log(productObjet);
 
     if (isBasketEmpty==true) {// cas3= on a envoyé au panier et il était vide avant 
-      //console.log("isBasketEmpty"+isBasketEmpty);
+      console.log("CAS3 = on a envoyé au panier et il était vide avant ");
+      console.log("isBasketEmpty"+isBasketEmpty);
       var productTab=[];
       //console.log("productTab"+productTab);
       productTab.push(productObjet);//on push sur productTab
@@ -212,6 +205,7 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
       calcAmountToPay(totalPrice,ShippingFees);
     }
     else{//// cas4= on a envoyé au panier et il était plein avant 
+      console.log("CAS4 = on a envoyé au panier et il était plein avant ");
       productTab=JSON.parse(localStorage.getItem('productTabLS'));//crée productTab pour y mettre le contenu du panier
       //mais avant, on teste si item existe déjà dans panier(productObjet.name and productObjet.color) , si oui=>fusion
       //comparer(productTab,productObjet);
@@ -274,13 +268,29 @@ pcrossTab.forEach(element => {
     console.log(this);
     console.log(this.getAttribute('data-attr'));
     console.log(typeof(this.getAttribute('data-attr')));
-    productTab.splice((this.getAttribute('data-attr')),1);
+    console.log("productTab=");
     console.log(productTab);
+    productTab.splice((this.getAttribute('data-attr')),1);
+    console.log("productTab=");
+    console.log(productTab);
+    if (productTab=="") {
+      localStorage.clear();
+      //form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
+    //pb à regler:soit laisser form mais bien bloquer l'envoi soit tout effacer?
+      alert("!!!");
+    }else{
     localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
+    }
     // showCart(productTab);
     // let totalPrice=calcTotal(productTab);
     // calcAmountToPay(totalPrice,ShippingFees);
     document.location.reload();
+
+    alert("!!!");
+    // if (productTabLS!=true) {
+    //   localStorage.clear();
+    //   form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
+    // }
   })
 });
 
@@ -330,6 +340,8 @@ const regexCP= /[0-9]{5}/ ;//et au moins 5carac
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
+
+//mettre un if panier non null
 let regexFormName=false;
 console.log(regexFormName);
 console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
