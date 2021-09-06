@@ -489,10 +489,13 @@ fieldset:hover .shopperInputValid{
 
 /* .......................................page my-orders.html.........................................*/
 
-.reportContainer p{
+
+.report{
+    display:none;
+}
+.report p{
     font-family: 'Roboto', sans-serif;
 }
-
 .myOrders p{
    padding-bottom: 20px;
 }
@@ -547,11 +550,27 @@ opacity: 0%;
 .orderId{
     font-weight:700 ;
 }
-
 .imageCont{
     position: relative;
     /* background: #000; */
 }
+
+.noOrder{
+    display: flex;
+    width: 98%;
+    height:auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    /*padding:10px;*/
+}
+
+.noOrder p{
+    margin: 20px;
+    align-self:center;   
+}
+
+
 
 
 /*_____________________________________________________________________________________________________*/

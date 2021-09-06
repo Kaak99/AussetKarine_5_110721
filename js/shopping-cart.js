@@ -24,16 +24,6 @@ function productObjetCreate(){
 }
 
 
-// function comparer(productTab,productObjet){
-  
-// }
-
-
-
-// function fusionner(productTab,productObjet){
-
-// }
-
 
 
 function showCart(tab){
