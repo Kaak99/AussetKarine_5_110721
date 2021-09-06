@@ -31,14 +31,14 @@ function showCart(tab){
   for (let i = 0; i < tab.length; i++) {
     itemsString +=
      `<div class="oneCartItem d-flex">
-              <p class="pcross" data-attr=${i}><i class="fas fa-times"></i></p>
-              <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
-              <p class="cart-teddyName cart">${tab[i].name}</p>
-              <p class="cart-teddyColor cart">${tab[i].color}</p>
-              <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" data-attr=${i} min="1" max="99"></input>
-              <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
-            </div>`
+        <p class="pcross" data-attr=${i}><i class="fas fa-times"></i></p>
+        <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
+        <p class="cart-teddyName cart">${tab[i].name}</p>
+        <p class="cart-teddyColor cart">${tab[i].color}</p>
+        <label for="cart-teddyNumber cart"></label>
+        <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" data-attr=${i} min="1" max="99"></input>
+        <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
+      </div>`
   };
   //////console.log('itemsString='+itemsString);
   itemsContainer.innerHTML= itemsString;
@@ -93,14 +93,14 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
       document.getElementById(champAlert).style.display= 'none';
       document.getElementById(champOk).style.display= 'block';
       //console.log("match");
-      return(true);
+      //return(true);
     }
     // else if (e.target.value.search(regex)===-1) {//si match pas
     else {//si match pas
       document.getElementById(champAlert).style.display= 'block';
       document.getElementById(champOk).style.display= 'none';
       //console.log("match pas!")
-      return(false);
+      //return(false);
     }
   })
 }
@@ -330,17 +330,27 @@ if (productTab!=null) {
   console.log(productTab);
   console.log("!!!!!");
   //--à remettre-start --//
-let regexFormName=false;
-console.log(regexFormName);
-console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
-regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+// let regexFormName=false;
+// console.log(regexFormName);
+// console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
+// regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+// let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+// let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+// let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+// let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+// let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+// let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
   //--à remettre-fin --//
+
+
+regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+
 
 // console.log("!!!!!");
 // console.log(regexFormName);
@@ -354,7 +364,7 @@ if (productTab!=null) {
   //console.log("on verifie tous champs formulaire ")
   //et verifier que panier pas nul=fait
   //alert(regexFormName);
-alert(1);
+//alert(1);
     //créons l'objet de contact (issu du formulaire) pour la commande
   let contact = {
     firstName: document.getElementById("shopperForename").value,
@@ -374,6 +384,7 @@ alert(1);
   for (let i = 0; i < productTab.length; i++) {
     products[i]=productTab[i].id;
     console.log(products);
+    console.log(typeof(products));
   }
   console.log("products=");
   console.log(products);
@@ -385,15 +396,16 @@ alert(1);
   console.log("jsonToSend (le body)");
   console.log(jsonToSend);
 
-  alert(2);
-  fetch("http://localhost:3000/api/teddies/order", {method: 'POST', headers: {'Content-Type': 'application/json'},mode:'cors',body: jsonToSend})
+  //alert(2);
+  fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
     .then(res => {
       if (res.ok) {
         console.log("success(fetch url)!");
+        //alert(3);
         return res.json();
       }
       else {
-      console.log("failed (fetch url)!")
+      console.log("failed (fetch url)!");
       warning("erreur fetch");
       }
     })
@@ -401,14 +413,14 @@ alert(1);
     
     .then( r => {
       console.log(r);
-      alert("r:"+r);
+      //alert("r:"+r);
       localStorage.clear(); //localStorage.removeItem('productTabLS');
       localStorage.setItem('retourPost', JSON.stringify(r));
       localStorage.setItem('contact', JSON.stringify(r.contact));
       localStorage.setItem('orderId', JSON.stringify(r.orderId));
-      alert('avant');//
-      document.location.href="my-orders.html";
-      //window.location.replace("./my-orders.html");  //--à remettre --//
+      //alert('avant');//
+      //document.location.href="my-orders.html";
+      window.location.replace("./my-orders.html");  //--à remettre --//
     })
     .catch((e) => {   
         console.log(e);
