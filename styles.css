@@ -508,7 +508,52 @@ fieldset:hover .shopperInputValid{
 .textCont{
     margin-left: 20px;
 }
+.fnaf{
+    position: absolute;
+    top:0px;
+    left: 0;
+    opacity: 0%;
+    /* display: none; */
+}
+.teddyTrigger{
+background: #000;
+width: 20px;
+height: 30px;
+position: absolute;
+top:10px;
+left: 104px;
+opacity: 0%;
+}
 
+.teddyTrigger:hover{
+    cursor: crosshair;
+    
+}
+
+.fnaf:active{
+    
+    animation: apparition 800ms;
+}
+
+@keyframes apparition{
+    0%{opacity: 10%;}
+    20%{opacity: 20%;}
+    40%{opacity: 40%;}
+    60%{opacity: 50%;}
+    80%{opacity: 40%;}
+    90%{opacity: 20%;}
+    100%{opacity: 00%;}
+}
+
+.enRoute{/*
+    visibility: hidden;  
+    opacity: 0%;*/
+}
+
+.imageCont{
+    position: relative;
+    /* background: #000; */
+}
 
 
 /*_____________________________________________________________________________________________________*/

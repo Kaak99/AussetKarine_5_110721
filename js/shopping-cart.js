@@ -141,7 +141,7 @@ const ShippingFees=0.2; //noter ici les frais de port en € (type 88.88)
 
 
 //  .......  code  ........ //
-alert("!start!");
+//alert("!start!");
 console.log("hello Wld");
 
 noWarning();
@@ -161,7 +161,7 @@ console.log("isBasketEmpty="+isBasketEmpty);
 
 console.log("****************************");
 
-alert("!!!");
+
 
 if (didWeJustSentToCart != true) {// on n'a rien envoyé au panier (juste cliqué lien panier shopping-cart.html )
   //console.log("rien fait!");
@@ -274,10 +274,8 @@ pcrossTab.forEach(element => {
     console.log("productTab=");
     console.log(productTab);
     if (productTab=="") {
-      localStorage.clear();
-      //form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
-    //pb à regler:soit laisser form mais bien bloquer l'envoi soit tout effacer?
-      alert("!!!");
+      localStorage.removeItem('productTabLS');//,idNow,colorNow,nameNow,numberNow,priceNow
+      //localStorage.clear();
     }else{
     localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
     }
@@ -285,12 +283,6 @@ pcrossTab.forEach(element => {
     // let totalPrice=calcTotal(productTab);
     // calcAmountToPay(totalPrice,ShippingFees);
     document.location.reload();
-
-    alert("!!!");
-    // if (productTabLS!=true) {
-    //   localStorage.clear();
-    //   form2Container.innerHTML=`<p class="centerTxt" style="font-family: 'Roboto', sans-serif; color: var(--main-color4)">Votre panier est désespérément vide !</p></br></br>`;
-    // }
   })
 });
 
@@ -342,6 +334,11 @@ const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}
 
 
 //mettre un if panier non null
+if (productTab!=null) {
+  
+  console.log("!!!!!");
+  console.log(productTab);
+  console.log("!!!!!");
 let regexFormName=false;
 console.log(regexFormName);
 console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
@@ -353,81 +350,83 @@ let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'sho
 let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
 let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
-console.log("!!!!!");
-console.log(regexFormName);
-console.log("!!!!!");
-
+// console.log("!!!!!");
+// console.log(regexFormName);
+// console.log("!!!!!");
+}
 
 //------------ validation finale commande-----------
-
-document.querySelector('#validOrderButton').addEventListener('click', function() {
+if (productTab!=null) {
+  document.querySelector('#validOrderButton').addEventListener('click', function() {
   //verifier tous champs formulaire ? marqueur?(regexFormName etc)
   //console.log("on verifie tous champs formulaire ")
-  //et verifier que panier pas nul
+  //et verifier que panier pas nul=fait
+  //alert(regexFormName);
 
-  if (productTab!=null) {//si panier non vide
+    //créons l'objet de contact (issu du formulaire) pour la commande
+  let contact = {
+    firstName: document.getElementById("shopperForename").value,
+    lastName: document.getElementById("shopperName").value,
+    address: document.getElementById("shopperAdresse").value,
+    city: document.getElementById("shopperCity").value,
+    email: document.getElementById("shopperMail").value
+  };
 
-      //créons l'objet de contact (issu du formulaire) pour la commande
-    let contact = {
-      firstName: document.getElementById("shopperForename").value,
-      lastName: document.getElementById("shopperName").value,
-      address: document.getElementById("shopperAdresse").value,
-      city: document.getElementById("shopperCity").value,
-      email: document.getElementById("shopperMail").value
-    };
+  //Maintenant le tableau d'id représentant la commande
+  let products=[];
+  console.log("products=");
+  console.log(products);
+  console.log("productTab=");
+  console.log(productTab);
 
-    //Maintenant le tableau d'id représentant la commande
-    let arrayId=[];
-    console.log("arrayId=");
-    console.log(arrayId);
-    console.log("productTab=");
-    console.log(productTab);
-
-    for (let i = 0; i < productTab.length; i++) {
-      arrayId[i]=productTab[i].id;
-      console.log(arrayId);
-    }
-    console.log("arrayId=");
-    console.log(arrayId);
-
-
-
-    //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
-    let jsonToSend = JSON.stringify({contact, arrayId});
-    console.log("jsonToSend (le body)");
-    console.log(jsonToSend);
-
-
-    fetch("http://localhost:3000/api/teddies/order", {method: 'POST', headers: {'Content-Type': 'application/json'},mode:'cors',body: jsonToSend})
-      .then(res => {
-            if (res.ok) {
-              //console.log("success(fetch url)!");
-              return res.json();
-            } else {
-              //console.log("failed (fetch url)!")
-              warning();
-            }
-          })
-          // .then(data => {
-          //   localStorage.setItem("order", JSON.stringify(data));
-        //         });
-        //   }
-        // })
-      
-      .then( r => {
-          localStorage.setItem('contact', JSON.stringify(r.contact));
-          localStorage.setItem('orderId', JSON.stringify(r.orderId));
-          localStorage.setItem('total', JSON.stringify(total));
-          //localStorage.removeItem('anyItem');
-          //window.location.replace("./confirmation.html");
-      })
-      .catch((e) => {
-          console.log(e);
-      })  
-  
-  
+  for (let i = 0; i < productTab.length; i++) {
+    products[i]=productTab[i].id;
+    console.log(products);
   }
-})
+  console.log("products=");
+  console.log(products);
+
+
+
+  //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
+  let jsonToSend = JSON.stringify({contact, products});
+  console.log("jsonToSend (le body)");
+  console.log(jsonToSend);
+
+
+  fetch("http://localhost:3000/api/teddies/order", {method: 'POST', headers: {'Content-Type': 'application/json'},mode:'cors',body: jsonToSend})
+    .then(res => {
+      if (res.ok) {
+        console.log("success(fetch url)!");
+        return res.json();
+      }
+      else {
+      console.log("failed (fetch url)!")
+      warning("erreur fetch");
+      }
+    })
+
+    
+    .then( r => {
+      console.log(r);
+      alert("r:"+r)
+      localStorage.clear(); //localStorage.removeItem('productTabLS');
+      localStorage.setItem('retourPost', JSON.stringify(r));
+      localStorage.setItem('contact', JSON.stringify(r.contact));
+      localStorage.setItem('orderId', JSON.stringify(r.orderId));
+      localStorage.setItem('total', JSON.stringify(total));
+      //document.location.href="../html/my-orders.html";//go to my-orders..html
+      //window.location.replace("./confirmation.html");
+      alert('avant');
+      document.location.href="my-orders.html";
+    })
+    .catch((e) => {   
+        console.log(e);
+    })  
+  })
+
+}
+
 
 
   //     .then(response => {
