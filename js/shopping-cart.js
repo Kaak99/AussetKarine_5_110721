@@ -329,6 +329,7 @@ if (productTab!=null) {
   console.log("!!!!!");
   console.log(productTab);
   console.log("!!!!!");
+  //--à remettre-start --//
 let regexFormName=false;
 console.log(regexFormName);
 console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
@@ -339,6 +340,7 @@ let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');/
 let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
 let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
 let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+  //--à remettre-fin --//
 
 // console.log("!!!!!");
 // console.log(regexFormName);
@@ -352,7 +354,7 @@ if (productTab!=null) {
   //console.log("on verifie tous champs formulaire ")
   //et verifier que panier pas nul=fait
   //alert(regexFormName);
-
+alert(1);
     //créons l'objet de contact (issu du formulaire) pour la commande
   let contact = {
     firstName: document.getElementById("shopperForename").value,
@@ -383,7 +385,7 @@ if (productTab!=null) {
   console.log("jsonToSend (le body)");
   console.log(jsonToSend);
 
-
+  alert(2);
   fetch("http://localhost:3000/api/teddies/order", {method: 'POST', headers: {'Content-Type': 'application/json'},mode:'cors',body: jsonToSend})
     .then(res => {
       if (res.ok) {
@@ -399,15 +401,14 @@ if (productTab!=null) {
     
     .then( r => {
       console.log(r);
-      alert("r:"+r)
+      alert("r:"+r);
       localStorage.clear(); //localStorage.removeItem('productTabLS');
       localStorage.setItem('retourPost', JSON.stringify(r));
       localStorage.setItem('contact', JSON.stringify(r.contact));
       localStorage.setItem('orderId', JSON.stringify(r.orderId));
-      localStorage.setItem('total', JSON.stringify(total));
-      alert('avant');//pas executé??
-      //document.location.href="my-orders.html";
-      window.location.replace("./my-orders.html");
+      alert('avant');//
+      document.location.href="my-orders.html";
+      //window.location.replace("./my-orders.html");  //--à remettre --//
     })
     .catch((e) => {   
         console.log(e);
