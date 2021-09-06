@@ -526,15 +526,11 @@ opacity: 0%;
 }
 
 .teddyTrigger:hover{
-    cursor: crosshair;
-    
+    cursor: crosshair;   
 }
-
 .fnaf:active{
-    
     animation: apparition 800ms;
 }
-
 @keyframes apparition{
     0%{opacity: 10%;}
     20%{opacity: 20%;}
@@ -545,9 +541,11 @@ opacity: 0%;
     100%{opacity: 00%;}
 }
 
-.enRoute{/*
-    visibility: hidden;  
-    opacity: 0%;*/
+.orderIdInfo{
+    text-decoration: underline;
+}
+.orderId{
+    font-weight:700 ;
 }
 
 .imageCont{
@@ -564,7 +562,7 @@ opacity: 0%;
 @media all and (max-width: 330px){/* <330w*/
         /*main*/
     .teddyCard{
-        width:280px;
+        width:270px;
         height:auto;
         margin: 10px 0;
     }
@@ -573,13 +571,13 @@ opacity: 0%;
         height: 140px;
     }
     .bestSaleImg{
-        width: 280px;
+        width: 250px;
         height: 300px;
     }
     .billContainer p{
         margin-bottom: 50px;
         font-size: 0.8rem;
-        padding-left: 10px;
+        padding-left: 6px;
     }
     fieldset .oneCartItem p{
     font-size: 0.8rem;
@@ -588,6 +586,10 @@ opacity: 0%;
         display: flex;
         flex-direction: column;
         width: 240px;
+    }
+    .fab{
+        font-size: 2rem;
+        padding: 5px;
     }
 }
 

@@ -64,11 +64,11 @@ fetch(url)
             <figure class="ted-fig d-flex">
               <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
               <figcaption class="ted-figcap d-flex">
-                <div class="ted-nameprice d-flex">
+                <div class="ted-nameprice">
                   <p class="ted-name">${data[i].name}</p>
-                  <p class="ted-price">${(data[i].price/100).toFixed(2).replace(".",",")} €</p>
+                  <p class="ted-price centerTxt">${(data[i].price/100).toFixed(2).replace(".",",")} €</p>
                 </div>
-                <p class="ted-description">${data[i].description}</p>
+                <!--<p class="ted-description">${data[i].description}</p>-->
               </figcaption>
             </figure>
           </a>

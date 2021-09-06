@@ -415,10 +415,9 @@ if (productTab!=null) {
       localStorage.setItem('contact', JSON.stringify(r.contact));
       localStorage.setItem('orderId', JSON.stringify(r.orderId));
       localStorage.setItem('total', JSON.stringify(total));
-      //document.location.href="../html/my-orders.html";//go to my-orders..html
-      //window.location.replace("./confirmation.html");
-      alert('avant');
-      document.location.href="my-orders.html";
+      alert('avant');//pas executé??
+      //document.location.href="my-orders.html";
+      window.location.replace("./my-orders.html");
     })
     .catch((e) => {   
         console.log(e);

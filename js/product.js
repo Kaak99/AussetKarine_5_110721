@@ -115,7 +115,6 @@ sendProductButton.addEventListener('click', function(){
   //localStorage.setItem('sendToCart',true);//boleen deviennent des string de toute façon dans localStorage
   localStorage.setItem('sendToCart',"true");
 
-
   document.location.href="shopping-cart.html";//go to shopping-cart.html
  }
 );
