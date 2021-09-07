@@ -327,12 +327,12 @@ footer ul{
 }
 
 button{
-    padding: 15px;
-    margin: 30px 10px;
+    padding: 15px 8px;
+    margin: 30px 4px;
     background-color: var(--main-color1);
     color: var(--mainWhite);
     border-radius: 5px;
-    width: 200px;
+    width: 180px;
     font-weight: 700;
 }
 button:hover, .returnIndexButton:hover{
@@ -343,8 +343,8 @@ button:hover, .returnIndexButton:hover{
 
 }
 .returnIndexButton{
-    padding: 15px;
-    margin: 30px 10px;
+    padding: 20px 5px;
+    margin: 34px 2px;
     background-color: var(--main-color1);
     color: var(--mainWhite);
     border-radius: 5px;
@@ -376,7 +376,7 @@ fieldset.cartField{
     height:auto;
     flex-direction: column;
     justify-content:space-evenly;
-    padding: 10px;
+    padding: 10px 2px;
     background-color:var(--main-color6);
     font-family: 'Roboto', sans-serif;
 }
@@ -384,17 +384,20 @@ fieldset .oneCartItem{
     flex-direction: row;
     justify-content:space-between;
     align-items: baseline;
-    padding: 10px;
+    padding: 10px 2px;
     background-color:var(--main-color6);
     font-family: 'Roboto', sans-serif;
 }
 
 .oneCartItem p{
-    padding: 0 6px;
+    padding: 0 2px;
     font-size: 1rem;
 }
-
-
+p.cart-teddyColor{
+color:var(--main-color1);
+font-style: italic;
+font-size: 0.9rem;
+}
 fieldset.billContainer{
     width: 98%;
     height:auto;
@@ -414,7 +417,7 @@ fieldset a{
 }
 
 .cart label{
-    padding: 14px 10px;
+    padding: 14px 0px;
 }
 
 .billText{
@@ -557,7 +560,7 @@ opacity: 0%;
 
 .noOrder{
     display: flex;
-    width: 98%;
+    width: 100%;
     height:auto;
     flex-direction: row;
     flex-wrap: wrap;
@@ -579,7 +582,7 @@ opacity: 0%;
 
 
 @media all and (max-width: 330px){/* <330w*/
-        /*main*/
+    /*index.html*/
     .teddyCard{
         width:270px;
         height:auto;
@@ -593,6 +596,17 @@ opacity: 0%;
         width: 250px;
         height: 300px;
     }
+    .fab{
+        font-size: 2rem;
+        padding: 5px;
+    }
+    /*product.html*/
+    .form1{
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    }
+    /*shopping-cart.html*/
     .billContainer p{
         margin-bottom: 50px;
         font-size: 0.8rem;
@@ -601,31 +615,31 @@ opacity: 0%;
     fieldset .oneCartItem p{
     font-size: 0.8rem;
     }
-    .form1{
-        display: flex;
-        flex-direction: column;
-        width: 240px;
+    fieldset .oneCartItem{
+        padding: 6px 0px;
     }
-    .fab{
-        font-size: 2rem;
-        padding: 5px;
+    .oneCartItem p{
+        padding: 0px 2px;
     }
 }
 
 @media all and (max-width: 600px)/* <600w*/
-{	/*general*/
-	/*header*/
-	/*main*/
-	/*footer*/
+{	
 
 }
 
 @media all and (min-width: 900px){/* >900w*/
+    /*header*/
     .headernav ul{
-        flex-direction: row;
-        justify-content:space-evenly;
+    flex-direction: row;
+    justify-content:space-evenly;
     }
-	/*main*/
+    /*footer*/
+    footer ul{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+	/*main index.html*/
     .teddyCard{
         width:420px;
         height:auto;
@@ -635,6 +649,14 @@ opacity: 0%;
         width: 400px;
         height: 300px;
     }
+    .ted-figcap {
+        padding: 15px;
+    }
+.ted-name{
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
     .bestSaleImg{
         width: 500px;
         height: 700px;
@@ -660,33 +682,52 @@ opacity: 0%;
         font-size: 3.5rem;
         margin: 0 20px;
     }
-	/*footer*/
-    footer ul{
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
 
-/*...........................*/
+
+
 	/*shopping-cart.html*/
-/*...........................*/
+
     fieldset.cartField, fieldset.billContainer{
-        width: 60%;
+        width: 70%;
         justify-content:space-evenly;/*??*/
     }
     fieldset a{
         display: box;
     }
-
     fieldset.shopperField{
-        width: 60%;
+        width: 70%;
         justify-content: center;
         padding: 30px 100px;
     }
-    
-    /*...........................*/
+    button{
+        width: 230px;
+        padding: 30px;
+    }
+    .returnIndexButton{
+        margin: 34px 50px;
+        width: 150px;
+    }
+    p.cart-teddyColor{
+        font-size: 1.1rem;
+    }
+    p.cart-teddyName{
+        font-size: 1.2rem;
+    }
+    .billText p, .billCalc p{
+        font-size: 1.1rem;   
+    }
+    label,input{
+        font-size: 1.1rem; 
+    }
 	/*my-orders.html*/
-    /*...........................*/
-
+    h2.myOrders{
+        font-size: 1.8rem;
+        padding-bottom: 50px
+    }
+    p.myOrders{
+        font-size: 1.4rem;
+        padding-bottom: 50px
+    }
 
 }
 
