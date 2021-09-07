@@ -330,104 +330,135 @@ if (productTab!=null) {
   console.log(productTab);
   console.log("!!!!!");
   //--à remettre-start --//
-// let regexFormName=false;
-// console.log(regexFormName);
-// console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
-// regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-// let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-// let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-// let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-// let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-// let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-// let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
-  //--à remettre-fin --//
+  // let regexFormName=false;
+  // console.log(regexFormName);
+  // console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
+  // regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+  // let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+  // let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+  // let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+  // let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+  // let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+  // let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+    //--à remettre-fin --//
 
 
-regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+  regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+  regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+  regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+  regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+  regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+  regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+  regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
 
-// console.log("!!!!!");
-// console.log(regexFormName);
-// console.log("!!!!!");
+  // console.log("!!!!!");
+  // console.log(regexFormName);
+  // console.log("!!!!!");
 }
+
 
 //------------ validation finale commande-----------
-if (productTab!=null) {
-  document.querySelector('#validOrderButton').addEventListener('click', function() {
-  //verifier tous champs formulaire ? marqueur?(regexFormName etc)
-  //console.log("on verifie tous champs formulaire ")
-  //et verifier que panier pas nul=fait
+
+//au click du formulaire 
+document.querySelector('#validOrderButton').addEventListener('click', function() {
   //alert(regexFormName);
-//alert(1);
-    //créons l'objet de contact (issu du formulaire) pour la commande
-  let contact = {
-    firstName: document.getElementById("shopperForename").value,
-    lastName: document.getElementById("shopperName").value,
-    address: document.getElementById("shopperAdresse").value,
-    city: document.getElementById("shopperCity").value,
-    email: document.getElementById("shopperMail").value
-  };
+  //alert(1);
 
-  //Maintenant le tableau d'id représentant la commande
-  let products=[];
-  console.log("products=");
-  console.log(products);
-  console.log("productTab=");
-  console.log(productTab);
+  if (productTab!=null) {
+    //verifier tous champs formulaire ? marqueur?(regexFormName etc)  
 
-  for (let i = 0; i < productTab.length; i++) {
-    products[i]=productTab[i].id;
+    //créons le tableau d'id products représentant la commande
+    let products=[];
+    console.log("products=");
     console.log(products);
-    console.log(typeof(products));
+    console.log("productTab=");
+    console.log(productTab);
+
+    for (let i = 0; i < productTab.length; i++) {
+      products[i]=productTab[i].id;
+      console.log(products);
+      console.log(typeof(products));
+    }
+    console.log("products=");
+    console.log(products);
+  
+      //créons l'objet du contact (issu du formulaire) pour la commande
+    let contact = {
+      firstName: document.getElementById("shopperForename").value,
+      lastName: document.getElementById("shopperName").value,
+      address: document.getElementById("shopperAdresse").value,
+      city: document.getElementById("shopperCity").value,
+      email: document.getElementById("shopperMail").value
+    };
+
+    if (contact.firstName && contact.lastName && contact.address && contact.city && contact.email) {
+      
+      //créons l'objet json à poster ( jsonToSend )
+      let jsonToSend = JSON.stringify({contact, products});
+      console.log("jsonToSend (le body)");
+      console.log(jsonToSend);
+
+      //puis fetch : on poste
+      //alert(2);
+      fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
+        .then(res => {
+          if (res.ok) {
+            console.log("success(fetch url)!");
+            //alert(3);
+            return res.json();
+          }
+          else {
+          console.log("failed (fetch url)!");
+          warning("erreur fetch");
+          }
+        })
+    
+        .then( r => {
+        console.log(r);
+        //alert("r:"+r);
+        localStorage.clear(); //localStorage.removeItem('productTabLS');
+        localStorage.setItem('retourPost', JSON.stringify(r));
+        localStorage.setItem('contact', JSON.stringify(r.contact));
+        localStorage.setItem('orderId', JSON.stringify(r.orderId));
+          //alert('avant');//
+        //on va à page de commande 
+        window.location.replace("./my-orders.html");
+        //document.location.href="my-orders.html";
+
+        })
+        .catch((e) => {   
+          console.log(e);
+        })  
+ 
+
+    }//fin 2eme if
+    else{alert("données contact incomplètes");
+    }
+    
+  }//fin 1er if
+  else{alert("commande vide");
   }
-  console.log("products=");
-  console.log(products);
+
+})//fin listener
 
 
 
-  //localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage
-  let jsonToSend = JSON.stringify({contact, products});
-  console.log("jsonToSend (le body)");
-  console.log(jsonToSend);
 
-  //alert(2);
-  fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
-    .then(res => {
-      if (res.ok) {
-        console.log("success(fetch url)!");
-        //alert(3);
-        return res.json();
-      }
-      else {
-      console.log("failed (fetch url)!");
-      warning("erreur fetch");
-      }
-    })
+
+
+
+
+
+
+
+
+
 
     
-    .then( r => {
-      console.log(r);
-      //alert("r:"+r);
-      localStorage.clear(); //localStorage.removeItem('productTabLS');
-      localStorage.setItem('retourPost', JSON.stringify(r));
-      localStorage.setItem('contact', JSON.stringify(r.contact));
-      localStorage.setItem('orderId', JSON.stringify(r.orderId));
-      //alert('avant');//
-      //document.location.href="my-orders.html";
-      window.location.replace("./my-orders.html");  //--à remettre --//
-    })
-    .catch((e) => {   
-        console.log(e);
-    })  
-  })
 
-}
+
+
 
 
 
