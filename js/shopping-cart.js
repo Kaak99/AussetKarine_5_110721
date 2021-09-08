@@ -35,8 +35,8 @@ function showCart(tab){
         <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
         <p class="cart-teddyName cart">${tab[i].name}</p>
         <p class="cart-teddyColor cart">${tab[i].color}</p>
-        <label for="cart-teddyNumber cart"></label>
-        <input type="number" size="3" maxlength="3" value="${tab[i].number}" name="cart-teddyNumber" class="cart-teddyNumber" data-attr=${i} min="1" max="99"></input>
+        <label for="cart-teddyNumber${i}"></label>
+        <input type="number" value="${tab[i].number}" id="cart-teddyNumber${i}" name="cart-teddyNumber" class="cart-teddyNumber" data-attr=${i} min="1" max="99">
         <p class="cart-teddyPrice cart">${(tab[i].price*tab[i].number/100).toFixed(2).replace(".",",")}€</p>
       </div>`
   };
@@ -74,12 +74,14 @@ function calcTotal(tab){
 }
 
 function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+frais de port
-  let AmountToPay=0;
-  //console.log(AmountToPay);
-  AmountToPay=totalPrice+(shippingFees*100);//car on fait tout nos calculs en centimes)
-  //console.log(AmountToPay);
+  let amountToPay=0;
+  //console.log(amountToPay);
+  amountToPay=totalPrice+(shippingFees*100);//car on fait tout nos calculs en centimes)
+  //console.log(amountToPay);
   shippingFeesHTML.innerHTML=`${(shippingFees).toFixed(2).replace(".",",")}€ `;
-  totalAmountHTML.innerHTML= `${(AmountToPay/100).toFixed(2).replace(".",",")}€ `;
+  totalAmountHTML.innerHTML= `${(amountToPay/100).toFixed(2).replace(".",",")}€ `;
+  //localStorage.setItem('amountToPay',amountToPay);
+  localStorage.setItem('amountToPay', JSON.stringify(amountToPay));
 }
   
 
@@ -417,10 +419,14 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
         .then( r => {
         console.log(r);
         //alert("r:"+r);
+
+        let amountToPay=JSON.parse(localStorage.getItem('amountToPay'))
+        alert('apres'+amountToPay+typeof(amountToPay));
         localStorage.clear(); //localStorage.removeItem('productTabLS');
         localStorage.setItem('retourPost', JSON.stringify(r));
         localStorage.setItem('contact', JSON.stringify(r.contact));
         localStorage.setItem('orderId', JSON.stringify(r.orderId));
+        localStorage.setItem('amountToPay', JSON.stringify(amountToPay));
           //alert('avant');//
         //on va à page de commande 
         window.location.replace("./my-orders.html");

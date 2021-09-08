@@ -61,8 +61,8 @@
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">nounours1</p>
               <p class="cart-teddyColor cart">brun</p>
-              <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" class="cart-teddyNumber" data-attr="0" min="1" max="99"></input>
+              <label for="cart-teddyNumber1"></label>
+              <input type="number" value="1" id="cart-teddyNumber1" name="cart-teddyNumber" class="cart-teddyNumber" data-attr="0" min="1" max="99"><!-- size="3" not allowed-->
               <p class="cart-teddyPrice cart">55€</p>
             </div>
             <div class="oneCartItem d-flex">
@@ -70,8 +70,8 @@
               <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
               <p class="cart-teddyName cart">nounours2</p>
               <p class="cart-teddyColor cart">brun</p>
-              <label for="cart-teddyNumber cart"></label>
-              <input type="number" size="3" maxlength="3" value="1" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"></input>
+              <label for="cart-teddyNumber2"></label>
+              <input type="number" value="1" id="cart-teddyNumber2" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"><!-- size="3" not allowed-->
               <p class="cart-teddyPrice cart">45€</p>
             </div>
           </fieldset>
@@ -86,17 +86,17 @@
               <p>0€</p>
               <p>1000€</p>
             </div>
-          </br></br>
+          <br><br>
           </fieldset>
           <fieldset class="shopperField d-flex cart">
 
               <label for="shopperName" title="au moins 2 lettres">Nom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required>
               <p id="shopperNameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Nom incorrect</p>
               <p id="shopperNameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Nom accepté</p>
 
               <label for="shopperForename" title="au moins 2 lettres">Prénom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required>
               <p id="shopperForenameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Prénom incorrect</p>
               <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
 
@@ -106,22 +106,22 @@
               <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
 
               <label for="shopperCP" title="5 chiffres">Code postal :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" size="5" required></input>
+              <input type="text" size="5" maxlength="8" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" required>
               <p id="shopperCPAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Code postal incorrect</p>
               <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
               <label for="shopperCity" title="au moins 2 lettres">Ville :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required></input>
+              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required>
               <p id="shopperCityAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Ville incorrecte</p>
               <p id="shopperCityOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
               <label for="shopperTel" title="10 chiffres, sans espace(débutant par 0 )">Téléphone :</label>
-              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required></input>
+              <input type="tel" size="20" maxlength="30" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required>
               <p id="shopperTelAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Numéro incorrect</p>
               <p id="shopperTelOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Numéro accepté</p>
 
               <label for="shopperMail" title="de type a@b.cd">E-mail :</label>
-              <input type="email" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail" required></input>
+              <input type="email" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail" required>
               <p id="shopperMailAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Mail incorrect</p>
               <p id="shopperMailOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Mail accepté</p>
 
@@ -130,7 +130,7 @@
 
           <div class="buttonContainer shoppingCart d-flex centerTxt">
             <a href="../index.html" class="returnIndexButton cart centerTxt"> Annuler</a>
-            <button id="validOrderButton" class="cart" type="submit"> Valider la commande</button></br></br>
+            <button id="validOrderButton" class="cart" type="submit"> Valider la commande</button><br><br>
           </div>
 
         </form>

@@ -93,7 +93,7 @@ fetch(urlTeddy)
   // Message d'erreur //
   .catch(error => {
     console.log('error(du catch de fetch url)');//+quand pas connexion server,bad url,erreur dans then
-    console.error("erreur : ", status.code)//affiche message d'erreur 
+    console.error("erreur : ", error.code)//affiche message d'erreur 
     warning()
   })
   ;

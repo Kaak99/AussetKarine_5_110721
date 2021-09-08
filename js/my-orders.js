@@ -38,17 +38,21 @@ if (orderId!=null) {//si pas de numéro de commande
   const fornameHTML=document.querySelector('.fornameText');
   const cityHTML=document.querySelector('.cityText');
   const orderIdHTML=document.querySelector('.orderId');
+  const amountHTML=document.querySelector('.amountText');
 
   const forname=JSON.parse(localStorage.getItem('contact')).firstName;
   //console.log(forname);
   const city=JSON.parse(localStorage.getItem('contact')).city;
   //console.log(city);
+  let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
+  //console.log(amountToPay);
 
-//on affiche id prenom et ville
+//on affiche id prenom et ville et montant 
   //fornameHTML.innerHTML = forname;
   fornameHTML.textContent=forname;
   cityHTML.textContent=city;
   orderIdHTML.textContent=orderId;
+  amountHTML.textContent=`${(amountToPay/100).toFixed(2).replace(".",",")}€ `;
   console.log(typeof(forname))
   console.log(typeof(city))
   console.log(typeof(orderId))
