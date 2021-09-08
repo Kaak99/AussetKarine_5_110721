@@ -108,14 +108,20 @@ const sendProductButton = document.querySelector("#sendProductButton");
 sendProductButton.addEventListener('click', function(){
   const container2colorHtml = document.querySelector("#couleurMenu");
   const container2numberHtml = document.querySelector("#nombreMenu");
-  var couleurMenu=document.querySelector("#couleurMenu").value;
   var nombreMenu=document.querySelector("#nombreMenu").value;
-  localStorage.setItem('colorNow', `${couleurMenu}`);
-  localStorage.setItem('numberNow',`${nombreMenu}`);
-  //localStorage.setItem('sendToCart',true);//boleen deviennent des string de toute façon dans localStorage
-  localStorage.setItem('sendToCart',"true");
+  if (nombreMenu<=0) {
+    alert("ce nombre ne peut pas etre négatif ou nul") 
+  }
+  else{
+    var couleurMenu=document.querySelector("#couleurMenu").value;
 
-  document.location.href="shopping-cart.html";//go to shopping-cart.html
+    localStorage.setItem('colorNow', `${couleurMenu}`);
+    localStorage.setItem('numberNow',`${nombreMenu}`);
+    //localStorage.setItem('sendToCart',true);//boleen deviennent des string de toute façon dans localStorage
+    localStorage.setItem('sendToCart',"true");
+
+    document.location.href="shopping-cart.html";//go to shopping-cart.html
+  }
  }
 );
 
