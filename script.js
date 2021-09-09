@@ -60,7 +60,7 @@ fetch(url)
       //avec pour chaque le lien .html?id et img/nom/prix/description
       teddiesString +=
       `<div class="teddyCard">
-      <a href="html/product.html?${data[i]._id}">
+          <a href="html/product.html?${data[i]._id}">
             <figure class="ted-fig d-flex">
               <img class="ted-img" src="${data[i].imageUrl}" alt="teddybear image" />
               <figcaption class="ted-figcap d-flex">
