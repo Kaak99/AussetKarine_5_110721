@@ -426,7 +426,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
         localStorage.setItem('retourPost', JSON.stringify(r));
         localStorage.setItem('contact', JSON.stringify(r.contact));
         localStorage.setItem('orderId', JSON.stringify(r.orderId));
-        localStorage.setItem('amountToPay', JSON.stringify(amountToPay));
+        localStorage.setItem('billRecord', JSON.stringify(amountToPay));
           //alert('avant');//
         //on va à page de commande 
         window.location.replace("./my-orders.html");

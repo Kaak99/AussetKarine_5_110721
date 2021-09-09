@@ -30,8 +30,8 @@ console.log("****************************");
 
 
 
-if (orderId!=null) {//si pas de numéro de commande 
-
+if (orderId!=null) {//si numéro de commande 
+//attention verifier aussi de d ou on vient ! lien? validation pannier?
   document.querySelector('.report').style.display='block' ;//on affiche le report
   document.querySelector('.noOrder').style.display='none' ;//et cache noOrder
   
@@ -44,15 +44,15 @@ if (orderId!=null) {//si pas de numéro de commande
   //console.log(forname);
   const city=JSON.parse(localStorage.getItem('contact')).city;
   //console.log(city);
-  let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
-  //console.log(amountToPay);
+  let billRecord=JSON.parse(localStorage.getItem('billRecord'));
+  //console.log(billRecord);
 
 //on affiche id prenom et ville et montant 
   //fornameHTML.innerHTML = forname;
   fornameHTML.textContent=forname;
   cityHTML.textContent=city;
   orderIdHTML.textContent=orderId;
-  amountHTML.textContent=`${(amountToPay/100).toFixed(2).replace(".",",")}€ `;
+  amountHTML.textContent=`${(billRecord/100).toFixed(2).replace(".",",")}€ `;
   console.log(typeof(forname))
   console.log(typeof(city))
   console.log(typeof(orderId))
