@@ -49,8 +49,6 @@ fetch(urlTeddy)
       }
   })
   .then(data => {
-    //let tedImgUrl=data.imageUrl;//tcke url de img du teddy dans tedImgUrl
-    //console.log(tedImgUrl); //
     let teddyProduct="";//let's put in teddyProduct the html code for this teddy product
     teddyProduct=
     `<div class="teddyCard product"><!--ici démarre la zone de création de nounours-->
@@ -117,8 +115,7 @@ sendProductButton.addEventListener('click', function(){
 
     localStorage.setItem('colorNow', `${couleurMenu}`);
     localStorage.setItem('numberNow',`${nombreMenu}`);
-    //localStorage.setItem('sendToCart',true);//boleen deviennent des string de toute façon dans localStorage
-    localStorage.setItem('sendToCart',"true");
+    localStorage.setItem('sendToCart',"true");//boleen deviennent des string de toute façon dans localStorage
 
     document.location.href="shopping-cart.html";//go to shopping-cart.html
   }
@@ -132,6 +129,8 @@ sendProductButton.addEventListener('click', function(){
 
 
 
+/*
+
 
 /////////////////////
 //   fetch         //
@@ -139,61 +138,61 @@ sendProductButton.addEventListener('click', function(){
 
 
 //1.verifie appel api: promesse avec response code 200
-// console.log(fetch(urlTeddy));
+console.log(fetch(urlTeddy));
 
 //2.verifie réponse api: status 200
-// fetch(urlTeddy)
-//   .then(res=> console.log(res))
+fetch(urlTeddy)
+  .then(res=> console.log(res))
 
 //3.verifie transfo json
-// fetch(urlTeddy)
-//   .then(res=>console.log(res.json()))
+fetch(urlTeddy)
+  .then(res=>console.log(res.json()))
 
 //4.verifie transfo objet; donne 1 1objet avec _id, colors:array[4], description, imageUrl, name, price
-// fetch(urlTeddy)
-//   .then(res=>res.json())
-//   .then(data=>console.log(data))
+fetch(urlTeddy)
+  .then(res=>res.json())
+  .then(data=>console.log(data))
 
 
 //5. exploitation (objet, tableau )... 
-//   fetch(urlTeddy)
-//  .then(res => {
-//       if (res.ok) {
-//         console.log("success(fetch url)!");
-//         return res.json();
-//       } else {
-//         console.log("failed (fetch url)!")
-//         warning();
-//       }
-//     })
-//     .then(data => {
-//       console.log(data); //affiche les data de l'api (json=tableau d'objet)
-//       // Création de la variable qui s'ajoutera aux éléments //
-//       let tedId=data._id;
-//       console.log(tedId); //
-//       let tedName=data.name;
-//       console.log(tedName); //
-//       let tedPrice=data.price;
-//       console.log(tedPrice); //
-//       let tedDescription=data.description;
-//       console.log(tedDescription); //
-//       let tedImgUrl=data.imageUrl;
-//       console.log(tedImgUrl); //
-//       let tedColors=data.colors;
-//       // console.log(tedColors); //
-//       // console.log(tedcolors[0]);
-//       for (let index = 0; index < tedColors.length; index++) {
-//         console.log(tedColors[index]);}
+fetch(urlTeddy)
+ .then(res => {
+      if (res.ok) {
+        console.log("success(fetch url)!");
+        return res.json();
+      } else {
+        console.log("failed (fetch url)!")
+        warning();
+      }
+    })
+    .then(data => {
+      console.log(data); //affiche les data de l'api (json=tableau d'objet)
+      // Création de la variable qui s'ajoutera aux éléments //
+      let tedId=data._id;
+      console.log(tedId); //
+      let tedName=data.name;
+      console.log(tedName); //
+      let tedPrice=data.price;
+      console.log(tedPrice); //
+      let tedDescription=data.description;
+      console.log(tedDescription); //
+      let tedImgUrl=data.imageUrl;
+      console.log(tedImgUrl); //
+      let tedColors=data.colors;
+      // console.log(tedColors); //
+      // console.log(tedcolors[0]);
+      for (let index = 0; index < tedColors.length; index++) {
+        console.log(tedColors[index]);}
 
-//       console.log("for of colors[] : ");//
-//       for (const element of data.colors) {
-//         console.log(element);
-//       }
+      console.log("for of colors[] : ");//
+      for (const element of data.colors) {
+        console.log(element);
+      }
 
-//       console.log("for in objet data : ");//
-//       for (const property in data) {
-//         console.log(`${property}: ${data[property]}`);
-//       } 
-//     });
+      console.log("for in objet data : ");//
+      for (const property in data) {
+        console.log(`${property}: ${data[property]}`);
+      } 
+    });
 
-
+*/

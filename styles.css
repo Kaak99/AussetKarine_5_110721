@@ -573,7 +573,10 @@ opacity: 0%;
     align-self:center;   
 }
 
-
+.textCont p:nth-child(5){
+    font-style: italic;
+    font-size: 1rem;
+}
 
 
 /*_____________________________________________________________________________________________________*/

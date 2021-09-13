@@ -39,12 +39,15 @@ if (orderId!=null) {//si numéro de commande
   const cityHTML=document.querySelector('.cityText');
   const orderIdHTML=document.querySelector('.orderId');
   const amountHTML=document.querySelector('.amountText');
+  const amountBackHTML=document.querySelector('.amountBack');
 
   const forname=JSON.parse(localStorage.getItem('contact')).firstName;
   //console.log(forname);
   const city=JSON.parse(localStorage.getItem('contact')).city;
   //console.log(city);
   let billRecord=JSON.parse(localStorage.getItem('billRecord'));
+  //console.log(billRecord);
+  let amountBack=JSON.parse(localStorage.getItem('pprice'));
   //console.log(billRecord);
 
 //on affiche id prenom et ville et montant 
@@ -53,6 +56,7 @@ if (orderId!=null) {//si numéro de commande
   cityHTML.textContent=city;
   orderIdHTML.textContent=orderId;
   amountHTML.textContent=`${(billRecord/100).toFixed(2).replace(".",",")}€ `;
+  amountBackHTML.textContent=`${(amountBack/100).toFixed(2).replace(".",",")}€ `;
   console.log(typeof(forname))
   console.log(typeof(city))
   console.log(typeof(orderId))

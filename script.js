@@ -16,12 +16,6 @@ function noWarning(){
 
 console.log(` testIndex `);
 
-// localStorage.setItem('scriptjsKey1', 'scriptjsValeur1');
-// localStorage.setItem("scriptjsKey2","scriptjsValeur2");
-//var scriptjsKey1= localStorage.getItem('scriptjsKey1');
-//console.log(scriptjsKey1);
-
-
 
 //  .......  const  ........ //
 
@@ -88,7 +82,6 @@ fetch(url)
   })
   ;
 
-  
 
 
 
@@ -96,48 +89,48 @@ fetch(url)
 
 
 
+  /*
 
-
-
-
-  
 
   
 
-/////////////////////
-//   fetch         //
-////////////////////
+///////////////////
+//  fetch       //
+//////////////////
 
 
 //1.verifie appel api: promesse avec response code 200
-// console.log(fetch(url));
+console.log(fetch(url));
 
 //2.verifie réponse api: status 200
-// fetch(url)
-//   .then(res=> console.log(res))
+fetch(url)
+  .then(res=> console.log(res))
 
 //3.verifie transfo json
-// fetch(url)
-//   .then(res=>console.log(res.json()))
+fetch(url)
+  .then(res=>console.log(res.json()))
 
 //4.verifie transfo objet; donne tableau d'objet avec _id, colors:array[4], description, imageUrl, name, price
-// fetch(url)
-//   .then(res=>res.json())
-//   .then(data=>console.log(data))
+fetch(url)
+  .then(res=>res.json())
+  .then(data=>console.log(data))
 
 
 //5. exploitation (objet, tableau )... 
-//   fetch(url)
-//  .then(res => {
-//       if (res.ok) {
-//         console.log("success(fetch url)!");
-//         return res.json();
-//       } else {
-//         console.log("failed (fetch url)!")
-//         warning();
-//       }
-//     })
-//     .then(data => {
-//       console.log(data); //affiche les data de l'api (json=tableau d'objet)
-//       // Création de la variable qui s'ajoutera aux éléments //
-//       
+  fetch(url)
+ .then(res => {
+      if (res.ok) {
+        console.log("success(fetch url)!");
+        return res.json();
+      } else {
+        console.log("failed (fetch url)!")
+        warning();
+      }
+    })
+    .then(data => {
+      console.log(data); //affiche les data de l'api (json=tableau d'objet)
+      // Création de la variable qui s'ajoutera aux éléments //
+      
+
+
+  */
