@@ -71,11 +71,13 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
       document.getElementById(champAlert).style.display= 'none';
       document.getElementById(champOk).style.display= 'block';
       //return(true);
+      localStorage.setItem('regex'+id, JSON.stringify(true));
     }
     // else if (e.target.value.search(regex)===-1) {//si match pas
     else {//si match pas
       document.getElementById(champAlert).style.display= 'block';
       document.getElementById(champOk).style.display= 'none';
+      localStorage.setItem('regex'+id, JSON.stringify(false));
       //return(false);
     }
   })
@@ -251,9 +253,6 @@ const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}
 //mettre un if panier non null
 if (productTab!=null) {
   
-  console.log("!!!!!");
-  console.log(productTab);
-  console.log("!!!!!");
   //--à remettre-start --//
   // let regexFormName=false;
   // console.log(regexFormName);
@@ -283,8 +282,15 @@ if (productTab!=null) {
 
 //au click du formulaire 
 document.querySelector('#validOrderButton').addEventListener('click', function() {
+  let regexValidation;
+if (localStorage.getItem('regexshopperName') && localStorage.getItem('regexshopperForename') && localStorage.getItem('regexshopperAdresse') && localStorage.getItem('shopperCP') && localStorage.getItem('regexshopperCity') && localStorage.getItem('regexshopperTel') && localStorage.getItem('regexshopperMail')) {
+  regexValidation=true;
+}
+else{
+  regexValidation=false
+}
 
-  if (productTab!=null) {
+  if (productTab!=null && regexValidation) {
     //verifier tous champs formulaire ? marqueur?(regexFormName etc)  
 
     //créons le tableau d'id products représentant la commande
