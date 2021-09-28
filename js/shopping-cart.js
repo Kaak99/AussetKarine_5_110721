@@ -276,21 +276,37 @@ if (productTab!=null) {
   regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
 }
+let valName=JSON.parse(localStorage.getItem('regexshopperName'));
+let valForname=JSON.parse(localStorage.getItem('regexshopperForename'));
+let valAdress=JSON.parse(localStorage.getItem('regexshopperAdresse'));
+let valCP=JSON.parse(localStorage.getItem('regexshopperCP'));
+let valCity=JSON.parse(localStorage.getItem('regexshopperCity'));
+let valTel=JSON.parse(localStorage.getItem('regexshopperTel'));
+let valMail=JSON.parse(localStorage.getItem('regexshopperMail'));
+
+
+let regexValidation=JSON.stringify(false);
+localStorage.setItem('regexValidation',regexValidation);
+if (valName==true && valForname==true && valAdress==true && valCP==true && valCity==true && valTel==true && valMail==true) {
+regexValidation=true;
+localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
+console.log(valForname);
+}
+else{
+regexValidation=false
+localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
+}
 
 
 //------------ validation finale commande-----------
 
 //au click du formulaire 
 document.querySelector('#validOrderButton').addEventListener('click', function() {
-  let regexValidation;
-if (localStorage.getItem('regexshopperName') && localStorage.getItem('regexshopperForename') && localStorage.getItem('regexshopperAdresse') && localStorage.getItem('shopperCP') && localStorage.getItem('regexshopperCity') && localStorage.getItem('regexshopperTel') && localStorage.getItem('regexshopperMail')) {
-  regexValidation=true;
-}
-else{
-  regexValidation=false
-}
 
-  if (productTab!=null && regexValidation) {
+
+
+
+  if (productTab!=null && JSON.parse(regexValidation)==true) {
     //verifier tous champs formulaire ? marqueur?(regexFormName etc)  
 
     //créons le tableau d'id products représentant la commande
@@ -341,7 +357,7 @@ else{
         console.log(r);
         //alert("r:"+r);
 
-        let amountToPay=JSON.parse(localStorage.getItem('amountToPay'))
+        let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
 
         // let billBack=calculBillBack(r.products);//le total calculé d'après le retour du post
         // console.log(billBack);
