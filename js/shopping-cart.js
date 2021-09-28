@@ -70,7 +70,9 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
     if (e.target.value.search(regex)===0){//si match
       document.getElementById(champAlert).style.display= 'none';
       document.getElementById(champOk).style.display= 'block';
-      //return(true);
+      //regexSum++;
+      console.log(regexSum);
+      localStorage.setItem('regexSum', JSON.stringify(regexSum));
       localStorage.setItem('regex'+id, JSON.stringify(true));
     }
     // else if (e.target.value.search(regex)===-1) {//si match pas
@@ -78,6 +80,8 @@ function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
       document.getElementById(champAlert).style.display= 'block';
       document.getElementById(champOk).style.display= 'none';
       localStorage.setItem('regex'+id, JSON.stringify(false));
+      //regexSum--;
+      localStorage.setItem('regexSum', JSON.stringify(regexSum));
       //return(false);
     }
   })
@@ -250,53 +254,62 @@ const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;
 const regexMail= /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
 
-//mettre un if panier non null
+//si panier non null
 if (productTab!=null) {
-  
-  //--à remettre-start --//
-  // let regexFormName=false;
-  // console.log(regexFormName);
-  // console.log(regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk'));
-  // regexFormName=regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-  // let regexFormForename=regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-  // let regexFormAdresse=regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-  // let regexFormCP=regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-  // let regexFormCity=regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-  // let regexFormTel=regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-  // let regexFormMail=regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
-    //--à remettre-fin --//
+    
+  //1: on valide chaque champ//
+
+  //let regexSum=0;
+  var regexSum=0;
+    regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
+    regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
+    regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
+    regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
+    regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
+    regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
+    regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
 
-  regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
-  regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
-  regexForm("shopperAdresse",regexAll,'shopperAdresseAlert', 'shopperAdresseOk');// REGEX ADRESSE
-  regexForm("shopperCP",regexCP,'shopperCPAlert', 'shopperCPOk');// REGEX CP
-  regexForm("shopperCity",regexNoNumber,'shopperCityAlert', 'shopperCityOk');// REGEX CITY
-  regexForm("shopperTel",regexTel,'shopperTelAlert', 'shopperTelOk');// REGEX TEL
-  regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
+    
+  //2: on active le bouton de commande si TOUS les champs sont valides //
+
+  //let regexValidation=JSON.stringify(false);
+  let regexValidation=false;
+  //localStorage.setItem('regexValidation',regexValidation);
+
+  //let valName=JSON.parse(localStorage.getItem('regexshopperName'));
+  let valName=localStorage.getItem('regexshopperName');
+  var valForname=JSON.parse(localStorage.getItem('regexshopperForename'));
+  let valAdress=JSON.parse(localStorage.getItem('regexshopperAdresse'));
+  let valCP=JSON.parse(localStorage.getItem('regexshopperCP'));
+  let valCity=JSON.parse(localStorage.getItem('regexshopperCity'));
+  let valTel=JSON.parse(localStorage.getItem('regexshopperTel'));
+  let valMail=JSON.parse(localStorage.getItem('regexshopperMail'));
+  console.log(valName);
+  console.log(valForname);
+  console.log(valAdress);
+  console.log(valCP);
+  console.log(valCity);
+  console.log(valTel);
+  console.log(valMail);
+
+
+  //if (valName==true && valForname==true && valAdress==true && valCP==true && valCity==true && valTel==true && valMail==true) {
+  if (valName && valForname && valAdress && valCP && valCity && valTel && valMail) {
+    regexValidation=true;
+    console.log(regexValidation);
+    localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
+    const validOrderButton=document.querySelector('#validOrderButton');
+    validOrderButton.disabled=false;
+  }
+  else{
+    regexValidation=false;
+    localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
+  }
+
+
 
 }
-let valName=JSON.parse(localStorage.getItem('regexshopperName'));
-let valForname=JSON.parse(localStorage.getItem('regexshopperForename'));
-let valAdress=JSON.parse(localStorage.getItem('regexshopperAdresse'));
-let valCP=JSON.parse(localStorage.getItem('regexshopperCP'));
-let valCity=JSON.parse(localStorage.getItem('regexshopperCity'));
-let valTel=JSON.parse(localStorage.getItem('regexshopperTel'));
-let valMail=JSON.parse(localStorage.getItem('regexshopperMail'));
-
-
-let regexValidation=JSON.stringify(false);
-localStorage.setItem('regexValidation',regexValidation);
-if (valName==true && valForname==true && valAdress==true && valCP==true && valCity==true && valTel==true && valMail==true) {
-regexValidation=true;
-localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-console.log(valForname);
-}
-else{
-regexValidation=false
-localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-}
-
 
 //------------ validation finale commande-----------
 

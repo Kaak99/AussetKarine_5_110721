@@ -360,6 +360,17 @@ button:hover, .returnIndexButton:hover{
 
 /* .......................................page shopping-cart.html.........................................*/
 
+
+#validOrderButton:disabled{
+    color: var(--mainGrey);
+    opacity: 50%;
+    cursor:not-allowed;
+}
+#validOrderButton:disabled:hover{
+    transform: scale(1);
+    background-color: var(--main-color1);
+}
+
 h2+p{
     padding-bottom: 50px;
 }
