@@ -315,10 +315,11 @@ if (productTab!=null) {
 }
     
   //2: on active le bouton de commande si TOUS les champs sont valides //
-let objet2=JSON.parse(localStorage.getItem('objetValidateur'));
+/*let objet2=JSON.parse(localStorage.getItem('objetValidateur'));
   if (productTab!=null && objet2===objetTemoin) {
     console.log("22");
     regexValidation=true;}
+    */
 
   // valName=JSON.parse(localStorage.getItem('regexshopperName'));
   // valForname=JSON.parse(localStorage.getItem('regexshopperForename'));
@@ -371,3 +372,95 @@ let objet2=JSON.parse(localStorage.getItem('objetValidateur'));
 //------------ validation finale commande-----------
 
 //au click du formulaire (rajouter //si panier non null avant?car alors bouton n'existe pas)
+document.querySelector('#validOrderButton').addEventListener('click', function() {
+
+
+    //créons le tableau d'id products représentant la commande
+    let products=[];
+    // console.log("products=");
+    // console.log(products);
+    // console.log("productTab=");
+    // console.log(productTab);
+
+    for (let i = 0; i < productTab.length; i++) {
+      products[i]=productTab[i].id;
+      console.log(products);
+      console.log(typeof(products));
+    }
+    console.log("products=");
+    console.log(products);
+  
+      //créons l'objet du contact (issu du formulaire) pour la commande
+    let contact = {
+      firstName: document.getElementById("shopperForename").value,
+      lastName: document.getElementById("shopperName").value,
+      address: document.getElementById("shopperAdresse").value,
+      city: document.getElementById("shopperCity").value,
+      email: document.getElementById("shopperMail").value
+    };
+
+
+      let jsonToSend = JSON.stringify({contact, products});
+      console.log("jsonToSend (le body)");
+      console.log(jsonToSend);
+
+      //puis fetch : on poste
+      fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
+        .then(res => {
+          if (res.ok) {
+            console.log("success(fetch url)!");
+            return res.json();
+          }
+          else {
+          console.log("failed (fetch url)!");
+          warning("erreur fetch");
+          }
+        })
+    
+        .then( r => {
+        console.log(r);
+        //alert("r:"+r);
+
+        let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
+
+
+
+
+        //alert('apres'+amountToPay+typeof(amountToPay));
+        localStorage.clear(); //localStorage.removeItem('productTabLS'); 
+        //localStorage.setItem('billBack', JSON.stringify(billBack));
+        localStorage.setItem('retourPost', JSON.stringify(r));
+        let pprice=0;
+        for (let i = 0; i < r.products.length; i++) {
+          pprice += r.products[i].price;
+        }
+        pprice += (ShippingFees*100);
+        localStorage.setItem('pprice', JSON.stringify(pprice));
+        localStorage.setItem('contact', JSON.stringify(r.contact));
+        localStorage.setItem('orderId', JSON.stringify(r.orderId));
+        localStorage.setItem('billRecord', JSON.stringify(amountToPay));
+
+
+
+
+
+
+        //on va à page de commande 
+        window.location.replace("./my-orders.html");
+        //document.location.href="my-orders.html";
+
+        })
+        .catch((e) => {   
+          console.log(e);
+        })  
+ 
+
+    //}//fin 2eme if
+    /*else{alert("données contact incomplètes");
+    }*/
+    
+  //}//fin 1er if
+  /*else{alert("commande vide");
+  }*/
+
+})//fin listener
