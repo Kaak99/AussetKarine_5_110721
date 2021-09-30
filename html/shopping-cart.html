@@ -53,79 +53,63 @@
 
       <h2 class="centerTxt cart">Vos nounours vous attendent !</h2> 
       <p class="centerTxt cart">Toutes nos transactions sont sécurisées</p>   
-      <div class="form2Container cart">
-        <form class="form2 centerTxt cart d-flex"><!--form2=  cart / panier  -->
-          <fieldset class="cartField cart d-flex">
-            <div class="oneCartItem d-flex">
-              <p class="pcross" data-attr="0">x</p>
-              <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
-              <p class="cart-teddyName cart">nounours1</p>
-              <p class="cart-teddyColor cart">brun</p>
-              <label for="cart-teddyNumber1"></label>
-              <input type="number" value="1" id="cart-teddyNumber1" name="cart-teddyNumber" class="cart-teddyNumber" data-attr="0" min="1" max="99"><!-- size="3" not allowed-->
-              <p class="cart-teddyPrice cart">55€</p>
-            </div>
-            <div class="oneCartItem d-flex">
-              <p class="pcross"><i class="fas fa-times"></i></p>
-              <a href=""><img src="../images/test.webp" alt="teddybear image"></a>
-              <p class="cart-teddyName cart">nounours2</p>
-              <p class="cart-teddyColor cart">brun</p>
-              <label for="cart-teddyNumber2"></label>
-              <input type="number" value="1" id="cart-teddyNumber2" name="cart-teddyNumber" class="cart-teddyNumber" min="1" max="99"><!-- size="3" not allowed-->
-              <p class="cart-teddyPrice cart">45€</p>
-            </div>
+      <div class="form2Container cart"><!-- contient le cart/panier ET le formulaire client -->
+        <form class="form2 centerTxt cart d-flex">
+          <fieldset class="cartField cart d-flex"><!-- fieldset1=zone des items du panier-->
+            <!-- cartField=> itemsContainer qui va recevoir chaque item du panier par js  -->
           </fieldset>
-          <fieldset class="billContainer cart d-flex">
+          <fieldset class="billContainer cart d-flex"><!-- fieldset2=zone des prix du panier-->
             <div class="billText d-flex">
               <p>TOTAL</p>
               <p>FRAIS DE PORT</p>
               <p>SOMME A PAYER</p>
             </div>
             <div class="billCalc d-flex">
-              <p>100€</p>
-              <p>0€</p>
-              <p>1000€</p>
+              <!-- billCalc=> <p>nth-child123 qui vont recevoir (totalHTML, shippingFeesHTML, totalAmountHTML) du js  -->
+              <p></p>
+              <p></p>
+              <p></p>
             </div>
           <br><br>
           </fieldset>
-          <fieldset class="shopperField d-flex cart">
+          <fieldset class="shopperField d-flex cart"><!-- fieldset3=zone du formulaire client-->
+            <p>Veuillez remplir les champs suivants pour pouvoir valider votre commande</p>
 
-              <label for="shopperName" title="au moins 2 lettres">Nom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required>
-              <p id="shopperNameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Nom incorrect</p>
-              <p id="shopperNameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Nom accepté</p>
+            <label for="shopperName" title="au moins 2 lettres">Nom :</label>
+            <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperName" id="shopperName" placeholder="votre nom" required>
+            <p id="shopperNameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Nom incorrect</p>
+            <p id="shopperNameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Nom accepté</p>
 
-              <label for="shopperForename" title="au moins 2 lettres">Prénom :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required>
-              <p id="shopperForenameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Prénom incorrect</p>
-              <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
+            <label for="shopperForename" title="au moins 2 lettres">Prénom :</label>
+            <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperForename" id="shopperForename" placeholder="votre prénom" required>
+            <p id="shopperForenameAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Prénom incorrect</p>
+            <p id="shopperForenameOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Prénom accepté</p>
 
-              <label for="shopperAdresse" title="au moins 6 caractères">Adresse :</label>
-              <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit" required></textarea>
-              <p id="shopperAdresseAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Adresse incorrecte</p>
-              <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
+            <label for="shopperAdresse" title="au moins 6 caractères">Adresse :</label>
+            <textarea rows="3" cols="1" class="centerTxt cart" name="shopperAdresse" id="shopperAdresse" placeholder="numéro voie bâtiment lieu-dit" required></textarea>
+            <p id="shopperAdresseAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Adresse incorrecte</p>
+            <p id="shopperAdresseOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Adresse acceptée</p>
 
-              <label for="shopperCP" title="5 chiffres">Code postal :</label>
-              <input type="text" size="5" maxlength="5" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" required>
-              <p id="shopperCPAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Code postal incorrect</p>
-              <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
+            <label for="shopperCP" title="5 chiffres">Code postal :</label>
+            <input type="text" size="5" maxlength="5" class="centerTxt cart" name="shopperCP" id="shopperCP" placeholder="votre code postal" required>
+            <p id="shopperCPAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Code postal incorrect</p>
+            <p id="shopperCPOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
-              <label for="shopperCity" title="au moins 2 lettres">Ville :</label>
-              <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required>
-              <p id="shopperCityAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Ville incorrecte</p>
-              <p id="shopperCityOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
+            <label for="shopperCity" title="au moins 2 lettres">Ville :</label>
+            <input type="text" size="20" maxlength="30" class="centerTxt cart" name="shopperCity" id="shopperCity" placeholder="votre ville" required>
+            <p id="shopperCityAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Ville incorrecte</p>
+            <p id="shopperCityOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Ville acceptée</p>
 
-              <label for="shopperTel" title="10 chiffres, sans espace(débutant par 0 )">Téléphone :</label>
-              <input type="tel" size="20" maxlength="10" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required>
-              <p id="shopperTelAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Numéro incorrect</p>
-              <p id="shopperTelOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Numéro accepté</p>
+            <label for="shopperTel" title="10 chiffres, sans espace(débutant par 0 )">Téléphone :</label>
+            <input type="tel" size="20" maxlength="10" class="centerTxt cart" name="shopperTel" id="shopperTel" placeholder="votre numero sans les espaces" required>
+            <p id="shopperTelAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Numéro incorrect</p>
+            <p id="shopperTelOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Numéro accepté</p>
 
-              <label for="shopperMail" title="de type a@b.cd">E-mail :</label>
-              <input type="email" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail" required>
-              <p id="shopperMailAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Mail incorrect</p>
-              <p id="shopperMailOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Mail accepté</p>
-
-
+            <label for="shopperMail" title="de type a@b.cd">E-mail :</label>
+            <input type="email" size="20" maxlength="30" class="centerTxt cart" name="shopperMail" id="shopperMail" placeholder="votre adresse mail" required>
+            <p id="shopperMailAlert" class="shopperInputAlert"><i class="fas fa-times-circle"></i>Mail incorrect</p>
+            <p id="shopperMailOk" class="shopperInputValid"><i class="fas fa-check-circle"></i>Mail accepté</p>
+          
           </fieldset>
 
           <div class="buttonContainer shoppingCart d-flex centerTxt">
