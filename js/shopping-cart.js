@@ -1,4 +1,4 @@
-//  .......  fonctions  ........ //
+//  .........................................................  fonctions  ......................................................... //
 
 //afficher warning "pb réseau "
 function warning(){
@@ -116,12 +116,13 @@ function calculBillBack(array) {
 }
 
 
-//  .......  tests à retirer  ........ //
+//  .........................................................  tests à retirer  ......................................................... //
 
 
 
 
-//  .......  const  ........ //
+//  .........................................................  const  ......................................................... //
+
 const noLoading = document.querySelector('.noLoading');//div avec alert "pb reseau" si probleme lors get
 const form2Container=document.querySelector('.form2Container');//container panier+form
 const itemsContainer=document.querySelector('.cartField');//container items panier
@@ -134,7 +135,7 @@ const teddyPrices=document.querySelectorAll('.cart-teddyPrice');//prix du/des te
 const ShippingFees=0.2; //noter ici les frais de port en € (type 88.88€)
 
 
-//  .......  code  ........ //
+//  .........................................................  code  ......................................................... //
 
 
 
@@ -244,7 +245,7 @@ inputNumberTab.forEach(element => {
 //2// ---------    2/ le formulaire avec données client   -------- //
 
 //---------regex----------
-const regexNoNumber= /[^0-9]{2}/ ;//pas de nombre et au moins 2carac
+const regexNoNumber= /^[^0-9]{2,}$/ ;//pas de nombre et au moins 2carac
 const regexAll= /.{6}/ ;// tout possible et au moins 6carac
 const regexCP= /[0-9]{5}/ ;//  au moins 5carac de 0 à 9
 const regexTel= /[0]{1}[1-9]{1}[0-9]{8}/;// commence par 01à09 puis 8 chiffres 
