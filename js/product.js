@@ -21,7 +21,7 @@ const noLoading = document.querySelector('.noLoading');
 const url="http://localhost:3000/api/teddies" ;
 const productId = window.location.search.substring(1);//l'id de ce teddy est récup dans l'adresse url
 const urlTeddy=`${url}/${productId}`; //= url/id de ce teddy (url?id = ${window.location} )
-//console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);//autre emthode
+//console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);//autre methode
 
 
 
@@ -35,7 +35,7 @@ localStorage.setItem('sendToCart',"false");//initialise à false dans local stor
 noWarning();//affichage sans alerte avant fetch, alerte selon résultats 
 
 
-//fetch sur xxx.html/id du teddy pour récup infos(nom prix descr)
+//fetch sur url.html/id du teddy pour récup infos(nom prix descr)
 fetch(urlTeddy)
   .then(res => {
       if (res.ok) {
