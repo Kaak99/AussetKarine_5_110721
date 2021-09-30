@@ -63,44 +63,29 @@ function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+fra
   
 
 // fonction regex : compare input & regex et affiche message ok ou alerte sous input
+//et check que tous champs ok pour pouvoir activer le bouton de validation de la commande
 //(id du champ input testé, nom const regex à utiliser , id alert/ok à afficher )
-function regexForm(id,regex,champAlert, champOk){//id et champ sans #devant
+//(constantes regex : cf ligne 249, avant appel de fonction)
+function regexForm(id,regex,champAlert, champOk){
   document.getElementById(id).addEventListener('input', (e)=>{
     if (e.target.value.search(regex)===0){//si match
       document.getElementById(champAlert).style.display= 'none';
       document.getElementById(champOk).style.display= 'block';
-      localStorage.setItem('regex'+id, JSON.stringify(true));
       objetValidateur[id]=true;
-      console.log(objetValidateur);
-      localStorage.setItem('objetValidateur', JSON.stringify(objetValidateur));
-      //if (objetValidateur===objetTemoin){
-
     }
     else {//si match pas
     document.getElementById(champAlert).style.display= 'block';
     document.getElementById(champOk).style.display= 'none';
     objetValidateur[id]=false;
-    localStorage.setItem('regex'+id, JSON.stringify(false));
-    localStorage.setItem('objetValidateur', JSON.stringify(objetValidateur));
 
-    
-  }
-  if(objetValidateur.shopperName && objetValidateur.shopperForename && objetValidateur.shopperAdresse && objetValidateur.shopperCP && objetValidateur.shopperCity && objetValidateur.shopperTel && objetValidateur.shopperMail) {
-    regexValidation=true;
-    console.log("11");
-    console.log(regexValidation);
-    localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-    const validOrderButton=document.querySelector('#validOrderButton');
-    validOrderButton.disabled=false;
-  }
-  else{
-    regexValidation=false;
-    console.log("113");
-    console.log(regexValidation);
-    localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-    const validOrderButton=document.querySelector('#validOrderButton');
-    validOrderButton.disabled=true;
-  }
+    }
+    const validOrderButton=document.querySelector('#validOrderButton');//le bouton de validation de la commande
+    if(objetValidateur.shopperName && objetValidateur.shopperForename && objetValidateur.shopperAdresse && objetValidateur.shopperCP && objetValidateur.shopperCity && objetValidateur.shopperTel && objetValidateur.shopperMail) {
+      validOrderButton.disabled=false;//on active le bouton de validation de la commande
+    }
+    else{
+      validOrderButton.disabled=true;//on désactive le bouton de validation de la commande
+    }
   })
 }
 
@@ -110,7 +95,6 @@ function calculBillBack(array) {
   let billBack=0;
   for (let index = 0; index < array.length; index++) {
     billBack += array[i].price;
-    console.log(billBack);
    } 
    return billBack;
 }
@@ -148,7 +132,7 @@ var didWeJustSentToCart= sentToCart=="true"? true : false;
 var actualBasket=localStorage.getItem('productTabLS')
 var isBasketEmpty= actualBasket==null? true : false;
 
-console.log("isBasketEmpty="+isBasketEmpty);
+
 console.log("****************************");
 
 
@@ -194,11 +178,8 @@ else if (didWeJustSentToCart == true) {// on a envoyé un item au panier
        }         
       if(doublon==false){//si tout parcouru et pas de doublon repéré : on push
         productTab.push(productObjet);//push mon objet que si n'a trouvé aucun match au final!
-        console.log("fait le push");
       }
 
-
-      console.log("apres else if");
       localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke sur local storage tableau de nounours du panier 
       showCart(productTab);//on affiche le panier 
       let totalPrice=calcTotal(productTab);//et les montants
@@ -262,41 +243,7 @@ let objetValidateur={
   shopperTel:false,
   shopperMail:false
 }
-let objetTemoin={
-  shopperName:true,
-  shopperForename:true,
-  shopperAdresse:true,
-  shopperCP:true,
-  shopperCity:true,
-  shopperTel:true,
-  shopperMail:true
-}
 
-console.log(objetValidateur);
-console.log(objetTemoin);
-
-let regexValidation=false;
-console.log('regexValidation'+regexValidation);
-//let regexValidation=JSON.stringify(false);
-
-localStorage.setItem('regexValidation',regexValidation);
-
-// let valName=false;
-// let valForname=false;
-// let valAdress=false;
-// let valCP=false;
-// let valCity=false;
-// let valTel=false;
-// let valMail=false;
-
-// console.log("ligne256");
-// console.log(valName);
-// console.log(valForname);
-// console.log(valAdress);
-// console.log(valCP);
-// console.log(valCity);
-// console.log(valTel);
-// console.log(valMail);
 
 
 
@@ -304,6 +251,7 @@ localStorage.setItem('regexValidation',regexValidation);
 if (productTab!=null) {
 
   //1: on valide chaque champ//(ligne67=regexForm())
+  //2: on active bouton de commande si à un moment tous les champs sont validés
 
     regexForm("shopperName",regexNoNumber,'shopperNameAlert', 'shopperNameOk');// REGEX NOM
     regexForm("shopperForename",regexNoNumber,'shopperForenameAlert', 'shopperForenameOk');// REGEX PRENOM
@@ -314,58 +262,7 @@ if (productTab!=null) {
     regexForm("shopperMail",regexMail,'shopperMailAlert', 'shopperMailOk');// REGEX MAIL
 
 }
-    
-  //2: on active le bouton de commande si TOUS les champs sont valides //
-/*let objet2=JSON.parse(localStorage.getItem('objetValidateur'));
-  if (productTab!=null && objet2===objetTemoin) {
-    console.log("22");
-    regexValidation=true;}
-    */
-
-  // valName=JSON.parse(localStorage.getItem('regexshopperName'));
-  // valForname=JSON.parse(localStorage.getItem('regexshopperForename'));
-  // valAdress=JSON.parse(localStorage.getItem('regexshopperAdresse'));
-  // valCP=JSON.parse(localStorage.getItem('regexshopperCP'));
-  // valCity=JSON.parse(localStorage.getItem('regexshopperCity'));
-  // valTel=JSON.parse(localStorage.getItem('regexshopperTel'));
-  // valMail=JSON.parse(localStorage.getItem('regexshopperMail'));
-  // console.log('ligne293');
-  // console.log(valName);
-  // console.log(valForname);
-  // console.log(valAdress);
-  // console.log(valCP);
-  // console.log(valCity);
-  // console.log(valTel);
-  // console.log(valMail);
-
-
-  //if (valName==true && valForname==true && valAdress==true && valCP==true && valCity==true && valTel==true && valMail==true) {
-  //if (valName && valForname && valAdress && valCP && valCity && valTel && valMail) {
-
-    //if (objetValidateur.shopperName && objetValidateur.shopperForename && objetValidateur.shopperAdresse && objetValidateur.shopperCP && objetValidateur.shopperCity && objetValidateur.shopperTel && objetValidateur.shopperMail) {
-    //if (true) {
-    /*
-    if (productTab!=null && objetValidateur===objetTemoin) {
-    regexValidation=true;
-    console.log(regexValidation);
-    localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-    const validOrderButton=document.querySelector('#validOrderButton');
-    validOrderButton.disabled=false;
-    //créons l'objet du contact (issu du formulaire) pour la commande
-    contact = {
-      firstName: document.getElementById("shopperForename").value,
-      lastName: document.getElementById("shopperName").value,
-      address: document.getElementById("shopperAdresse").value,
-      city: document.getElementById("shopperCity").value,
-      email: document.getElementById("shopperMail").value
-    };
-    }
-    else{
-      regexValidation=false;
-      localStorage.setItem('regexValidation',JSON.stringify(regexValidation));
-    }
-*/
-
+   
 
 
 
@@ -378,18 +275,11 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
 
     //créons le tableau d'id products représentant la commande
     let products=[];
-    // console.log("products=");
-    // console.log(products);
-    // console.log("productTab=");
-    // console.log(productTab);
 
     for (let i = 0; i < productTab.length; i++) {
       products[i]=productTab[i].id;
-      console.log(products);
-      console.log(typeof(products));
     }
-    console.log("products=");
-    console.log(products);
+
   
       //créons l'objet du contact (issu du formulaire) pour la commande
     let contact = {
@@ -400,10 +290,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
       email: document.getElementById("shopperMail").value
     };
 
-
       let jsonToSend = JSON.stringify({contact, products});
-      console.log("jsonToSend (le body)");
-      console.log(jsonToSend);
 
       //puis fetch : on poste
       fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
@@ -423,13 +310,7 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
         //alert("r:"+r);
 
         let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
-
-
-
-
-        //alert('apres'+amountToPay+typeof(amountToPay));
-        localStorage.clear(); //localStorage.removeItem('productTabLS'); 
-        //localStorage.setItem('billBack', JSON.stringify(billBack));
+        localStorage.clear(); 
         localStorage.setItem('retourPost', JSON.stringify(r));
         let pprice=0;
         for (let i = 0; i < r.products.length; i++) {
@@ -441,27 +322,13 @@ document.querySelector('#validOrderButton').addEventListener('click', function()
         localStorage.setItem('orderId', JSON.stringify(r.orderId));
         localStorage.setItem('billRecord', JSON.stringify(amountToPay));
 
-
-
-
-
-
         //on va à page de commande 
         window.location.replace("./my-orders.html");
-        //document.location.href="my-orders.html";
 
         })
         .catch((e) => {   
           console.log(e);
         })  
  
-
-    //}//fin 2eme if
-    /*else{alert("données contact incomplètes");
-    }*/
-    
-  //}//fin 1er if
-  /*else{alert("commande vide");
-  }*/
 
 })//fin listener
