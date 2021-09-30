@@ -13,7 +13,6 @@ function noWarning(){
 
 //  .......  tests à retirer  ........ //
 
-console.log(` testproduct `);
 
 
 //  .......  const  ........ //
@@ -22,7 +21,7 @@ const noLoading = document.querySelector('.noLoading');
 const url="http://localhost:3000/api/teddies" ;
 const productId = window.location.search.substring(1);//l'id de ce teddy est récup dans l'adresse url
 const urlTeddy=`${url}/${productId}`; //= url/id de ce teddy (url?id = ${window.location} )
-console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);
+//console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);//autre emthode
 
 
 
@@ -31,7 +30,7 @@ console.log(` test url urlTeddy=${urlTeddy} urlWinloc=${window.location}`);
 //  .......  code  ........ //
 
 localStorage.setItem('idNow', `${productId}`);//stocke l'id en cours dans local storage
-localStorage.setItem('sendToCart',"false");//initialise à false dans local storage(pour test surtout )
+localStorage.setItem('sendToCart',"false");//initialise à false dans local storage
 
 noWarning();//affichage sans alerte avant fetch, alerte selon résultats 
 
@@ -75,22 +74,19 @@ fetch(urlTeddy)
     // colorsString récupère l'html des différents choix de couleur de ce teddy
     let colorsString="";//let's put the right colors in html-menu
     for (let index = 0; index < data.colors.length; index++) {
-      console.log(` ${data.colors[index]} `);
+      //console.log(` ${data.colors[index]} `);
       colorsString+=
       `<option value="${data.colors[index]}">${data.colors[index]}</option>`
     } 
     //on écrit les differentes couleurs du menu (colorsString) dans l'html ( #couleurMenu )
     const container2Html = document.querySelector("#couleurMenu");
     container2Html.innerHTML = colorsString; 
-    console.log( colorsString );  
-    console.log(container2Html);
-
 
   })
   
   // Message d'erreur //
   .catch(error => {
-    console.log('error(du catch de fetch url)');//+quand pas connexion server,bad url,erreur dans then
+    console.log('error dans catch de fetch )');//+quand pas connexion server,bad url,erreur dans then
     console.error("erreur : ", error.code)//affiche message d'erreur 
     warning()
   })
@@ -121,6 +117,27 @@ sendProductButton.addEventListener('click', function(){
   }
  }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

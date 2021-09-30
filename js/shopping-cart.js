@@ -56,8 +56,8 @@ function calcTotal(tab){
 function calcAmountToPay(totalPrice,shippingFees){//total à payer=prixTotal+frais de port
   let amountToPay=0;
   amountToPay=totalPrice+(shippingFees*100);//car on fait tout nos calculs en centimes)
-  shippingFeesHTML.innerHTML=`${(shippingFees).toFixed(2).replace(".",",")}€ `;
-  totalAmountHTML.innerHTML= `${(amountToPay/100).toFixed(2).replace(".",",")}€ `;
+  shippingFeesHTML.textContent=`${(shippingFees).toFixed(2).replace(".",",")}€ `;//remplace innerHTML par textContent
+  totalAmountHTML.textContent= `${(amountToPay/100).toFixed(2).replace(".",",")}€ `;//remplace innerHTML par textContent
   localStorage.setItem('amountToPay', JSON.stringify(amountToPay));
 }
   
