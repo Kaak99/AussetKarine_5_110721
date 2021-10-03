@@ -264,65 +264,67 @@ if (productTab!=null) {
 //------------ validation finale commande-----------
 
 //au click du formulaire (rajouter //si panier non null avant?car alors bouton n'existe pas)
-document.querySelector('#validOrderButton').addEventListener('click', function() {
+if (productTab!=null) {
+  document.querySelector('#validOrderButton').addEventListener('click', function() {
 
 
-    //créons le tableau d'id products représentant la commande
-    let products=[];
+      //créons le tableau d'id products représentant la commande
+      let products=[];
 
-    for (let i = 0; i < productTab.length; i++) {
-      products[i]=productTab[i].id;
-    }
-
-  
-    //créons l'objet du contact (issu du formulaire) pour la commande
-    let contact = {
-      firstName: document.getElementById("shopperForename").value,
-      lastName: document.getElementById("shopperName").value,
-      address: document.getElementById("shopperAdresse").value,
-      city: document.getElementById("shopperCity").value,
-      email: document.getElementById("shopperMail").value
-    };
-
-    let jsonToSend = JSON.stringify({contact, products});
-
-    //puis fetch : on poste
-    fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
-      .then(res => {
-        if (res.ok) {
-          console.log("success(fetch url)!");
-          return res.json();
-        }
-        else {
-        console.log("failed (fetch url)!");
-        warning("erreur fetch");
-        }
-      })
-  
-      .then( r => {
-      console.log(r);
-      //alert("r:"+r);
-
-      let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
-      localStorage.clear(); 
-      localStorage.setItem('retourPost', JSON.stringify(r));
-      let pprice=0;
-      for (let i = 0; i < r.products.length; i++) {
-        pprice += r.products[i].price;
+      for (let i = 0; i < productTab.length; i++) {
+        products[i]=productTab[i].id;
       }
-      pprice += (ShippingFees*100);
-      localStorage.setItem('pprice', JSON.stringify(pprice));
-      localStorage.setItem('contact', JSON.stringify(r.contact));
-      localStorage.setItem('orderId', JSON.stringify(r.orderId));
-      localStorage.setItem('billRecord', JSON.stringify(amountToPay));
 
-      //on va à page de commande 
-      window.location.replace("./my-orders.html");
+    
+      //créons l'objet du contact (issu du formulaire) pour la commande
+      let contact = {
+        firstName: document.getElementById("shopperForename").value,
+        lastName: document.getElementById("shopperName").value,
+        address: document.getElementById("shopperAdresse").value,
+        city: document.getElementById("shopperCity").value,
+        email: document.getElementById("shopperMail").value
+      };
 
-      })
-      .catch((e) => {   
-        console.log(e);
-      })  
- 
+      let jsonToSend = JSON.stringify({contact, products});
 
-})//fin listener
+      //puis fetch : on poste
+      fetch("http://localhost:3000/api/teddies/order",{method:'POST', headers:{'Content-Type':'application/json'},mode:'cors',body:jsonToSend})
+        .then(res => {
+          if (res.ok) {
+            console.log("success(fetch url)!");
+            return res.json();
+          }
+          else {
+          console.log("failed (fetch url)!");
+          warning("erreur fetch");
+          }
+        })
+    
+        .then( r => {
+        console.log(r);
+        //alert("r:"+r);
+
+        let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
+        localStorage.clear(); 
+        localStorage.setItem('retourPost', JSON.stringify(r));
+        let pprice=0;
+        for (let i = 0; i < r.products.length; i++) {
+          pprice += r.products[i].price;
+        }
+        pprice += (ShippingFees*100);
+        localStorage.setItem('pprice', JSON.stringify(pprice));
+        localStorage.setItem('contact', JSON.stringify(r.contact));
+        localStorage.setItem('orderId', JSON.stringify(r.orderId));
+        localStorage.setItem('billRecord', JSON.stringify(amountToPay));
+
+        //on va à page de commande 
+        window.location.replace("./my-orders.html");
+
+        })
+        .catch((e) => {   
+          console.log(e);
+        })  
+  
+
+  })//fin listener
+}
