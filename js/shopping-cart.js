@@ -303,6 +303,7 @@ if (productTab!=null) {
         .then( r => {
         console.log(r);
         //alert("r:"+r);
+        alert("Commande réussie !");
 
         let amountToPay=JSON.parse(localStorage.getItem('amountToPay'));
         localStorage.clear(); 
