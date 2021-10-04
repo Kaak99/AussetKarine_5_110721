@@ -129,7 +129,7 @@ noWarning();
 var sentToCart=localStorage.getItem('sendToCart');
 localStorage.removeItem('sendToCart');
 var didWeJustSentToCart= sentToCart=="true"? true : false;
-var actualBasket=localStorage.getItem('productTabLS')
+var actualBasket=JSON.parse(localStorage.getItem('productTabLS'));
 var isBasketEmpty= actualBasket==null? true : false;
 
 
@@ -212,7 +212,7 @@ let inputNumberTab=document.querySelectorAll('.cart-teddyNumber');
 
 inputNumberTab.forEach(element => {
   element.addEventListener('input',function() {
-    productTab[this.getAttribute('data-attr')].number=this.value;//si modif input number d'un nounours du panier(jusqu'à 1 min, par html)
+    productTab[this.getAttribute('data-attr')].number=parseInt(this.value);//si modif input number d'un nounours du panier(jusqu'à 1 min, par html)
     localStorage.setItem('productTabLS',JSON.stringify(productTab));//on stocke changement sur local storage
     // showCart(productTab);
     // let totalPrice=calcTotal(productTab);
